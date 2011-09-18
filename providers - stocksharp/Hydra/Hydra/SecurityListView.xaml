@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="StockSharp.Hydra.SecurityListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:SX="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+			 xmlns:EcngXaml="clr-namespace:Ecng.Xaml;assembly=Ecng.Xaml"
+			 mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="950">
+    <UserControl.Resources>
+        <SX:BackgroundConvertor x:Key="myConverter" />
+
+        <Style x:Key="myItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource myConverter}"/>
+                </Setter.Value>
+            </Setter>
+			<EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClick" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+		<ListView x:Name="SecurityDetails" IsSynchronizedWithCurrentItem="True" EcngXaml:GridViewSort.AutoSort="True" ItemContainerStyle="{StaticResource myItemStyle}" HorizontalAlignment="Stretch" SelectionMode="Single" SelectionChanged="SecurityDetails_SelectionChanged">
+            <ListView.View>
+                <GridView>
+					<GridViewColumn Width="150" Header="ID" EcngXaml:GridViewSort.PropertyName="Security.Id">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Path=Security.Id}" HorizontalAlignment="Center" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="180" Header="Название" EcngXaml:GridViewSort.PropertyName="Security.Name">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Path=Security.Name}" HorizontalAlignment="Center" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="120" Header="Код" EcngXaml:GridViewSort.PropertyName="Security.Code">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Path=Security.Code}" HorizontalAlignment="Center" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="120" Header="Сделки (источник)" EcngXaml:GridViewSort.PropertyName="TradeSource">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Path=TradeSource}" HorizontalAlignment="Center" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="120" Header="Стаканы (источник)" EcngXaml:GridViewSort.PropertyName="DepthSource">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Path=DepthSource}" HorizontalAlignment="Center" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="70" Header="Сделок" EcngXaml:GridViewSort.PropertyName="TradeCount">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Path=TradeCount}" HorizontalAlignment="Right" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="70" Header="Стаканов" EcngXaml:GridViewSort.PropertyName="DepthCount">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Path=DepthCount}" HorizontalAlignment="Right" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn x:Name="LastUpdateTimeColumn" Width="120" Header="Послед. изменение" EcngXaml:GridViewSort.PropertyName="LastUpdateTime">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<TextBlock Text="{Binding Path=LastUpdateTime}" HorizontalAlignment="Center" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn x:Name="SelectedColumn" Width="30" EcngXaml:GridViewSort.PropertyName="IsSelected">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Path=IsSelected}" IsEnabled="False" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

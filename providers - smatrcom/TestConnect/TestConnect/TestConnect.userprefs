@@ -1,0 +1,23 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="TestConnect\Properties\Resources.Designer.cs" Line="27" Column="1" />
+      <File FileName="TestConnect\Properties\AssemblyInfo.cs" Line="37" Column="1" />
+      <File FileName="TestConnect\Headers.cs" Line="1" Column="1" />
+      <File FileName="TestConnect\Log.cs" Line="56" Column="27" />
+      <File FileName="TestConnect\TestForm.Designer.cs" Line="23" Column="9" />
+      <File FileName="TestConnect\TestForm.resx" Line="1" Column="1" />
+      <File FileName="TestConnect\Program.cs" Line="1" Column="1" />
+      <File FileName="c:\Users\westtrd\Downloads\itinvest\TestConnect\TestConnect\TestConnect\TestForm.cs" Line="299" Column="96" />
+      <File FileName="TestConnect\Properties\Settings.Designer.cs" Line="1" Column="1" />
+      <File FileName="TestConnect\Properties\Resources.resx" Line="1" Column="1" />
+      <File FileName="TestConnect\Properties\Settings.settings" Line="1" Column="1" />
+      <File FileName="TestConnect\Properties\main.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

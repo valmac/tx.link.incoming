@@ -1,0 +1,34 @@
+﻿<Window x:Class="Sample.NewOrderWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:EcngTradingXaml="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+	Title="NewOrderWindow" ShowInTaskbar="False" SizeToContent="WidthAndHeight">
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="70" />
+			<ColumnDefinition Width="120" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="30" />
+		</Grid.RowDefinitions>
+
+		<Label Grid.Column="0" Grid.Row="0" Content="Счет:" />
+		<EcngTradingXaml:PortfolioComboBox x:Name="Portfolio" Grid.Column="1" Grid.Row="0" />
+
+		<Label Grid.Column="0" Grid.Row="1" Content="Цена:" />
+		<TextBox x:Name="Price" Grid.Column="1" Grid.Row="1" Text="0" TextAlignment="Right" />
+				
+		<Label Grid.Column="0" Grid.Row="2" Content="Объем:" />
+		<TextBox x:Name="Volume" Grid.Column="1" Grid.Row="2" Text="0" TextAlignment="Right" />
+		
+		<RadioButton x:Name="IsBuy" Content="Покупка" GroupName="Direction" IsChecked="True" Grid.Column="1" Grid.Row="3" />
+		<RadioButton x:Name="IsSell" Content="Продажа" GroupName="Direction" Grid.Column="1" Grid.Row="4" />
+		
+		<Button x:Name="Send" Content="Отправить" IsDefault="True" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Width="100" Height="22" Click="Send_Click" />
+	</Grid>
+</Window>

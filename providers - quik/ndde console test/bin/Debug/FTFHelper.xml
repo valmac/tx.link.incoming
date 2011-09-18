@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FTFHelper</name>
+    </assembly>
+    <members>
+        <member name="T:FTFHelper.PREVIEWVALUE">
+            <summary>
+            Описывает структуру представляющую значение, соответствующее блоку данных tdtSkip.  
+            </summary>
+            <remarks>Используйте приведение к типу PREVIEWVALUE, для того, что бы определить данные, значения которых 
+            не изменялись с момента последнего DDE обмена.</remarks>
+        </member>
+        <member name="T:FTFHelper.XLTable">
+            <summary>
+            Описывает вспомогательный класс для анализа (разбора) данных в соответствии с описанием "Fast Table Format" 
+            (XLTable Format)
+            </summary>
+        </member>
+        <member name="F:FTFHelper.XLTable.CDBP">
+            <summary>
+            текущая позиция блока данных
+            </summary>
+            <remarks>Индекс в байтовом массиве, показывающий позицию текущего блока данных для которого выполняется 
+            анализ</remarks>
+        </member>
+        <member name="M:FTFHelper.XLTable.Cells(System.Byte[],System.String)">
+            <summary>
+            Проводит анализ (разбор) данных, представленных в виде массива байт, и формирует массив типизированных значений 
+            в соответствии с описанием формата "Fast Table Format" (он же "XlTable" формат)
+            </summary>
+            <param name="theData">Тип <see cref="T:System.Byte"/>. Массив данных для анализа.</param>
+            <param name="theCodePageName">Тип <see cref="T:System.String"/>. Имя кодовой страницы, используемой для анализа
+            (разбора) строковых значений.</param>
+            <returns>Возвращает массив значений типа <see cref="T:System.Object"/>.
+            Значения распределяются по строкам и столбцам в соответствии с описанием, содержащимся в массиве данных, 
+            переданных для анализа.</returns>
+            <remarks>Каждое значение возвращаемого массива может быть </remarks>
+            <exception cref="T:System.ArgumentNullException">
+            Данное исключение вызывается, если параметр theData не установлен и его значение - <b>null</b>
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Данное исключение вызывается, если количество значений, полученных после анализа, не совпадает с 
+            количеством значений переданных в блоке данных таблица (tdtTable)
+            </exception>
+        </member>
+        <member name="M:FTFHelper.XLTable.Cells(System.Byte[])">
+            <summary>
+            Проводит анализ (разбор) данных, представленных в виде массива байт, и формирует массив типизированных значений 
+            в соответствии с описанием формата "Fast Table Format" (он же "XlTable" формат). Для анализа строковых данных
+            используется кодовая страница с именем "windows-1251" - Русский язык, набор символов Кириллица.
+            </summary>
+            <param name="theData">Тип <see cref="T:System.Byte"/>. Данные для анализа.</param>
+            <returns>Возвращает массив значений типа <see cref="T:System.Object"/>. 
+            Значения распределяются по строкам и столбцам в соответствии с описанием, содержащимся в массиве данных, 
+            переданных для анализа.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Данное исключение вызывается, если параметр theData не установлен и его значение - <b>null</b>
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Данное исключение вызывается, если количество значений, полученных после анализа, не совпадает с 
+            количеством значений переданных в блоке данных таблица (tdtTable)
+            </exception>
+        </member>
+        <member name="M:FTFHelper.XLTable.GetDataBlockType(System.Byte[],System.Int32)">
+            <summary>
+            Определяет тип блока данных 
+            </summary>
+            <param name="theData">Тип <see cref="T:System.Byte"/>. Массив данных для анализа.</param>
+            <param name="thePoint">Тип <see cref="T:System.Int32"/>. Индекс позиции, для анализа типа очередного блока
+            данных</param>
+            <returns>Тип <see cref="T:FTFHelper.eFTFDataBlockType"/>. 
+            <list type="table">
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.</term>
+            <description></description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtUnknown</term>
+            <description>блок данных тип которого неизвестен, или его не удалось определить</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtTable</term>
+            <description>бок данных - таблица</description>
+            <remarks>В соответствии с форматом XLТable, первый блок данных для всегда имеет тип
+            <see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtTable</remarks>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtFloat</term>
+            <description>число (числа) с плавающей точкой (по стандарту IEEE)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtString</term>
+            <description>строковое значение (значения), длина которой определяется по количеству байт, а не по терминальному
+            символу</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtBool</term>
+            <description>логическое значение (значения)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtError</term>
+            <description>ошибка (ошибки)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtBlank</term>
+            <description>неопределенное (пустое) значение (значения)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtInt</term>
+            <description>беззнаковое целое значение (значения)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtSkip</term>
+            <description>пропущенное значение (значения) </description>
+            </item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:FTFHelper.XLTable.GetData(System.Byte[],System.String,System.Object[]@)">
+            <summary>
+            Выполняет анализ (разбор) текущего блока данных
+            </summary>
+            <param name="theData">Тип <see cref="T:System.Byte"/>. Массив данных для анализа.</param>
+            <param name="theCodePageName">Тип <see cref="T:System.String"/>. Имя кодовой страницы, используемой для анализа
+            (разбора) строковых значений.</param>
+            <param name="theItems">Массив значений типа <see cref="T:System.Object"/>. Массив содержит типизированные данные
+            полученные при анализе (разборе) текущего блока данных</param>
+            <returns>Тип <see cref="T:FTFHelper.eFTFDataBlockType"/>. 
+            <list type="table">
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.</term>
+            <description></description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtUnknown</term>
+            <description>блок данных тип которого неизвестен, или его не удалось определить</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtTable</term>
+            <description>бок данных - таблица</description>
+            <remarks>В соответствии с форматом XLТable, первый блок данных для всегда имеет тип
+            <see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtTable</remarks>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtFloat</term>
+            <description>число (числа) с плавающей точкой (по стандарту IEEE)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtString</term>
+            <description>строковое значение (значения), длина которой определяется по количеству байт, а не по терминальному
+            символу</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtBool</term>
+            <description>логическое значение (значения)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtError</term>
+            <description>ошибка (ошибки)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtBlank</term>
+            <description>неопределенное (пустое) значение (значения)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtInt</term>
+            <description>беззнаковое целое значение (значения)</description>
+            </item>
+            <item>
+            <term><see cref="T:FTFHelper.eFTFDataBlockType"/>.tdtSkip</term>
+            <description>пропущенное значение (значения) </description>
+            </item>
+            </list>
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Данное исключение вызываетестся если значение параметра <see cref="!:FTFHelper.CDBP"/> находиться вне 
+            допустимого диапазона.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Данное исключение вызываетестся первый блок данных последовательности не является блоком "tdtTable".
+            </exception>
+        </member>
+        <member name="T:FTFHelper.eFTFDataBlockType">
+            <summary>
+            Описывает типы блоков данных
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtUnknown">
+            <summary>
+            неизвестен или ошибка при определении типа
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtTable">
+            <summary>
+            таблица 
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtFloat">
+            <summary>
+            число с плавающей точкой (по стандарту IEEE)
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtString">
+            <summary>
+            строка, по количеству байт, без символа окончания
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtBool">
+            <summary>
+            логическое значение
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtError">
+            <summary>
+            ошибка
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtBlank">
+            <summary>
+            неопределенное (пустое) значение
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtInt">
+            <summary>
+            беззнаковое целое
+            </summary>
+        </member>
+        <member name="F:FTFHelper.eFTFDataBlockType.tdtSkip">
+            <summary>
+            пропущенное значение
+            </summary>
+        </member>
+    </members>
+</doc>

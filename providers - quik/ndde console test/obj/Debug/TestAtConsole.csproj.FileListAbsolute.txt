@@ -1,0 +1,8 @@
+D:\cs\_Components\DdeServer\TestAtConsole\obj\Debug\ResolveAssemblyReference.cache
+D:\cs\_Components\DdeServer\TestAtConsole\bin\Debug\TestAtConsole.exe
+D:\cs\_Components\DdeServer\TestAtConsole\bin\Debug\TestAtConsole.pdb
+D:\cs\_Components\DdeServer\TestAtConsole\bin\Debug\NDde.dll
+D:\cs\_Components\DdeServer\TestAtConsole\obj\Debug\TestAtConsole.exe
+D:\cs\_Components\DdeServer\TestAtConsole\obj\Debug\TestAtConsole.pdb
+D:\cs\_Components\DdeServer\TestAtConsole\bin\Debug\FTFHelper.dll
+D:\cs\_Components\DdeServer\TestAtConsole\bin\Debug\FTFHelper.xml

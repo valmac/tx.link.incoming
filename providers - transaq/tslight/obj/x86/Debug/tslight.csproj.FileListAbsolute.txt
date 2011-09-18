@@ -1,0 +1,7 @@
+O:\My Documents\SharpDevelop Projects\tslight\tslight\bin\Debug\tslight.exe
+O:\My Documents\SharpDevelop Projects\tslight\tslight\bin\Debug\tslight.pdb
+O:\My Documents\SharpDevelop Projects\tslight\tslight\obj\x86\Debug\ResolveAssemblyReference.cache
+O:\My Documents\SharpDevelop Projects\tslight\tslight\obj\x86\Debug\tslight.exe
+O:\My Documents\SharpDevelop Projects\tslight\tslight\obj\x86\Debug\tslight.pdb
+O:\My Documents\SharpDevelop Projects\tslight\tslight\obj\x86\Debug\tslight.MainForm.resources
+O:\My Documents\SharpDevelop Projects\tslight\tslight\obj\x86\Debug\tslight.csproj.GenerateResource.Cache

@@ -1,0 +1,101 @@
+﻿<Window x:Class="StockSharp.Hydra.CandlesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+		xmlns:tools="clr-namespace:Syncfusion.Windows.Tools.Controls;assembly=Syncfusion.Shared.Wpf"
+		xmlns:EcngXaml="clr-namespace:Ecng.Xaml;assembly=Ecng.Xaml"
+        Title="Сформировать свечки для " ShowInTaskbar="False" Height="300" Width="570">
+	<Window.Resources>
+		<Style x:Key="myItemStyle" TargetType="{x:Type ListViewItem}">
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		</Style>
+	</Window.Resources>
+	<Grid Margin="5,5,5,5">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="100" />
+			<ColumnDefinition Width="5" />
+			<ColumnDefinition Width="200" />
+			<ColumnDefinition Width="5" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="5" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="5" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="5" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		
+		<ComboBox x:Name="CandleType" SelectionChanged="CandleType_SelectionChanged">
+			<ComboBoxItem>TimeFrame</ComboBoxItem>
+			<ComboBoxItem>Tick</ComboBoxItem>
+			<ComboBoxItem>Volume</ComboBoxItem>
+			<ComboBoxItem>Range</ComboBoxItem>
+			<ComboBoxItem>P&amp;F</ComboBoxItem>
+			<ComboBoxItem>Renko</ComboBoxItem>
+		</ComboBox>
+
+		<StackPanel x:Name="TimeFrameSettings" Grid.Column="2" Visibility="Hidden">
+			<syncfusion:DateTimeEdit x:Name="TimeFrame" Pattern="LongTime" />
+		</StackPanel>
+
+		<StackPanel x:Name="VolumeSettings" Grid.Column="2" Visibility="Hidden">
+			<TextBox x:Name="Volume" TextAlignment="Right" VerticalAlignment="Center" />
+		</StackPanel>
+
+		<StackPanel x:Name="TickSettings" Grid.Column="2" Visibility="Hidden">
+			<TextBox x:Name="TickCount" TextAlignment="Right" VerticalAlignment="Center" />
+		</StackPanel>
+
+		<StackPanel x:Name="RangeSettings" Grid.Column="2" Visibility="Hidden">
+			<TextBox x:Name="Range" TextAlignment="Right" VerticalAlignment="Center" />
+		</StackPanel>
+
+		<Button x:Name="Build" ToolTip="Создать свечки" Grid.Column="4" Grid.Row="0" Click="Build_Click">
+			<EcngXaml:BmpImage Source="Images/build.png" />
+		</Button>
+
+		<Button x:Name="ShowChart" Grid.Column="7" Grid.Row="0" ToolTip="Показать свечки на графике..." IsEnabled="False" Click="ShowChart_Click">
+			<EcngXaml:BmpImage Source="Images/candles.png" />
+		</Button>
+
+		<tools:DropDownButtonAdv x:Name="ExportBtn" Grid.Column="9" Label="" IsEnabled="False" SmallIcon="/Images/save.png">
+			<tools:DropDownMenuGroup IsMoreItemsIconTrayEnabled="False" IconBarEnabled="False">
+				<syncfusion:TreeViewAdv x:Name="ExportType">
+					<tools:DropDownMenuItem x:Name="Excel" Header="Excel" Click="ExportType_Click">
+						<tools:DropDownMenuItem.Icon>
+							<Image Source="Images/excel.png"/>
+						</tools:DropDownMenuItem.Icon>
+					</tools:DropDownMenuItem>
+					<tools:DropDownMenuItem x:Name="Xml" Header="Xml" Click="ExportType_Click">
+						<tools:DropDownMenuItem.Icon>
+							<Image Source="Images/xml.png"/>
+						</tools:DropDownMenuItem.Icon>
+					</tools:DropDownMenuItem>
+					<tools:DropDownMenuItem x:Name="Txt" Header="Txt" Click="ExportType_Click">
+						<tools:DropDownMenuItem.Icon>
+							<Image Source="Images/txt.png"/>
+						</tools:DropDownMenuItem.Icon>
+					</tools:DropDownMenuItem>
+				</syncfusion:TreeViewAdv>
+			</tools:DropDownMenuGroup>
+		</tools:DropDownButtonAdv>
+
+		<ListView x:Name="BuildedCandles" Grid.Row="2" Grid.ColumnSpan="10" ItemContainerStyle="{StaticResource myItemStyle}" SelectionMode="Single" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Stretch">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Width="100" Header="Время" DisplayMemberBinding="{Binding Path=Time}" />
+					<GridViewColumn Width="80" Header="O" DisplayMemberBinding="{Binding Path=OpenPrice}" />
+					<GridViewColumn Width="80" Header="H" DisplayMemberBinding="{Binding Path=HighPrice}" />
+					<GridViewColumn Width="80" Header="L" DisplayMemberBinding="{Binding Path=LowPrice}" />
+					<GridViewColumn Width="80" Header="C" DisplayMemberBinding="{Binding Path=ClosePrice}" />
+					<GridViewColumn Width="80" Header="V" DisplayMemberBinding="{Binding Path=TotalVolume}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</Grid>
+</Window>

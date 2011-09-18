@@ -1,0 +1,2121 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AvalonControlsLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:AC.AvalonControlsLibrary.Controls.RangeSlider">
+            <summary>
+            A slider that provides the a range
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeStartProperty">
+            <summary>
+            The min value for the range of the range slider
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeStopProperty">
+            <summary>
+            The max value for the range of the range slider
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeStartSelectedProperty">
+            <summary>
+            The min value of the selected range of the range slider
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeStopSelectedProperty">
+            <summary>
+            The max value of the selected range of the range slider
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.MinRangeProperty">
+            <summary>
+            The min range value that you can have for the range slider
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when MinRange is set less than 0</exception>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeSelectionChangedEvent">
+            <summary>
+            Event raised whenever the selected range is changed
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.MoveBack">
+            <summary>
+            Command to move back the selection
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.MoveForward">
+            <summary>
+            Command to move forward the selection
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.MoveAllForward">
+            <summary>
+            Command to move all forward the selection
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RangeSlider.MoveAllBack">
+            <summary>
+            Command to move all back the selection
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSlider.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSlider.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSlider.MoveSelection(System.Boolean)">
+            <summary>
+            moves the current selection with x value
+            </summary>
+            <param name="isLeft">True if you want to move to the left</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSlider.ResetSelection(System.Boolean)">
+            <summary>
+            Reset the Slider to the Start/End
+            </summary>
+            <param name="isStart">Pass true to reset to start point</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSlider.MoveSelection(System.Int64)">
+            <summary>
+             Change the range selected 
+            </summary>
+            <param name="span">The steps</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSlider.SetSelectedRange(System.Int64,System.Int64)">
+            <summary>
+            Sets the selected range in one go. If the selection is invalid, nothing happens.
+            </summary>
+            <param name="selectionStart">New selection start value</param>
+            <param name="selectionStop">New selection stop value</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSlider.ZoomToSpan(System.Int64)">
+            <summary>
+            Changes the selected range to the supplied range
+            </summary>
+            <param name="span">The span to zoom</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSlider.OnApplyTemplate">
+            <summary>
+            Overide to get the visuals from the control template
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeStart">
+            <summary>
+            The min value for the range of the range slider
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeStop">
+            <summary>
+            The max value for the range of the range slider
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeStartSelected">
+            <summary>
+            The min value of the selected range of the range slider
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeStopSelected">
+            <summary>
+            The max value of the selected range of the range slider
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RangeSlider.MinRange">
+            <summary>
+            The min range value that you can have for the range slider
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when MinRange is set less than 0</exception>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.RangeSlider.RangeSelectionChanged">
+            <summary>
+            Event raised whenever the selected range is changed
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.RangeSelectionChangedEventHandler">
+            <summary>
+            Delegate for the RangeSelectionChanged event
+            </summary>
+            <param name="sender">The object raising the event</param>
+            <param name="e">The event arguments</param>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.RangeSelectionChangedEventArgs">
+            <summary>
+            Event arguments for the Range slider RangeSelectionChanged event
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSelectionChangedEventArgs.#ctor(System.Int64,System.Int64)">
+            <summary>
+            sets the range start and range stop for the event args
+            </summary>
+            <param name="newRangeStart">The new range start set</param>
+            <param name="newRangeStop">The new range stop set</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RangeSelectionChangedEventArgs.#ctor(AC.AvalonControlsLibrary.Controls.RangeSlider)">
+            <summary>
+            sets the range start and range stop for the event args by using the slider RangeStartSelected and RangeStopSelected properties
+            </summary>
+            <param name="slider">The slider to get the info from</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RangeSelectionChangedEventArgs.NewRangeStart">
+            <summary>
+            The new range start selected in the range slider
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RangeSelectionChangedEventArgs.NewRangeStop">
+            <summary>
+            The new range stop selected in the range slider
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.TimePicker">
+            <summary>
+            Time Picker as a control that lets the user select a specific time
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TimePicker.MinTimeProperty">
+            <summary>
+            Gets or sets the minimum time selected
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TimePicker.MaxTimeProperty">
+            <summary>
+            Gets or sets the maximum time that can be selected
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedTimeProperty">
+            <summary>
+            Backing store for the selected timestamp 
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedHourProperty">
+            <summary>
+            Backing store for the selected hour
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedMinuteProperty">
+            <summary>
+            Backing store for the selected minsutes
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedSecondProperty">
+            <summary>
+            Backing store for the selected second
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedTimeChangedEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TimePicker.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TimePicker.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TimePicker.OnApplyTemplate">
+            <summary>
+            override to hook to the Control template elements
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TimePicker.ExposeTryFocusNeighbourControl(System.Windows.Controls.TextBox,System.Windows.Controls.TextBox,System.Windows.Controls.TextBox,System.Windows.Input.Key)">
+            <summary>
+            Exposes TryFocusNeighbourControl
+            </summary>
+            <param name="currentControl"></param>
+            <param name="leftControl"></param>
+            <param name="rightControl"></param>
+            <param name="keyPressed"></param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TimePicker.ExposeAdjustCarretIndexOrMoveToNeighbour(System.Windows.Controls.TextBox,System.Windows.Controls.TextBox)">
+            <summary>
+            Exposes the AdjustCarretIndexOrMoveToNeighbour
+            </summary>
+            <param name="current"></param>
+            <param name="neighbour"></param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TimePicker.ExposeTrimSelectedText(System.Windows.Controls.TextBox)">
+            <summary>
+            Exposes the TrimSelectedText method
+            </summary>
+            <param name="textBox"></param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TimePicker.MinTime">
+            <summary>
+            Gets or sets the minimum time that can be selected
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TimePicker.MaxTime">
+            <summary>
+            Gets or sets the maximum time that can be selected
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedTime">
+            <summary>
+            Gets or sets the selected timestamp 
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedHour">
+            <summary>
+            Gets or sets the selected Hour
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedMinute">
+            <summary>
+            Gets or sets the selected minutes
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TimePicker.SelectedSecond">
+            <summary>
+            Gets or sets the selected second
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.TimeSelectedChangedEventHandler">
+            <summary>
+            Delegate for the TimeSelectedChanged event
+            </summary>
+            <param name="sender">The object raising the event</param>
+            <param name="e">The routed event arguments</param>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.TimeSelectedChangedRoutedEventArgs">
+            <summary>
+            Routed event arguments for the TimeSelectedChanged event
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TimeSelectedChangedRoutedEventArgs.#ctor(System.Windows.RoutedEvent)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="routedEvent">The event that is raised </param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TimeSelectedChangedRoutedEventArgs.NewTime">
+            <summary>
+            Gets or sets the new time
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TimeSelectedChangedRoutedEventArgs.OldTime">
+            <summary>
+            Gets or sets the old time
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.ColumnStateChangeAction">
+            <summary>
+            Enum to state the action for the Coulmn State
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.ColumnStateChangeAction.Enabled">
+            <summary>
+            columns is enabled
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.ColumnStateChangeAction.Disabled">
+            <summary>
+            columns is disabled
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.SortableGridViewColumn">
+            <summary>
+            Grid view column that can sort
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.SortableGridViewColumn.#ctor">
+            <summary>
+            default ctor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.SortableGridViewColumn.SetSortDirection">
+            <summary>
+            Switches the sort direction
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.SortableGridViewColumn.SortPropertyNameProperty">
+            <summary>
+            The property name of the column to be sorted
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.SortableGridViewColumn.SortDirection">
+            <summary>
+            Gets or sets the current sort direction
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.SortableGridViewColumn.SortPropertyName">
+            <summary>
+            The property name of the column to be sorted
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.SortableGridViewColumn.CanSort">
+            <summary>
+            Gets or sets a flag indicating if the column can sort
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DataGridViewColumn">
+            <summary>
+            Extends the GridViewColumn to include some extra features
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.#ctor">
+            <summary>
+            Default ctor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.#ctor(System.String,System.String)">
+            <summary>
+            ctor
+            </summary>
+            <param name="name">The header name to set</param>
+            <param name="sortName">The sort property name to set</param>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.IsEnabledProperty">
+            <summary>
+            a dependancy property to know whether to display the column in the ListView
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.IsEnabledPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Checks if the property changed is the IsEnabled propety
+            </summary>
+            <param name="e">The event arguments to verify</param>
+            <returns>Returns true if the property is the IsEnabled</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.GetActionFromPropertyChanged(AC.AvalonControlsLibrary.Controls.DataGridViewColumn,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Returns a ColumnStateChangeAction that describes the property changed event
+            </summary>
+            <param name="sender">The DataGridViewColumn that has raised the event</param>
+            <param name="e">The event argmunets to parse</param>
+            <returns>Returns a ColumnStateChangeAction to represent the change of state</returns>
+            <exception cref="T:System.ArgumentNullException">Throws ArgumentNullException if the sender or the arguments are not valid</exception>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.GetColumnIdentifier(System.Windows.Controls.GridViewColumn)">
+            <summary>
+            Gets the identifier for a specific column
+            </summary>
+            <param name="column">The column to get the identifier from</param>
+            <returns>Returns an identifier for the column</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.IsValidPosition(System.Int32)">
+            <summary>
+            Gets a flag indicating if the position of the column is valid
+            </summary>
+            <param name="position">The position to check</param>
+            <returns>Returns true if position is valid</returns>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.DefaultPosition">
+            <summary>
+            Gets or sets the default position(index) where to place the column
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.Tag">
+            <summary>
+            Gets or sets the tag for this object
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DataGridViewColumn.IsEnabled">
+            <summary>
+            Dependancy property to know whether to display the column in the ListView
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.DateHelper">
+            <summary>
+            Helper class for dates
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DateHelper.GetDaysOfMonth(System.Int32,System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            Generates an array of days in a month
+            </summary>
+            <param name="month">The month to get the days for </param>
+            <param name="year">The year to get the days for </param>
+            <param name="maxDate">The max date to generate enabled cells</param>
+            <param name="minDate">The min date to generate enabled cells</param>
+            <returns>Returns an int array full of days in a month</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DateHelper.IsDateWithinRange(System.DateTime,System.DateTime,AC.AvalonControlsLibrary.Controls.DayCell)">
+            <summary>
+            Checks if the specified date is greater than 
+            </summary>
+            <param name="minDate">The min date</param>
+            <param name="maxDate">The max date</param>
+            <param name="cell">The cell to check</param>
+            <returns>Returns true if the cell is greater</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DateHelper.GetDayOfWeek(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the day of week for a specific date
+            </summary>
+            <param name="year">The year of the date</param>
+            <param name="month">The month of the date</param>
+            <param name="day">The day of the date</param>
+            <returns>Returns the day of week</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DateHelper.GetMonthDisplayName(System.Int32)">
+            <summary>
+            Gets a string that represents the string for the current month
+            </summary>
+            <param name="month">a number from 1 to 12</param>
+            <returns>Returns the string that represents the month</returns>
+            <exception cref="T:System.ArgumentException">Thrown if the month number is less than 1 or greater than 12</exception>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DateHelper.MoveMonthForward(System.Int32,System.Int32,System.Int32@,System.Int32@)">
+            <summary>
+            Moves one month forward
+            </summary>
+            <param name="currentMonth">The current month</param>
+            <param name="currentYear">The current year</param>
+            <param name="monthToGetNext">The next month</param>
+            <param name="yearTogetNext">The relative year for the new month</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DateHelper.MoveMonthBack(System.Int32,System.Int32,System.Int32@,System.Int32@)">
+            <summary>
+            Move one month back
+            </summary>
+            <param name="currentMonth">The current month</param>
+            <param name="currentYear">The current year</param>
+            <param name="monthToGetPrevious">The previous month</param>
+            <param name="yearToGetPrevious">The relative year for the new month</param>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.Months">
+            <summary>
+            Enum that specifies the list of months
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.January">
+            <summary>
+            January 
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.February">
+            <summary>
+            February
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.March">
+            <summary>
+            March
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.April">
+            <summary>
+            April
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.May">
+            <summary>
+            May
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.June">
+            <summary>
+            June
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.July">
+            <summary>
+            July
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.August">
+            <summary>
+            August
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.September">
+            <summary>
+            September
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.October">
+            <summary>
+            October
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.November">
+            <summary>
+            November
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.Months.December">
+            <summary>
+            December
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DatePicker">
+            <summary>
+            Control to select a specific date
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DatePicker.MaxDateProperty">
+            <summary>
+            Gets or sets the max date to be set for the DatePicker
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DatePicker.MinDateProperty">
+            <summary>
+            The Minimum date for the date picker
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DatePicker.DatesSelectionModeProperty">
+            <summary>
+            Gets or sets the selection mode for the DatePicker
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DatePicker.CurrentlySelectedDatesProperty">
+            <summary>
+            Gets or sets a collection of selected dates
+            This property can only be used if the DatesSelectionMode is not set to Single
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DatePicker.CurrentlySelectedDateProperty">
+            <summary>
+            Gets and sets the currently viewed date
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DatePicker.SelectedDateChangedEvent">
+            <summary>
+            Event for the DateSelectionChanged raised when the date changes
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DatePicker.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DatePicker.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DatePicker.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Raises the property changed event
+            </summary>
+            <param name="e">The arguments to pass</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DatePicker.OnApplyTemplate">
+            <summary>
+            override to get the templated controls
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.MaxDate">
+            <summary>
+            Gets or sets the max date to be set for the DatePicker
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.MinDate">
+            <summary>
+            The Minimum date for the date picker
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.DatesSelectionMode">
+            <summary>
+            Gets or sets the selection mode for the DatePicker
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.MonthsList">
+            <summary>
+            Gets the list of months
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.CurrentlyViewedMonth">
+            <summary>
+            Gets or sets the current month in view
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.CurrentlyViewedYear">
+            <summary>
+            Gets or sets the current year in view
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.CurrentlyViewedMonthYear">
+            <summary>
+            returns the month currently selected as a full string
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.CurrentlySelectedDateString">
+            <summary>
+            Gets and sets a string that represents the selected date
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.CurrentlySelectedDates">
+            <summary>
+            Gets or sets a collection of selected dates
+            This property can only be used if the DatesSelectionMode is not set to Single
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DatePicker.CurrentlySelectedDate">
+            <summary>
+            Gets and sets the currently viewed date
+            </summary>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.DatePicker.SelectedDateChanged">
+            <summary>
+            Event for the DateSelectionChanged raised when the date changes
+            </summary>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.DatePicker.PropertyChanged">
+            <summary>
+            Event raised when a property is changed
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DayCell">
+            <summary>
+            Object to represent a single day as a cell
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DayCell.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="day">The day to store</param>
+            <param name="month">The month to store</param>
+            <param name="year">The year to store</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DayCell.DayNumber">
+            <summary>
+            gets the day number for the cell
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DayCell.MonthNumber">
+            <summary>
+            gets the month number for the cell
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DayCell.YearNumber">
+            <summary>
+            gets the year number for the cell
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DayCell.IsEnabled">
+            <summary>
+            Gets or sets the Enabled status
+            </summary>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.DayCell.PropertyChanged">
+            <summary>
+            Property changed event for the enabled status
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DateSelectedChangedRoutedEventArgs">
+            <summary>
+            Routed event args for the DateSelectedChanged
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DateSelectedChangedRoutedEventArgs.#ctor(System.Windows.RoutedEvent)">
+            <summary>
+            Constructor for the event args
+            </summary>
+            <param name="routedEvent">The event for which the args will be passed</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateSelectedChangedRoutedEventArgs.NewDate">
+            <summary>
+            Gets or sets the new date that was set
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateSelectedChangedRoutedEventArgs.OldDate">
+            <summary>
+            Gets or sets the old date that was set
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DateSelectedChangedEventHandler">
+            <summary>
+            Delegate for the DateSelectedChanged event
+            </summary>
+            <param name="sender">The object that raised the event</param>
+            <param name="e">Event arguments for the DateSelectedChanged event</param>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.IsCurrentMonthConverter">
+            <summary>
+            Converter used to compare 2 months
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.OneWayMultiValueConverter">
+            <summary>
+            Base class for multivalue converters that do not implement the ConvertBack method
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.OneWayMultiValueConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value. Used in data binding. Override this method (sealed).
+            </summary>
+            <param name="values">The array of values that the source bindings in the MultiBinding produces</param>
+            <param name="targetType">The type of the binding target property</param>
+            <param name="parameter">The converter parameter to use</param>
+            <param name="culture">The culture to use in the converter</param>
+            <returns>A converted value</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.OneWayMultiValueConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Unimplemented method for converting back. This converter can only be used for one-way binding.
+            </summary>
+            <param name="value">Unused parameter</param>
+            <param name="targetTypes">Unused parameter</param>
+            <param name="parameter">Unused parameter</param>
+            <param name="culture">Unused parameter</param>
+            <returns>Always throws an exception</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.IsCurrentMonthConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Compares 2 months together
+            </summary>
+            <param name="values">The currently view month and the other month to check</param>
+            <param name="targetType">Target type</param>
+            <param name="parameter">The parameter to use</param>
+            <param name="culture">The current culture in use</param>
+            <returns>Returns true if there is a match between the 2 months</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.CellSizeConverter">
+            <summary>
+            converter to calculate the size for the cell of the calender
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.OneWayValueConverter">
+            <summary>
+            Base class for value converters that do not implement the ConvertBack method.
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.OneWayValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value. Used in data binding. Override this method (sealed).
+            Decorate the method with the type of return data (ValueConversion attribute).
+            </summary>
+            <param name="value">The value produced by the binding source</param>
+            <param name="targetType">The type of the binding target property</param>
+            <param name="parameter">The converter parameter to use</param>
+            <param name="culture">The culture to use in the converter</param>
+            <returns>A converted value</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.OneWayValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Unimplemented method for converting back. This converter can only be used for one-way binding.
+            </summary>
+            <param name="value">Unused parameter</param>
+            <param name="targetType">Unused parameter</param>
+            <param name="parameter">Unused parameter</param>
+            <param name="culture">Unused parameter</param>
+            <returns>Always throws an exception</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.CellSizeConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converter for the calender control to measure the widths to calculate
+            </summary>
+            <param name="value">Pass the Actual width of the parent control</param>
+            <param name="targetType">Target type</param>
+            <param name="parameter">Pass widthCell to calculate the width a particular cell.
+            Pass widthCellContainer to calculate the witdth of the parent control</param>
+            <param name="culture">The current culture in use</param>
+            <returns>Returns the new width to use</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.MonthConverter">
+            <summary>
+            converts the date string to the value
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.MonthConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts the month from a number to the actual string
+            </summary>
+            <param name="value">The value as integer</param>
+            <param name="targetType">Target type</param>
+            <param name="parameter">The parameter to use</param>
+            <param name="culture">The current culture in use</param>
+            <returns>Returns the selected item to select for the drop down list</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.MonthConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts the value back from ComboBoxitem to a number that can be set for the current month
+            </summary>
+            <param name="value">The comboBoxItem Selected</param>
+            <param name="targetType">Target type</param>
+            <param name="parameter">The parameter to use</param>
+            <param name="culture">The current culture in use</param>
+            <returns>Returns a number that represents the month selected</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.YearValidation">
+            <summary>
+            Validation rule for the Year
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.YearValidation.Validate(System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Validation for the year
+            </summary>
+            <param name="value">The year value</param>
+            <param name="cultureInfo">The culture info</param>
+            <returns>Returns the validation result</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DateTimePicker">
+            <summary>
+            DateTimePicker Control to select date and time
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DateTimePicker.MinuteHandProperty">
+            <summary>
+            Gets or sets the color to use for the minute hand
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DateTimePicker.HourHandProperty">
+            <summary>
+            Gets or sets the color to use for the hour hand
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DateTimePicker.ClockBackgroundProperty">
+            <summary>
+            Gets or sets the backgroud to use for the clock
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DateTimePicker.CalanderHeaderForegroundProperty">
+            <summary>
+            Gets or sets the calander foreground for the text
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DateTimePicker.MaxDateProperty">
+            <summary>
+            Gets or sets the max date to be set for the DatePicker
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DateTimePicker.MinDateProperty">
+            <summary>
+            The Minimum date for the date picker
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DateTimePicker.DateTimeSelectedProperty">
+            <summary>
+            Gets or sets the DateTime Selected
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DateTimePicker.SelectedDateTimeChangedEvent">
+            <summary>
+            Event for the DateSelectionChanged raised when the date changes
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DateTimePicker.#cctor">
+            <summary>
+            static constructor for the DatetimePicker
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DateTimePicker.OnApplyTemplate">
+            <summary>
+            Override the default template
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DateTimePicker.ExposedDatePicker(AC.AvalonControlsLibrary.Controls.DatePicker@,AC.AvalonControlsLibrary.Controls.TimePicker@)">
+            <summary>
+            Exposes the DatePicker and Time picker for unit tests
+            </summary>
+            <param name="datePicker"></param>
+            <param name="timePicker"></param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateTimePicker.MinuteHand">
+            <summary>
+            Gets or sets the color to use for the minute hand
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateTimePicker.HourHand">
+            <summary>
+            Gets or sets the color to use for the hour hand
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateTimePicker.ClockBackground">
+            <summary>
+            Gets or sets the backgroud to use for the clock
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateTimePicker.CalanderHeaderBackground">
+            <summary>
+            Gets or sets the background color used by the header of the Calander
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateTimePicker.CalanderHeaderForeground">
+            <summary>
+            Gets or sets the calander foreground for the text
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateTimePicker.MaxDate">
+            <summary>
+            Gets or sets the max date to be set for the DatePicker
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateTimePicker.MinDate">
+            <summary>
+            The Minimum date for the date picker
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DateTimePicker.DateTimeSelected">
+            <summary>
+            Gets or sets the DateTime Selected
+            </summary>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.DateTimePicker.SelectedDateTimeChanged">
+            <summary>
+            Event for the DateSelectionChanged raised when the date changes
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DateTimeSelectedChangedRoutedEventHandler">
+            <summary>
+            Delegate for the date selected changed
+            </summary>
+            <param name="sender">The object raising the event</param>
+            <param name="e">The event arguments for event being raised</param>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DateTimeSelectedChangedRoutedEventArgs">
+            <summary>
+            Event arguments for the DateTimeSelected changed
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DateTimeSelectedChangedRoutedEventArgs.#ctor(System.Windows.RoutedEvent)">
+            <summary>
+            constructor 
+            </summary>
+            <param name="routedEvent">The event raised</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.HandLengthConverter.PercentageToSubtract">
+            <summary>
+            Gets or sets the percentage of the length to show
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.AngleConverter.Units">
+            <summary>
+            Gets or sets the number of units to calculate the angle on
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.AlignClockHands">
+            <summary>
+            Places the minute hand and the hour hand in the center of the canvas
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.GridViewSortHandler">
+            <summary>
+            Handles sorting on any type of Listvew or Listview derived types
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.GridViewSortHandler.GridViewSortHandlerProperty">
+            <summary>
+            Attached property to make a specific listview support sorting
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.GridViewSortHandler.GetGridViewSortHandler(System.Windows.DependencyObject)">
+            <summary>
+            gets the value GridViewSortable from the object
+            </summary>
+            <param name="obj">The object to check</param>
+            <returns>Returns the value of the GridViewSortable property</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.GridViewSortHandler.SetGridViewSortHandler(System.Windows.DependencyObject,AC.AvalonControlsLibrary.Core.GridViewSortHandler)">
+            <summary>
+            Sets the value GridViewSortable on the specified object
+            </summary>
+            <param name="obj">The object to store the value of the property</param>
+            <param name="value">The value to set</param>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.GridViewSortHandler.CustomComparerProperty">
+            <summary>
+            Attached property to make a specific listview support sorting
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.GridViewSortHandler.GetCustomComparer(System.Windows.DependencyObject)">
+            <summary>
+            gets the value GridViewCustomComparer from the object
+            </summary>
+            <param name="obj">The object to check</param>
+            <returns>Returns the value of the GridViewSortable property</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.GridViewSortHandler.SetCustomComparer(System.Windows.DependencyObject,AC.AvalonControlsLibrary.Core.GridViewCustomComparer)">
+            <summary>
+            Sets the value GridViewCustomComparer on the specified object
+            </summary>
+            <param name="obj">The object to store the value of the property</param>
+            <param name="value">The value to set</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.GridViewSortHandler.ApplySort(AC.AvalonControlsLibrary.Controls.SortableGridViewColumn)">
+            <summary>
+            sorts the grid view by a specified column
+            </summary>
+            <param name="sortableGridViewColumn">The column to sort</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewSortHandler.ColumnHeaderSortedAscendingTemplate">
+            <summary>
+            Template for the column header to sort in asc order
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewSortHandler.ColumnHeaderSortedDescendingTemplate">
+            <summary>
+            The template for the column header for sorting in desc order
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewSortHandler.ColumnHeaderNotSortedTemplate">
+            <summary>
+            Template for the column header when it is not being sorted
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewSortHandler.LastSortedOnColumn">
+            <summary>
+            Returns the last sorted column
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewSortHandler.Comparer">
+            <summary>
+            The comparer to use for the sorting
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewSortHandler.ParentControl">
+            <summary>
+            gets the parent control for the sort handler
+            this is set by the RegisterSortHandler
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.TreeListBox">
+            <summary>
+            VirtualizingTreeView is a listbox that can show a hierarchy of objects just like a tree view. 
+            This control uses UI virtualization
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBox.OnNewItemCreated(AC.AvalonControlsLibrary.Controls.TreeListBoxItemCreatedEventArgs)">
+            <summary>
+            raises the NewItemCreated
+            </summary>
+            <param name="e">The event arguments for the event</param>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TreeListBox.ChildItemSourcePathProperty">
+            <summary>
+            The property name of the property that exposes the child collection of items
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TreeListBox.HierarchalItemsSourceProperty">
+            <summary>
+            Gets or sets the items source for the hierarchal data items
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBox.IsItemItsOwnContainerOverride(System.Object)">
+            <summary>
+            Verifies if the item passed is a VirtualizingTreeViewItem
+            </summary>
+            <param name="item">The item to verify</param>
+            <returns>Returns true if the item is a VirtualizingTreeViewItem</returns>
+            <exception cref="T:System.NotSupportedException">The current implementation does not suupport generation of it's own kind</exception>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBox.GetContainerForItemOverride">
+            <summary>
+            Creates an instance of the VirtualizingTreeViewItem
+            </summary>
+            <returns>Returns the instance of the new VirtualizingTreeViewItem</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBox.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Prepares the new VirtualizingTreeViewItem with the actual business object
+            </summary>
+            <param name="element">The element (VirtualizingTreeViewItem) to apply the template</param>
+            <param name="item">The business object to set</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBox.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)">
+            <summary>
+            override the Items source changed to verify that the items source set was set from the control itself
+            </summary>
+            <param name="oldValue">The old items source</param>
+            <param name="newValue">The new items source</param>
+            <exception cref="T:System.ArgumentException">Thrown when the user sets the Items source property</exception>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBox.ExposedGenerateItemsSource(System.Collections.IEnumerable)">
+            <summary>
+            Exposes the ResetItemsSource
+            </summary>
+            <param name="newValue">A list containing buisness objects</param>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.TreeListBox.NewItemCreated">
+            <summary>
+            Event raised when new items are created
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBox.ChildItemSourcePath">
+            <summary>
+            The property name of the property that exposes the child collection of items
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBox.CompositeChildCollection">
+            <summary>
+            Gets or sets the composite collection that contains all child elements
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBox.HierarchalItemsSource">
+            <summary>
+            Gets or sets the items source for the hierarchal data items
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.TreeListBoxInfo">
+            <summary>
+            Holds the info for a specific VirtualizingTreeViewItem
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBoxInfo.#ctor(System.Int32,System.Object)">
+            <summary>
+            Constructor 
+            Sets the default values for the data members
+            </summary>
+            <param name="level">The level of the item</param>
+            <param name="dataItem"><see cref="P:AC.AvalonControlsLibrary.Controls.TreeListBoxInfo.DataItem"/>The actual data item</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxInfo.Level">
+            <summary>
+            Gets or sets the level for the current VirtualizingTreeViewItem
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxInfo.ChildrenCount">
+            <summary>
+            Gets the child count of the current item.
+            This includes the children at all levels
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxInfo.DataItem">
+            <summary>
+            Gets the business object of the current item
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxInfo.IsExpanded">
+            <summary>
+            Gets or sets the state of the item expansion
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxInfo.ChildItems">
+            <summary>
+            return the child TreeListBoxInfo objects
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.TreeListBoxItemCreatedEventArgs">
+            <summary>
+            event args passed when a tree list box item change
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBoxItemCreatedEventArgs.#ctor(AC.AvalonControlsLibrary.Controls.TreeListBoxItem,AC.AvalonControlsLibrary.Controls.TreeListBoxInfo)">
+            <summary>
+            Constructor 
+            </summary>
+            <param name="item">The new item created</param>
+            <param name="info">The info relative to this item</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxItemCreatedEventArgs.NewItem">
+            <summary>
+            gets the new item created
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxItemCreatedEventArgs.NewItemInfo">
+            <summary>
+            gets the new item info for the newly created item
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DockableControl">
+            <summary>
+            Control that can be Docked in a DockableContainer
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableControl.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.ReflectionHelper">
+            <summary>
+            Helper class for reflection
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.ReflectionHelper.GetPropertyForObject(System.Object,System.String)">
+            <summary>
+            Returns a Proeprty info for a specific property
+            </summary>
+            <param name="obj">The object to get the property from</param>
+            <param name="propertyName">The property name</param>
+            <returns>Returns the property info of the type</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.ReflectionHelper.InterfacePresentInType(System.Type,System.Type)">
+            <summary>
+            InterfacePresentInClass check that an inteface is implimented for the specific dll type
+            </summary>
+            <param name="checkType">The type to check i.e the class</param>
+            <param name="compareType">The interface type</param>
+            <returns>Returns true if the interface is implemented in the class</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.ReflectionHelper.InterfaceFilter(System.Type,System.Object)">
+            <summary>
+            InterfaceFilter will check if the type passed is the same as the object passed
+            </summary>
+            <param name="typeObj">The Type object to which the filter is applied</param>
+            <param name="criteriaObj">An arbitrary object used to filter the list</param>
+            <returns>Returns true to include the Type in the filtered list</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.Globals">
+            <summary>
+            Class containing global strings
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.ControlsHelper">
+            <summary>
+            Helper class for controls
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Exception.ExceptionStrings">
+            <summary>
+            class definition holding all exception / error strings
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Exception.ExceptionStrings.NOT_SUPPORTED_RATINGITEM">
+            <summary>
+            Message when a user tries to manual populate the Ratingselector with invalid objects
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Exception.ExceptionStrings.INVALID_PROPETY_CHANGED_EVENT_ARGS">
+            <summary>
+            Message used when the PropertyChangedEventArgs is null
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Exception.ExceptionStrings.MIN_RANGE_LESS_THAN_ZERO">
+            <summary>
+            Thrown when MinRange(for the range slider) is set less than 0
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Exception.ExceptionStrings.INVALID_MONTH_NUMBER">
+            <summary>
+            Thrown when a month is passed as less than 1 or greater than 12
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DockableContainer">
+            <summary>
+            Container in which it's children can be dragged around
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DockableContainer.ChildrenProperty">
+            <summary>
+            Gets or sets the children of the collection
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DockableContainer.SidePanelWidthProperty">
+            <summary>
+            Gets or sets the Side panel width
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DockableContainer.SidePanelHeightProperty">
+            <summary>
+            Gets or sets the Side panel height
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.GetDock(System.Windows.DependencyObject)">
+            <summary>
+            Attached property that can be used by the children of this control to specify where they want to e docked
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.SetDock(System.Windows.DependencyObject,System.Nullable{System.Windows.Controls.Dock})">
+            <summary>
+            Attached property that can be used by the children of this control to specify where they want to e docked
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DockableContainer.DockProperty">
+            <summary>
+            Attached property that can be used by the children of this control to specify where they want to e docked
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.GetElementForDragging(System.Windows.DependencyObject)">
+            <summary>
+            Gets the element to be dragged from the child element that sets this property
+            </summary>
+            <param name="obj">The element that stores this property</param>
+            <returns>Returns the element to be dragged</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.SetElementForDragging(System.Windows.DependencyObject,System.Windows.FrameworkElement)">
+            <summary>
+            Sets the element to be dragged
+            </summary>
+            <param name="obj">The element to store the property</param>
+            <param name="value">The element to be dragged</param>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DockableContainer.ElementForDraggingProperty">
+            <summary>
+            Gets or sets the element to drag when undocked
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DockableContainer.ToggleDockChild">
+            <summary>
+            Command to Dock the control or un dock it
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.#cctor">
+            <summary>
+            Static constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.OnApplyTemplate">
+            <summary>
+            Get all the elements for the Control Template
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.AddChild(System.Object)">
+            <summary>
+            Adds a child to the children collection
+            </summary>
+            <param name="value">The value to add</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.AddText(System.String)">
+            <summary>
+            This is not supported. Only UI Element can be added
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.OnMouseMove(System.Windows.Input.MouseEventArgs)">
+            <summary>
+            move any element that is being dragged
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DockableContainer.OnMouseUp(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            unregister the element to drag
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DockableContainer.Children">
+            <summary>
+            Gets or sets the children of the collection
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DockableContainer.SidePanelWidth">
+            <summary>
+            Gets or sets the Side panel width
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DockableContainer.SidePanelHeight">
+            <summary>
+            Gets or sets the Side panel height
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.GridViewCustomComparer">
+            <summary>
+            Base class for comparers that need to be used for the sorting of a control
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.GridViewCustomComparer.#ctor(System.Boolean)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="passFullObjectForComparison">Set to true if you want the CompareOverride method to pass the full object to compare
+            Pass false if you want to pass the value of the property to compare</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.GridViewCustomComparer.Compare(System.Object,System.Object)">
+            <summary>
+            The comparison for the class
+            </summary>
+            <param name="x">The object value 1</param>
+            <param name="y">The object value 2</param>
+            <returns>Returns a number taht determines the order to sort</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.GridViewCustomComparer.CompareOverride(System.Object,System.Object)">
+            <summary>
+            The comparison for the class
+            </summary>
+            <param name="x">The object value 1</param>
+            <param name="y">The object value 2</param>
+            <returns>Returns a number taht determines the order to sort</returns>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewCustomComparer.PassFullObjectForComparison">
+            <summary>
+            Set to true if you want the CompareOverride method to pass the full object to compare
+            Pass false if you want to pass the value of the property to compare
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewCustomComparer.Direction">
+            <summary>
+            Gets or set the direction for sorting
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.GridViewCustomComparer.SortPropertyName">
+            <summary>
+            The name of the property to sort
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.DefaultListViewComparer">
+            <summary>
+            Default comparer that can only work with properties that implement the IComparable interface or the IComparer interface
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DefaultListViewComparer.#ctor">
+            <summary>
+            default constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DefaultListViewComparer.CompareOverride(System.Object,System.Object)">
+            <summary>
+            The comparison for the class
+            </summary>
+            <param name="x">The object value 1</param>
+            <param name="y">The object value 2</param>
+            <returns>Returns a number taht determines the order to sort</returns>
+            <exception cref="T:System.ArgumentException">Raised when one of the properties to compare does not implement the IComparer or the IComparable</exception>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.DefaultListViewComparer.UseSimpleBinding">
+            <summary>
+            Pass true when using the comparer with simple binding 
+            Pass false when using complex binding for properties (ex MyProp[test])
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.CollectionBehaviour">
+            <summary>
+            The behevoiur to have for a collection
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.CollectionBehaviour.None">
+            <summary>
+            Does not use this field
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.CollectionBehaviour.LastValue">
+            <summary>
+            Gets ths last value added in the collection
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Core.CollectionBehaviour.Count">
+            <summary>
+            Gets the count of the collection
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute">
+            <summary>
+            Attribute to describe the data grid column fo a specific property
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Full constructor
+            </summary>
+            <param name="bindingPath">The binding path for the DisplayMemeberValue</param>
+            <param name="displayName">The display name to use for the datagrid</param>
+            <param name="sortName">The sort name to use to sort the data</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.#ctor(System.Boolean)">
+            <summary>
+            Ctor used when one wants to mark a property to be excluded 
+            from the auto generation of data grid viewl columns
+            </summary>
+            <param name="exclude">Set to true to exclude property</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.GetDataGridViewColumn">
+            <summary>
+            returns a datagrid view column with all the settings applied
+            </summary>
+            <returns>datagrid view column</returns>
+            <exception cref="T:System.NotSupportedException">Thrown when the exclude flag has been marked as true</exception>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.CollectionBehaviour">
+            <summary>
+            Gets or sets the collection Behaviour
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.Exclude">
+            <summary>
+            gets or sets a flag that marks the property to be excluded
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.Position">
+            <summary>
+            Gets or sets the position(index) where to place the column
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.DisplayName">
+            <summary>
+            Display Name used for the data grid view column
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.MemeberBinding">
+            <summary>
+            Display Name used for the data grid view column
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Core.DataGridViewPropertyDescriptorAttribute.SortName">
+            <summary>
+            Sort name used for sorting on the column
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.Magnifier">
+            <summary>
+            Control that acts like a normal slider yet has the functionality of pushing new values while holding the thumb
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.Magnifier.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.Magnifier.OnMagnify(AC.AvalonControlsLibrary.Controls.MagnifyEventArgs)">
+            <summary>
+            Raises the magnify event
+            </summary>
+            <param name="magnifyChange">The change to pass</param>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.Magnifier.Magnify">
+            <summary>
+            Raises when the slider is being zoom in or out
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.Magnifier.CenteredAnimationDuration">
+            <summary>
+            The duration of the animation to animate the slider back to the center point
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.Magnifier.MagnifyInterval">
+            <summary>
+            The interval rate to raise the magnify event while user is holding the magnify
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.Magnifier.MidPoint">
+            <summary>
+            Gets the mid point of the slider
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.MagnifyEventArgs">
+            <summary>
+            Event arguments for the magnify event
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.MagnifyEventArgs.#ctor(System.Double)">
+            <summary>
+            constructor
+            </summary>
+            <param name="magnifyBy">The value to magnify by</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.MagnifyEventArgs.MagnifiedBy">
+            <summary>
+            Returns the value to magnify by
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.CreateUiPresenter`1">
+            <summary>
+            Creates an instance of an object from the property info specified
+            </summary>
+            <typeparam name="T">The Type to create</typeparam>
+            <param name="propertyInfo">The property info to create the type</param>
+            <returns>Return the object constructed from the property info</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.PropertyInfoEngine">
+            <summary>
+            Helper class that get a list of property from a specific type
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.PropertyInfoEngine.GetProperties``1(System.Type,AC.AvalonControlsLibrary.Core.CreateUiPresenter{``0})">
+            <summary>
+            Create a list of ui element from a specific type
+            </summary>
+            <typeparam name="T">The type of objects to create</typeparam>
+            <param name="type">The type to analyze</param>
+            <param name="createUiPresenter">a delegate that creates an instance of ui elemet from a property info</param>
+            <returns>Returns a list of UI element objects</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.PropertyInfoEngine.GetProperties(System.Type)">
+            <summary>
+            Gets a list of instance properties that have a getter
+            </summary>
+            <param name="type">The type to analze</param>
+            <returns>Returns a list of properties</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.TreeListBoxItem">
+            <summary>
+            The UI container that represents an item for the TreeListBox
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.IsExpandedProperty">
+            <summary>
+            Returns true if the item is expanded
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.#cctor">
+            <summary>
+            Static constructor
+            This overrides the default style
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.#ctor(AC.AvalonControlsLibrary.Controls.TreeListBox)">
+            <summary>
+            constructor for the TreeListBoxItem
+            </summary>
+            <param name="parent">The parent TreeListBox</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.PrepareItem(AC.AvalonControlsLibrary.Controls.TreeListBoxInfo)">
+            <summary>
+            Prepares the item by setting the properties
+            Override this method if you want to attach any extra info to the item
+            </summary>
+            <param name="info">The info to apply</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.DropAllListItems">
+            <summary>
+            drops all the child list items
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.OnApplyTemplate">
+            <summary>
+            Apply the control template
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.ExposePrepareItem(AC.AvalonControlsLibrary.Controls.TreeListBoxInfo)">
+            <summary>
+            Esposes the PrepareItem
+            </summary>
+            <param name="info"></param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.Level">
+            <summary>
+            Gets the current level number in the hierarchy
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.TreeListBoxItem.IsExpanded">
+            <summary>
+            Returns true if the item is expanded
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.ICollectionNotificationStrategy">
+            <summary>
+            Strategy interface to get data
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.ICollectionNotificationStrategy.GetDisplayMember(System.Collections.IList)">
+            <summary>
+            Get the Display object to show on screen
+            </summary>
+            <param name="source">The source collection to get data from</param>
+            <returns>The object to show on screen</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.CollectionLastValueNotificationStrategy">
+            <summary>
+            Gets the last value from a collection
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.CollectionLastValueNotificationStrategy.GetDisplayMember(System.Collections.IList)">
+            <summary>
+            Gets the last value from the collection
+            </summary>
+            <param name="source">The source collection to get the value from</param>
+            <returns>Return the object to display on screen</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the source list is set to null</exception>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.CollectionCountNotificationStrategy">
+            <summary>
+            Gets the count of the collection to display on screen
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.CollectionCountNotificationStrategy.GetDisplayMember(System.Collections.IList)">
+            <summary>
+            gets the count of the collection
+            </summary>
+            <param name="source">The source collection to get the count from</param>
+            <returns>The count of the collection</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the source list is set to null</exception>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.CollectionNotificationManager">
+            <summary>
+            Notification listener for a collection that implement INotifyCollectionChanged
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.CollectionNotificationManager.RegisterCollectionNotification(AC.AvalonControlsLibrary.Core.CollectionBehaviour)">
+            <summary>
+            creates a class that is registered to notification of INotifyCollectionChanged
+            </summary>
+            <param name="collectionBehaviour">The behavoir (return value) for the listnener</param>
+            <returns>Return a listener instance that is registered to notifications</returns>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.CollectionNotifier">
+            <summary>
+            Converter used to translate the collection property to a value set by the strategy specified
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.CollectionNotifier.#ctor(AC.AvalonControlsLibrary.Core.ICollectionNotificationStrategy)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="strategy">The strategy to use to convert data</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.CollectionNotifier.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts the source collection to return the value specified by the strategy
+            </summary>
+            <param name="value">The collection value</param>
+            <param name="targetType">The target type is not used in this context</param>
+            <param name="parameter">The parameter is not used in this context</param>
+            <param name="culture">The culture is not used in this context</param>
+            <returns>Returns the value specified by the strategy</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.CollectionNotifier.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+             <summary>
+             Converts the value back to the original value. Used for two way databinding
+             This is not supported
+             </summary>
+             <param name="value">The value represented in the UI</param>
+             <param name="targetType">The target type is not used in this context</param>
+             <param name="parameter">The parameter type is not used in this context</param>
+             <param name="culture">The culture type is not used in this context</param>
+             <returns>Return the value of the collection</returns>
+            <exception cref="T:System.NotSupportedException">Thrown when trying to use two way databinding</exception>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.RateItemMouseOverEventArgs">
+            <summary>
+            Event args to pass when sending the Item mouse over event
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RateItemMouseOverEventArgs.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="rateValue">The rate value to pass</param>
+            <param name="cancel">Pass true to cancel the rate mouse over</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RateItemMouseOverEventArgs.RateValue">
+            <summary>
+            Gets or Sets the rate value selected
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RateItemMouseOverEventArgs.Cancel">
+            <summary>
+            Gets or sets a flag that signals if the items should cancel the mouse over
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.RatingSelector">
+            <summary>
+            RatingSelector is a control that lets you select a rating
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelector.RateItemHoverColorProperty">
+            <summary>
+            Gets or sets the color for the hover color of the rate item
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelector.RateItemColorProperty">
+            <summary>
+            Gets or sets the color to use for the rating control
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelector.IsReadOnlyProperty">
+            <summary>
+            Gets or sets a flag that signals if the control should be readonly
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelector.RatingSelectedProperty">
+            <summary>
+            Gets or sets the rating selected
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelector.MinRatingProperty">
+            <summary>
+            Gets and Sets the min rating for the control
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelector.MaxRatingProperty">
+            <summary>
+            Gets and Sets the max rating for the control
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelector.SelectRating">
+            <summary>
+            Command to select rating
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RatingSelector.#cctor">
+            <summary>
+            Static constructor
+            This overrides the default style
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RatingSelector.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RatingSelector.IsItemItsOwnContainerOverride(System.Object)">
+            <summary>
+            override in order to make sure that only RatingSelectorItems are populated
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RatingSelector.GetContainerForItemOverride">
+            <summary>
+            create an instance of the rating item
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.RatingSelector.RateItemMouseOver">
+            <summary>
+            Event raised to notify all rate items that another rate item has been mouse over
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelector.RateItemHoverColor">
+            <summary>
+            Gets or sets the color for the hover color of the rate item
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelector.RateItemColor">
+            <summary>
+            Gets or sets the color to use for the rating control
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelector.IsReadOnly">
+            <summary>
+            Gets or sets a flag that signals if the control should be readonly
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelector.RatingSelected">
+            <summary>
+            Gets or sets the rating selected
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelector.MinRating">
+            <summary>
+            Gets and Sets the min rating for the control
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelector.MaxRating">
+            <summary>
+            Gets and Sets the max rating for the control
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.RatingSelectorItem">
+            <summary>
+            Items for the rating seletor
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelectorItem.IsHigherRateMouseOverProperty">
+            <summary>
+            Gets a value indicating that a higher rate than the current has the mouse over
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelectorItem.RateValueProperty">
+            <summary>
+            The rating value for the item
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.RatingSelectorItem.IsSelectedProperty">
+            <summary>
+            gets or sets if the item is selected
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RatingSelectorItem.#cctor">
+            <summary>
+            Static constructor
+            This overrides the default style
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.RatingSelectorItem.#ctor(AC.AvalonControlsLibrary.Controls.RatingSelector)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="parentSelector">The owner of the item</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelectorItem.IsHigherRateMouseOver">
+            <summary>
+            Gets a value indicating that a higher rate than the current has the mouse over
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelectorItem.RateValue">
+            <summary>
+            The rating value for the item
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.RatingSelectorItem.IsSelected">
+            <summary>
+            gets or sets if the item is selected
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.MaskedTextBox">
+            <summary>
+            Masked textbox control is a text box that can have a mask for the text
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.MaskedTextBox.MaskProperty">
+            <summary>
+            Dependency property to store the mask to apply to the textbox
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.MaskedTextBox.#cctor">
+            <summary>
+            Static Constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.MaskedTextBox.#ctor">
+            <summary>
+             Default  constructor
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.MaskedTextBox.OnPreviewTextInput(System.Windows.Input.TextCompositionEventArgs)">
+            <summary>
+            override this method to replace the characters enetered with the mask
+            </summary>
+            <param name="e">Arguments for event</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.MaskedTextBox.OnPreviewKeyDown(System.Windows.Input.KeyEventArgs)">
+            <summary>
+            override the key down to handle delete of a character
+            </summary>
+            <param name="e">Arguments for the event</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.MaskedTextBox.MaskProvider">
+            <summary>
+            Gets the MaskTextProvider for the specified Mask
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.MaskedTextBox.Mask">
+            <summary>
+            Gets or sets the mask to apply to the textbox
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.ColumnStateChangedEventArgs">
+            <summary>
+            Event arguments for the ColumnStateChanged event
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.ColumnStateChangedEventArgs.#ctor(AC.AvalonControlsLibrary.Controls.DataGridViewColumn,AC.AvalonControlsLibrary.Controls.ColumnStateChangeAction)">
+            <summary>
+            default ctor
+            </summary>
+            <param name="columnChanged">The column that has changed</param>
+            <param name="action">The action for the event</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.ColumnStateChangedEventArgs.Action">
+            <summary>
+            The action for the event
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.ColumnStateChangedEventArgs.ColumnChanged">
+            <summary>
+            The column that has changed
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Controls.DataGridView">
+            <summary>
+            DataGridView is a control that can display a list of objects
+            The data grid view show the data in a grid style. It generates the columns from the properties of the object in the current context of data
+            You can use the DataGridViewPropertyDescriptorAttribute attribute to make your class properties interact better with the data grid
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridView.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="F:AC.AvalonControlsLibrary.Controls.DataGridView.MultipleItemsSelectedProperty">
+            <summary>
+            Returns true if there are multiple items selected 
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridView.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)">
+            <summary>
+            override the selection changed to change the multiple select property
+            </summary>
+            <param name="e">The event arguments passed</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridView.OnColumnStateChanged(AC.AvalonControlsLibrary.Controls.ColumnStateChangedEventArgs)">
+            <summary>
+            raises the ColumnStateChanged event
+            </summary>
+            <param name="e">The event arguments for the event</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridView.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Check that the grid view columns where generated for this type if not create them
+            This usually occurs if data comes in late after binding...
+            </summary>
+            <param name="e">The arguments for the notification change of the binded collection</param>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Controls.DataGridView.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)">
+            <summary>
+            Repopulate the columns for the listview when the item source changes
+            </summary>
+            <param name="oldValue">The old items</param>
+            <param name="newValue">The new items</param>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DataGridView.UseDefaultView">
+            <summary>
+            Gets or set the use of a default view
+            Set this property to true if you want to specify your own GridView
+            </summary>
+        </member>
+        <member name="P:AC.AvalonControlsLibrary.Controls.DataGridView.MultipleItemsSelected">
+            <summary>
+            Returns true if there are multiple items selected 
+            </summary>
+        </member>
+        <member name="E:AC.AvalonControlsLibrary.Controls.DataGridView.ColumnStateChanged">
+            <summary>
+            event raised to notify listeners that a column state has changed
+            </summary>
+        </member>
+        <member name="T:AC.AvalonControlsLibrary.Core.MathUtil">
+            <summary>
+            Helper class that contains methods that execute mathematical operations
+            </summary>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.MathUtil.IncrementDecrementNumber(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Validates the string passed by parsing it as int and checking if it is inside the bounds specified 
+            then the resulting int will be incremented/decremented
+            </summary>
+            <param name="num">The string to parse as int and increment/decrement</param>
+            <param name="minValue">The min value for the bound checking</param>
+            <param name="maxVal">The max value for the bounds checking</param>
+            <param name="increment">Pass true to increment and false to decrement</param>
+            <returns>Returns the new number incremented or decremeneted</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.MathUtil.ValidateNumber(System.String,System.Int32,System.Int32)">
+            <summary>
+            Parses the number and makes sure that it is within the bounds specified
+            </summary>
+            <param name="newNum">The string to parse and validate</param>
+            <param name="minValue">The min value for the bound checking</param>
+            <param name="maxValue">The max value for the bound checking</param>
+            <returns>Returns the int that was constructed from the string + bound checking</returns>
+        </member>
+        <member name="M:AC.AvalonControlsLibrary.Core.MathUtil.ValidateNumber(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            makes sure that the number is within the bounds specified
+            </summary>
+            <param name="newNum">The number to validate</param>
+            <param name="minValue">The min value for the bound checking</param>
+            <param name="maxValue">The max value for the bound checking</param>
+            <returns>Returns the int that was constructed from the string + bound checking</returns>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

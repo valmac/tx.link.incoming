@@ -1,0 +1,1985 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StockSharp.Algo.Indicators</name>
+    </assembly>
+    <members>
+        <member name="T:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage">
+            <summary>
+            Взвешенная по объему скользящая средняя (Volume-Weighted Moving Average)
+            </summary>
+            <remarks>
+            Cumulative(Volume x Typical Price)/Cumulative(Volume)
+            
+            http://www2.wealth-lab.com/WL5Wiki/VMA.ashx
+            http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:vwap_intraday      
+            
+            Author: Maxim
+            </remarks>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.SingleValueIndicator`1">
+            <summary>
+            Базовый класс для индикаторов с одним результирующим значением.
+            </summary>
+            <typeparam name="T">Тип данных, на основе которых обновляется индикатор.</typeparam>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.BaseIndicator">
+            <summary>
+            Базовый индикатор.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.IIndicator">
+            <summary>
+            Интерфейс, описывающий индикатор.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.IIndicator.Name">
+            <summary>
+            Название индикатора.
+            </summary>
+        </member>
+        <member name="E:StockSharp.Algo.Indicators.IIndicator.Changed">
+            <summary>
+            Событие об изменении индикатора (например, добавлено новое значение).
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.BaseIndicator.RaiseChangedEvent">
+            <summary>
+            Вызвать событие <see cref="E:StockSharp.Algo.Indicators.BaseIndicator.Changed"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.BaseIndicator.Name">
+            <summary>
+            Название индикатора.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.BaseIndicator.IsFormed">
+            <summary>
+            Сформирован ли индикатор.
+            </summary>
+        </member>
+        <member name="E:StockSharp.Algo.Indicators.BaseIndicator.Changed">
+            <summary>
+            Событие об изменении индикатора (например, добавлено новое значение).
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.SingleValueIndicator`1.Add(`0)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="value">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.SingleValueIndicator`1.Value">
+            <summary>
+            Текущее значение индикатора.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage._shislitel">
+            <summary>
+            Текущее значение числителя
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage._znamenatel">
+            <summary>
+            Текущее значение знаменателя
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage.#ctor(System.Int32)">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку, берется в учет цена закрытия
+            </summary>
+            <param name="candle">Новая свечка</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage.Add(System.Decimal,System.Int32)">
+            <summary>
+            Добавить новые значения цены и объема
+            </summary>
+            <param name="newPrice">Новая цена</param>
+            <param name="newVolume">Новый объем</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage.Length">
+            <summary>
+            Длина скользящей
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage.IsFormed">
+            <summary>
+            Скользящая сформирована
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.IndicatorManager`1">
+            <summary>
+            Менеджер индикаторов, который автоматически заполняет индикаторы <see cref="P:StockSharp.Algo.Indicators.IndicatorManager`1.Indicators"/> на основе поступаемых данных из <see cref="P:StockSharp.Algo.Indicators.IndicatorManager`1.Source"/>.
+            </summary>
+            <typeparam name="T">Тип данных, на основе которых обновляется индикатор.</typeparam>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.IndicatorManager`1.#ctor(StockSharp.Algo.Indicators.IIndicatorSource{`0})">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.IndicatorManager`1"/>.
+            </summary>
+            <param name="source">Источник данных для индикаторов.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.IndicatorManager`1.DisposeManaged">
+            <summary>
+            Освободить занятые ресурсы.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.IndicatorManager`1.Source">
+            <summary>
+            Источник данных для индикаторов.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.IndicatorManager`1.Indicators">
+            <summary>
+            Индикаторы.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Williams.Acceleration">
+            <summary>
+            Acceleration/Deceleration Technical Indicator (AC)
+            Автор: Puchkoff
+            </summary>
+            <remarks>
+            http://ta.mql4.com/indicators/bills/acceleration_deceleration
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Acceleration.#ctor(StockSharp.Algo.Indicators.Williams.AwesomeOscillator,StockSharp.Algo.Indicators.Trend.SimpleMovingAverage)">
+            <summary>
+            Создать  Acceleration / Deceleration Oscillator с пользовательскими параметрами
+            </summary>
+            <param name="ao">Awesome Oscillator</param>
+            <param name="sma">SimpleMovingAverage</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Acceleration.#ctor">
+            <summary>
+            Создать Awesome Oscillator с параметрами по умолчанию
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Acceleration.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Acceleration.IsFormed">
+            <summary>
+            Acceleration сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.WeightedMovingAverage">
+            <summary>
+            Взвешанная скользящая средняя.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.LengthIndicator`1">
+            <summary>
+            Базовый класс для индикаторов с одним результирующим значением и основанных на периоде.
+            </summary>
+            <typeparam name="T">Тип данных, на основе которых обновляется индикатор.</typeparam>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.LengthIndicator`1.#ctor(System.Int32)">
+            <summary>
+            Инициализировать <see cref="T:StockSharp.Algo.Indicators.LengthIndicator`1"/>.
+            </summary>
+            <param name="length">Длина периода.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.LengthIndicator`1.Length">
+            <summary>
+            Длина периода.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.LengthIndicator`1.IsFormed">
+            <summary>
+            Сформирован ли индикатор.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.LengthIndicator`1.Buffer">
+            <summary>
+             Буфер для хранения данных.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.WeightedMovingAverage.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Trend.WeightedMovingAverage"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.WeightedMovingAverage.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.Ichimoku">
+            <summary>
+             Реализация индикатора Ишимоку Кинко Хайо.
+             Автор: Puchkoff
+            </summary>
+            <remarks>
+            http://ta.mql4.com/indicators/oscillators/ichimoku
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Ichimoku.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Создать Ишимоку с пользовательскими параметрами
+            </summary>
+            <param name="lengthTenkan">Длина линии Tenkan</param>
+            <param name="lengthKijun">Длина линии Kijun</param>
+            <param name="lengthSenkou">Длина линии Senkou</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Ichimoku.#ctor">
+            <summary>
+            Создать Ишимоку с параметрами по умолчанию
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Oscillator.Ichimoku._bufferSenkouA">
+            <summary>
+             Буфер для хранения значений Senkou Span A
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Oscillator.Ichimoku._bufferSenkouB">
+            <summary>
+             Буфер для хранения значений Senkou Span B
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Oscillator.Ichimoku._bufferSize">
+            <summary>
+            Размер буфера для Senkou Span A и Senkou Span B
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Ichimoku.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Ichimoku.ValueTenkan">
+            <summary>
+            Текущее значение Tenkan-sen
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Ichimoku.ValueKijun">
+            <summary>
+            Текущее значение Kijun-sen
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Ichimoku.ValueSenkouA">
+            <summary>
+            Текущее значение Senkou Span A
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Ichimoku.ValueSenkouB">
+            <summary>
+            Текущее значение Senkou Span B
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Ichimoku.ValueChinkou">
+            <summary>
+            Текущее значение Chinkou-span
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.IchimokuLine">
+            <summary>
+             Реализация одной из линий индикатора Ишимоку Кинко Хайо (Tenkan, Kijun, Senkou Span B).
+             Автор: Puchkoff
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Oscillator.IchimokuLine._buffer">
+            <summary>
+             Буфер для хранения ценовых данных.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.IchimokuLine.#ctor(System.Int32)">
+            <summary>
+            Создать Ишимоку.
+            </summary>
+            <param name="length">Длина линии.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.IchimokuLine.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.IchimokuLine.Length">
+            <summary>
+            Длина линии.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.IchimokuLine.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.IchimokuLine.BufferSize">
+            <summary>
+            Размер буфера. После достаточного наполнения данными через метод <see cref="M:StockSharp.Algo.Indicators.Oscillator.IchimokuLine.Add(StockSharp.Algo.Candles.Candle)"/>
+            длина станет равной <see cref="P:StockSharp.Algo.Indicators.Oscillator.IchimokuLine.Length"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.IchimokuLine.IsFormed">
+            <summary>
+            Индикатор сформировался, т.е. добавлено достаточное количество значений.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.RSquared">
+            <summary>
+            R-квадрат в линейной регрессии.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.RSquared.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.RSquared"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.RSquared._slope">
+            <summary>
+            Коэффициент при независимой переменной, угол наклона прямой.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.RSquared.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.Trough">
+            <summary>
+            Впадина
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Trough.#ctor(System.Decimal,StockSharp.Algo.Indicators.Misc.PeakTroughMode)">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Misc.Trough"/>.
+            </summary>
+            <param name="reversalAmount">Порог изменения индикатора в процентах (1.0 — сто процентов) или в абсолютном значении</param>      
+            <param name="reversalType">Тип порога изменения. По умолчанию — проценты</param>      
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Trough.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение
+            </summary>
+            <param name="newValue">Новое значение</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Trough.ReversalType">
+            <summary>
+            Порог изменения индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Trough.ReversalAmount">
+            <summary>
+            Порог изменения индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Trough.Value">
+            <summary>
+            Текущее значение
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Trough.IsFormed">
+            <summary>
+            Индикатор сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.PeakTroughMode">
+            <summary>
+            Тип изменения порога значения для классов Peak и Trough
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.Sum">
+            <summary>
+            Сумма N последних значений.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Sum.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.Sum"/>.
+            </summary>
+            <param name="length">Период.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Sum.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.RAVI">
+            <summary>
+            Range Action Verification Index
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.RAVI.#ctor(System.Int32,System.Int32)">
+             <summary>
+             Инициализировать <see cref="T:StockSharp.Algo.Indicators.Misc.RAVI"/>.
+             </summary>
+             <param name="short"></param>
+            <param name="long"></param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.RAVI.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.RAVI.Short">
+            <summary>
+            Короткий период RAVI
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.RAVI.Long">
+            <summary>
+            Длинный период RAVI
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.RAVI.Value">
+            <summary>
+            Текущее значение
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.RAVI.IsFormed">
+            <summary>
+            RAVI сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.Macd">
+            <summary>
+            Схождение/расхождение скользящих средних.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.Macd.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Инициализировать <see cref="T:StockSharp.Algo.Indicators.Trend.Macd"/>.
+            </summary>
+            <param name="short"></param>
+            <param name="long"></param>
+            <param name="signal"></param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.Macd.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.Macd.Short">
+            <summary>
+            Короткий период
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.Macd.Long">
+            <summary>
+            Длинный период
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.Macd.Signal">
+            <summary>
+            Период сигнала
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.Macd.Value">
+            <summary>
+            Текущее значение MACD
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.Macd.SignalValue">
+            <summary>
+            Текущее значение сигнала
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.Macd.IsFormed">
+            <summary>
+            MACD сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.CommodityChannelIndex">
+            <summary>
+            Индекс товарного канала
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.CommodityChannelIndex.#ctor(System.Int32)">
+            <summary>
+            Инициализировать <see cref="T:StockSharp.Algo.Indicators.Oscillator.CommodityChannelIndex"/>.
+            </summary>
+            <param name="length">Период</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.CommodityChannelIndex.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.CommodityChannelIndex.Length">
+            <summary>
+            Период CCI
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.CommodityChannelIndex.IsFormed">
+            <summary>
+            Индекс товарного канала сформирован.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.SmoothedMovingAverage">
+            <summary>
+            Сглаженное скользящее среднее.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.SmoothedMovingAverage.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Trend.SmoothedMovingAverage"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.SmoothedMovingAverage.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Williams.GatorOscillator">
+            <summary>
+            Gator Oscillator
+            Автор: Puchkoff
+            </summary>
+            <remarks>
+            http://ta.mql4.com/indicators/bills/gator
+            </remarks>
+            
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.GatorOscillator.#ctor(StockSharp.Algo.Indicators.Williams.Alligator)">
+            <summary>
+            Инициализировать GatorOscillator с пользовательскими параметрами
+            </summary>
+            <param name="alligator">Alligator</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.GatorOscillator.#ctor">
+             <summary>
+            Инициализировать GatorOscillator с параметрами по умолчанию
+             </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.GatorOscillator.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.GatorOscillator.ValueHistogram1">
+            <summary>
+            Текущее значение верхней гистограммы
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.GatorOscillator.ValueHistogram2">
+            <summary>
+            Текущее значение нижней гистограммы
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.MedianPrice">
+            <summary>
+            Median Price
+            </summary>
+            <remarks>
+            This indicator is simply the midpoint of each day's price (the average of 
+            the High and Low for each day). It provides a simple, single-line chart of the 
+            day's "average price." This average price provides a simpler view of prices.
+            MEDIAN PRICE = (HIGH+LOW)/2 (plotted through the central points of the bars).
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.MedianPrice.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.ExponentialMovingAverage">
+            <summary>
+            Экспоненциальная скользящая средняя.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.ExponentialMovingAverage.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Trend.ExponentialMovingAverage"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.ExponentialMovingAverage.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.UltimateOsc">
+            <summary>
+            Последний осцилятор
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.UltimateOsc.#ctor">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Misc.UltimateOsc"/>.
+            </summary>		
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.UltimateOsc.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку
+            </summary>
+            <param name="candle">Новая свечка</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.UltimateOsc.Value">
+            <summary>
+            Текущее значение
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.UltimateOsc.IsFormed">
+            <summary>
+            Индикатор сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.StandardError">
+            <summary>
+            Стандартная ошибка в линейной регрессии.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.StandardError._slope">
+            <summary>
+            Коэффициент при независимой переменной, угол наклона прямой.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.StandardError.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.StandardError"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.StandardError.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.LinearRegression">
+            <summary>
+            Полный класс линейной регрессии, считает одновременно LinearReg, LinearRegSlope, RSquared и StandardError.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.LinearRegression.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.LinearRegression"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.LinearRegression.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.LinearRegression.Forecast">
+            <summary>
+            Прогноз по модели для последней точки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.LinearRegression.RSquared">
+            <summary>
+            R-квадрат регрессии.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.LinearRegression.StandardError">
+            <summary>
+            Стандартная ошибка.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.LinearRegression.LinearRegSlope">
+            <summary>
+            Коэффициент при независимой переменной, угол наклона прямой.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.BollingerBands">
+            <summary>
+            Полосы Боллинджера.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.BollingerBands.#ctor(StockSharp.Algo.Indicators.LengthIndicator{System.Decimal})">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Trend.BollingerBands"/>.
+            </summary>
+            <param name="ma">Средняя</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.BollingerBands.#ctor(StockSharp.Algo.Indicators.LengthIndicator{System.Decimal},System.Decimal)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Trend.BollingerBands"/>.
+            </summary>
+            <param name="ma">Средняя</param>
+            <param name="width">Ширина канала</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.BollingerBands.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.BollingerBands.Width">
+            <summary>
+            Ширина канала Полос Боллинджера
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.BollingerBands.Length">
+            <summary>
+            Период Полос Боллинджера
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.BollingerBands.Value">
+            <summary>
+            Значение средней
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.BollingerBands.Top">
+            <summary>
+            Значение верхней границы
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.BollingerBands.Bottom">
+            <summary>
+            Значение нижней границы
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.BollingerBands.IsFormed">
+            <summary>
+            Полосы Боллинджера сформированы
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Williams.Alligator">
+            <summary>
+            Alligator
+            Автор: Puchkoff
+            </summary>
+            <remarks>
+            http://ta.mql4.com/indicators/bills/alligator
+            </remarks>
+            
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Alligator.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Инициализировать Alligator с пользовательскими параметрами
+            </summary>
+            <param name="lengthJaw"> Период линии Jaw</param>
+            <param name="offsetJaw">Смещение линии Jaw</param>
+            <param name="lengthTeeth">Период линии Teeth</param>
+            <param name="offsetTeeth">Смещение линии Teeth</param>
+            <param name="lengthLips">Период линии Lips</param>
+            <param name="offsetLips">Смещение линии Lips</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Alligator.#ctor">
+             <summary>
+            Инициализировать Alligator с параметрами по умолчанию
+             </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.Alligator._bufferJaw">
+            <summary>
+             Буфер для хранения значений Alligators Jaw
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.Alligator._bufferTeeth">
+            <summary>
+             Буфер для хранения значений Alligators Teeth
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.Alligator._bufferLips">
+            <summary>
+             Буфер для хранения значений Alligators Lips
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.Alligator._offsetJaw">
+            <summary>
+            Смещение линии Jaw 
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.Alligator._offsetTeeth">
+            <summary>
+            Смещение линии Teeth 
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.Alligator._offsetLips">
+            <summary>
+            Смещение линии Lips 
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Alligator.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Alligator.ValueJaw">
+            <summary>
+            Текущее значение Alligators Jaw
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Alligator.ValueTeeth">
+            <summary>
+            Текущее значение Alligators Teeth
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Alligator.ValueLips">
+            <summary>
+            Текущее значение Alligators Lips
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Williams.AlligatorLine">
+            <summary>
+             Реализация одной из линий индикатора Alligator (Jaw, Teeth, Lips).
+             Автор: Puchkoff
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.AlligatorLine._buffer">
+            <summary>
+             Буфер для хранения ценовых данных.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.AlligatorLine.#ctor(System.Int32)">
+            <summary>
+            Создать Ишимоку.
+            </summary>
+            <param name="length">Длина линии.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.AlligatorLine.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.AlligatorLine.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.AlligatorLine.IsFormed">
+            <summary>
+            Индикатор сформировался, т.е. добавлено достаточное количество значений.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.TrueRange">
+            <summary>
+            The True Range is the maximum price movement over a period.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.TrueRange.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.TrueRange"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.TrueRange.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="newValue">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.TrueRange.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.TrueRange.IsFormed">
+            <summary>
+            True Range сформирован.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.Highest">
+            <summary>
+            Максимальное значение за период.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Highest.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.Highest"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Highest.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.DiPlus">
+            <summary>
+            DIPlus is a component of the Directional Movement System developed by Welles Wilder.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.DiPlus.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.DiPlus"/>.
+            </summary>
+            <param name="length">Период.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.DiPlus.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="newValue">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.DiPlus.Length">
+            <summary>
+            Период.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.DiPlus.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.DiPlus.IsFormed">
+            <summary>
+            Значение сформировано.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.VerticalHorizontalFilter">
+            <summary>
+            Вертиально-горизонтальный фильтр (Vertical Horizontal Filter).
+            </summary>
+            <remarks>
+            http://www2.wealth-lab.com/WL5Wiki/VHF.ashx
+            http://www.stator-afm.com/vertical-horizontal-filter.html
+            http://www.incrediblecharts.com/indicators/vertical_horizontal_filter.php
+            Author: Maxim
+            </remarks>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.VerticalHorizontalFilter._min">
+            <summary>
+            Текущее значение минимума
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.VerticalHorizontalFilter._max">
+            <summary>
+            Текущее значение максимума
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.VerticalHorizontalFilter._sum">
+            <summary>
+            Текущее значение суммы
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.VerticalHorizontalFilter._previousClosePrice">
+            <summary>
+            Цена закрытия предыдущего бара
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.VerticalHorizontalFilter.#ctor(System.Int32)">
+            <summary>
+            Создать индикатор <see cref="T:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage"/>.
+            </summary>
+            <param name="length">Длина периода.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.VerticalHorizontalFilter.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="candle">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.VerticalHorizontalFilter.IsFormed">
+            <summary>
+            Сформирован ли индикатор.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.Peak">
+            <summary>
+            Пик (Peak)
+            </summary>
+            <remarks>
+            Author: Maxim
+            http://www2.wealth-lab.com/WL5Wiki/Peak.ashx 
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Peak.#ctor(System.Decimal,StockSharp.Algo.Indicators.Misc.PeakTroughMode)">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Misc.Peak"/>.
+            </summary>
+            <param name="reversalAmount">Порог изменения индикатора в процентах (1.0 — сто процентов) или в абсолютном значении</param>      
+            <param name="reversalType">Тип порога изменения. По умолчанию — проценты</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Peak.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение
+            </summary>
+            <param name="newValue">Новое значение</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Peak.ReversalType">
+            <summary>
+            Порог изменения индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Peak.ReversalAmount">
+            <summary>
+            Порог изменения индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Peak.Value">
+            <summary>
+            Текущее значение
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Peak.IsFormed">
+            <summary>
+            Индикатор сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.Vidya">
+            <summary>
+            Динамическая средняя переменного индекса (Variable Index Dynamic Average).
+            </summary>
+            <remarks>
+            http://www2.wealth-lab.com/WL5Wiki/Vidya.ashx
+            http://www.mql5.com/en/code/75 
+            Author: Maxim
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Vidya.#ctor(System.Int32)">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Misc.Vidya"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Vidya.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.Trix">
+            <summary>
+            Тройная экспоненциальная скользящая средняя
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Trix.#ctor(System.Int32)">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Trend.VolumeWeightedMovingAverage"/>.
+            </summary>
+            <param name="length">Количество периодов</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Trix.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку
+            </summary>
+            <param name="candle">Новая свечка</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Trix.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение
+            </summary>
+            <param name="newValue">Новое значение</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Trix.Length">
+            <summary>
+            Длина скользящей
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Trix.Value">
+            <summary>
+            Текущее значение индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Trix.IsFormed">
+            <summary>
+            Индикатор сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.WilderMovingAverage">
+            <summary>
+            WilderMA is sometimes call Wilder's Smoothing, and it returns a moving average
+            as calculated by Welles Wilder in his book New Concepts in Technical Trading.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.WilderMovingAverage.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Trend.WilderMovingAverage"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.WilderMovingAverage.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Williams.Fractals">
+            <summary>
+            Fractals.
+            Автор: Puchkoff
+            </summary>
+            <remarks>
+            http://ta.mql4.com/indicators/bills/fractal
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Fractals.#ctor(System.Int32)">
+            <summary>
+            Создать Фракталы
+            </summary>
+            <param name="length">Длина линии.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Fractals.#ctor">
+            <summary>
+            Создать Фракталы
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.Fractals._buffer">
+            <summary>
+             Буфер для хранения ценовых данных.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.Fractals._numCenter">
+            <summary>
+            Номер центральной свечи
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.Fractals.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Fractals.Length">
+            <summary>
+            Длина линии.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Fractals.ValueUp">
+            <summary>
+            Фрактал вверх
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Fractals.ValueDown">
+            <summary>
+            Фрактал вниз
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Fractals.BufferSize">
+            <summary>
+            Размер буфера. После достаточного наполнения данными через метод <see cref="M:StockSharp.Algo.Indicators.Williams.Fractals.Add(StockSharp.Algo.Candles.Candle)"/>
+            длина станет равной <see cref="P:StockSharp.Algo.Indicators.Williams.Fractals.Length"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.Fractals.IsFormed">
+            <summary>
+            Индикатор сформировался, т.е. добавлено достаточное количество значений.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.WilliamsR">
+            <summary>
+            Williams %R
+            </summary>
+            <remarks>
+             %R = (Highest High - Close)/(Highest High - Lowest Low) * -100
+            http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:williams_r
+            http://www2.wealth-lab.com/WL5Wiki/WilliamsR.ashx
+            Author: Maxim
+            </remarks>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.WilliamsR._min">
+            <summary>
+            Текущее значение минимума
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.WilliamsR._max">
+            <summary>
+            Текущее значение максимума
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.WilliamsR.#ctor(System.Int32)">
+            <summary>
+            Создать индикатор <see cref="T:StockSharp.Algo.Indicators.Misc.WilliamsR"/>.
+            </summary>
+            <param name="length">Длина периода.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.WilliamsR.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="candle">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.WilliamsR.IsFormed">
+            <summary>
+            Сформирован ли индикатор.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.Volatility">
+            <summary>
+            Волатильность
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Volatility.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Misc.Volatility"/>.
+            </summary>
+            <param name="lengthEma">Длина экпоненциальной скользящей</param>
+            <param name="lengthRoc">Длина Roc параметра</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Volatility.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку
+            </summary>
+            <param name="candle">Новая свечка</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Volatility.LengthEma">
+            <summary>
+            Длина экпоненциальной скользящей
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Volatility.LengthRoc">
+            <summary>
+            Длина Roc параметра
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Volatility.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.Volatility.IsFormed">
+            <summary>
+            Скользящая сформирована.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.QStick">
+            <summary>
+            QStick 
+            </summary>
+            <remarks>
+            http://www2.wealth-lab.com/WL5Wiki/QStick.ashx
+            Author: Maxim
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.QStick.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.QStick"/>.
+            </summary>
+            <param name="length">Длина скользящей</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.QStick.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку
+            </summary>
+            <param name="candle">Новая свечка</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.QStick.Length">
+            <summary>
+            Длина скользящей
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.QStick.IsFormed">
+            <summary>
+            Скользящая сформирована.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Williams.MarketFacilitationIndex">
+            <summary>
+            Market Facilitation Index (BW MFI)
+            Автор: Puchkoff
+            </summary>
+            <remarks>
+            http://ta.mql4.com/indicators/bills/market_facilitation_index
+            </remarks>
+            
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.MarketFacilitationIndex.#ctor(System.Decimal)">
+            <summary>
+            Инициализировать Market Facilitation Index с пользовательскими параметрами
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.MarketFacilitationIndex.#ctor">
+            <summary>
+            Инициализировать Market Facilitation Index с пользовательскими параметрами
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Williams.MarketFacilitationIndex._range">
+            <summary>
+            Множитель, приводящий разницу в пунктах к целым числам
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.MarketFacilitationIndex.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.RelativeStrengthIndex">
+            <summary>
+            Индекс относительной силы (RSI).
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.RelativeStrengthIndex.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.RelativeStrengthIndex"/>.
+            </summary>
+            <param name="length">Длина периода.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.RelativeStrengthIndex.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="value">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.RelativeStrengthIndex.IsFormed">
+            <summary>
+            Сформирован ли индикатор.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.DiMinus">
+            <summary>
+            DIMinus is a component of the Directional Movement System developed by Welles Wilder.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.DiMinus.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.DiMinus"/>.
+            </summary>
+            <param name="length">Период.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.DiMinus.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="newValue">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.DiMinus.Length">
+            <summary>
+            Период.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.DiMinus.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.DiMinus.IsFormed">
+            <summary>
+            Значение сформировано.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.RVI">
+            <summary>
+            Индекс Относительной Бодрости
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.RVI.#ctor">
+            <summary>
+            Инициализировать <see cref="!:StandartDeviation"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.RVI.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.RVI.RVIavegare">
+            <summary>
+            Текущее значение средней
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.RVI.RVIsignal">
+            <summary>
+            Текущее значение сигнала
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.RVI.IsFormed">
+            <summary>
+            RVI сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.ChandeMomentumOscillator">
+            <summary>
+            Осциллятор ценовых моментов Чанде
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.ChandeMomentumOscillator.#ctor(System.Int32)">
+            <summary>
+            Инициализировать <see cref="T:StockSharp.Algo.Indicators.Misc.ChandeMomentumOscillator"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.ChandeMomentumOscillator.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.ChandeMomentumOscillator.Length">
+            <summary>
+            Период CMO
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.ChandeMomentumOscillator.IsFormed">
+            <summary>
+            CMO сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.Momentum">
+            <summary>
+            Индикатор Моментум.
+            </summary>
+            <remarks>
+            Momentum Simple = C - C-n
+            Где C- цена закрытия текущего периода.
+            Где С-n - цена закрытия N периодов назад.
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Momentum.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.Momentum"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Momentum.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Momentum.IsFormed">
+            <summary>
+            Сформирован ли индикатор.
+            </summary>
+            <remarks>
+            Необходимо Length + 1 значение для формирования индикатора.
+            </remarks>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.ParabolicSar">
+            <summary>
+            Реализация индикатора тренда - Parabolic SAR
+            </summary>
+             /// <remarks>
+            http://ta.mql4.com/indicators/trends/parabolic_sar
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.ParabolicSar.#ctor">
+            <summary>
+            Создать Parabolic SAR
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Trend.ParabolicSar._step">
+            <summary>
+            Шаг фактора ускорения
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Trend.ParabolicSar._maximum">
+            <summary>
+            Максимальный фактор ускорения
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Trend.ParabolicSar._prevValue">
+            <summary>
+            значение индикатора Parabolic SAR на предыдущем баре;
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.ParabolicSar.Add(StockSharp.Algo.Candles.TimeFrameCandle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.ParabolicSar.Acceleration">
+            <summary>
+            Фактор ускорения
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.ParabolicSar.ForLong">
+            <summary>
+            Для длинных позиций
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.ParabolicSar.ForShort">
+            <summary>
+            Для коротких позиций
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.ParabolicSar.Value">
+            <summary>
+            Текущее значение Parabolic SAR
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.DetrendedPriceOscillator">
+            <summary>
+            DPO The Detrended Price Oscillator (DPO) is an indicator that attempts to eliminate the trend in prices. Detrended prices allow you to more easily identify cycles and overbought/oversold levels.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.DetrendedPriceOscillator.Sma">
+            <summary>
+            Средняя, неоходимая для расчетов индикатора.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.DetrendedPriceOscillator.#ctor(System.Int32)">
+            <summary>
+            Инициализировать <see cref="T:StockSharp.Algo.Indicators.Misc.DetrendedPriceOscillator"/>.
+            </summary>
+            <param name="length">Период стахостатика.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.DetrendedPriceOscillator.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.Adx">
+            <summary>
+            ADX stands for Average Directional movement Index and is used to measure the overall strength of the trend.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Adx.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.Atr"/>.
+            </summary>
+            <param name="length">Период.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Adx.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="newValue">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Adx.Length">
+            <summary>
+            Период.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Adx.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Adx.IsFormed">
+            <summary>
+            Значение сформировано.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.SimpleMovingAverage">
+            <summary>
+            Простая скользящая средняя.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.SimpleMovingAverage.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Trend.SimpleMovingAverage"/>.
+            </summary>
+            <param name="length">Длина скользящей.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.SimpleMovingAverage.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.SimpleMovingAverage.Name">
+            <summary>
+            Название индикатора.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.IIndicatorSource`1">
+            <summary>
+            Интерфейс, описывающий источник данных для индикаторов.
+            </summary>
+            <typeparam name="T">Тип данных, на основе которых обновляется индикатор.</typeparam>
+        </member>
+        <member name="E:StockSharp.Algo.Indicators.IIndicatorSource`1.NewValue">
+            <summary>
+            Событие появления новых данных.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.BaseIndicatorSource`1">
+            <summary>
+            Базовый источник данных для индикаторов.
+            </summary>
+            <typeparam name="T">Тип данных, на основе которых обновляется индикатор.</typeparam>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.BaseIndicatorSource`1.RaiseNewValue(`0)">
+            <summary>
+            Вызвать событие <see cref="E:StockSharp.Algo.Indicators.BaseIndicatorSource`1.NewValue"/>.
+            </summary>
+            <param name="value">Новые данные.</param>
+        </member>
+        <member name="E:StockSharp.Algo.Indicators.BaseIndicatorSource`1.NewValue">
+            <summary>
+            Событие появления новых данных.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.CandleIndicatorSource">
+            <summary>
+            Источник данных для индикаторов, которые строяться на основе объектов <see cref="T:StockSharp.Algo.Candles.Candle"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.CandleIndicatorSource.#ctor(StockSharp.Algo.Candles.ICandleManager)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.CandleIndicatorSource"/>.
+            </summary>
+            <param name="candleManager">Менеджер свечек.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.CandleIndicatorSource.DisposeManaged">
+            <summary>
+            Освободить занятые ресурсы.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.CandlePartIndicatorSource">
+            <summary>
+            Источник данных для индикаторов, которые строяться на основе параметров объекта <see cref="T:StockSharp.Algo.Candles.Candle"/> (цены закрытия <see cref="P:StockSharp.Algo.Candles.Candle.ClosePrice"/>, цены открытия <see cref="P:StockSharp.Algo.Candles.Candle.OpenPrice"/> и т.д.).
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.CandlePartIndicatorSource.#ctor(StockSharp.Algo.Candles.ICandleManager)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.CandlePartIndicatorSource"/>.
+            </summary>
+            <param name="candleManager">Менеджер свечек.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.CandlePartIndicatorSource.#ctor(StockSharp.Algo.Candles.ICandleManager,System.Func{StockSharp.Algo.Candles.Candle,System.Decimal})">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.CandlePartIndicatorSource"/>.
+            </summary>
+            <param name="candleManager">Менеджер свечек.</param>
+            <param name="getPart">Конвертер свечки, через которую можно получить ее параметр (цену закрытия <see cref="P:StockSharp.Algo.Candles.Candle.ClosePrice"/>, цену открытия <see cref="P:StockSharp.Algo.Candles.Candle.OpenPrice"/> и т.д.).</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.CandlePartIndicatorSource.DisposeManaged">
+            <summary>
+            Освободить занятые ресурсы.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.LinearReg">
+            <summary>
+            Линейная регрессия - Value возвращает прогноз последней точки.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.LinearReg.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.LinearReg"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.LinearReg._slope">
+            <summary>
+            Коэффициент при независимой переменной, угол наклона прямой.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.LinearReg.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.PeakBar">
+            <summary>
+            ПикБар
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.PeakBar.#ctor(System.Decimal,StockSharp.Algo.Indicators.Misc.PeakTroughMode)">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Misc.PeakBar"/>.
+            </summary>
+            <param name="reversalAmount">Порог изменения индикатора в процентах (1.0 — сто процентов) или в абсолютном значении</param>      
+            <param name="reversalType">Тип порога изменения. По умолчанию — проценты</param>      
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.PeakBar.Add(StockSharp.Algo.Candles.TimeFrameCandle)">
+            <summary>
+            Добавить новую свечку
+            </summary>
+            <param name="candle">Новая свечка</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.PeakBar.ReversalType">
+            <summary>
+            Порог изменения индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.PeakBar.ReversalAmount">
+            <summary>
+            Порог изменения индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.PeakBar.Value">
+            <summary>
+            Текущее значение
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Trend.StandartDeviation">
+            <summary>
+            Стандартное отклонение.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.StandartDeviation.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Trend.StandartDeviation"/>.
+            </summary>
+            <param name="length">Длина периода.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Trend.StandartDeviation.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Trend.StandartDeviation.IsFormed">
+            <summary>
+            Сформирован ли индикатор.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.RateOfChange">
+            <summary>
+            Индикатор RoC (Скорость изменения).
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.RateOfChange.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.RateOfChange"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.RateOfChange.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.MeanDeviation">
+            <summary>
+            Среднее отклонение
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.MeanDeviation.#ctor(System.Int32)">
+            <summary>
+            Инициализировать <see cref="T:StockSharp.Algo.Indicators.Misc.MeanDeviation"/>.
+            </summary>
+            <param name="length">Период</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.MeanDeviation.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение
+            </summary>
+            <param name="newValue">Новое значение</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.MeanDeviation.Length">
+            <summary>
+            Период среднего отклонения
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.MeanDeviation.SmaValue">
+            <summary>
+            Текущее значение SMA
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.MeanDeviation.IsFormed">
+            <summary>
+            Среднее отклонение сформировано
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Williams.AwesomeOscillator">
+            <summary>
+            Awesome Oscillator (AO).
+            Автор: Puchkoff
+            </summary>
+             <remarks>
+            http://ta.mql4.com/indicators/bills/awesome
+            </remarks>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.AwesomeOscillator.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Создать Awesome Oscillator с пользовательскими параметрами
+            </summary>
+            <param name="lengthShort">период короткой Sma</param>
+            <param name="lengthLong">период длинной Sma</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.AwesomeOscillator.#ctor">
+            <summary>
+            Создать Awesome Oscillator с параметрами по умолчанию
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Williams.AwesomeOscillator.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="candle">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Williams.AwesomeOscillator.IsFormed">
+            <summary>
+            AO сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.Lowest">
+            <summary>
+            Минимальное значение за период.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Lowest.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.Lowest"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.Lowest.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.LinearRegSlope">
+            <summary>
+            Наклон линейной регрессии.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.LinearRegSlope.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Misc.LinearRegSlope"/>.
+            </summary>
+            <param name="length">Интервал.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.LinearRegSlope.Add(System.Decimal)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.StochK">
+            <summary>
+            Стохастик %K.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.StochK.Llv">
+            <summary>
+            Минимальная цена за период.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Indicators.Misc.StochK.Hhv">
+            <summary>
+            Максимальная цена за период.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.StochK.#ctor(System.Int32)">
+            <summary>
+            Инициализировать <see cref="!:Ma"/>.
+            </summary>
+            <param name="length">Период стахостатика.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.StochK.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новое значение.
+            </summary>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.StochK.Length">
+            <summary>
+            Период индикатора.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.StochK.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.StochK.IsFormed">
+            <summary>
+            Индикатор сформирован.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.Dx">
+            <summary>
+            DX is a component of the Directional Movement System developed by Welles Wilder.
+            DX = Round( 100 * |DIPlus - DIMinus| / |DIPlus + DIMinus| )
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Dx.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.Dx"/>.
+            </summary>
+            <param name="length">Период.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Dx.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="newValue">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Dx.Length">
+            <summary>
+            Период.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Dx.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Dx.IsFormed">
+            <summary>
+            Значение сформировано.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Misc.TroughBar">
+            <summary>
+            ВпадинаБар
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.TroughBar.#ctor(System.Decimal,StockSharp.Algo.Indicators.Misc.PeakTroughMode)">
+            <summary>
+            Создать индикатор<see cref="T:StockSharp.Algo.Indicators.Misc.TroughBar"/>.
+            </summary>
+            <param name="reversalAmount">Порог изменения индикатора в процентах (1.0 — сто процентов) или в абсолютном значении</param>      
+            <param name="reversalType">Тип порога изменения. По умолчанию — проценты</param>      
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Misc.TroughBar.Add(StockSharp.Algo.Candles.TimeFrameCandle)">
+            <summary>
+            Добавить новую свечку
+            </summary>
+            <param name="candle">Новая свечка</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.TroughBar.ReversalType">
+            <summary>
+            Порог изменения индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.TroughBar.ReversalAmount">
+            <summary>
+            Порог изменения индикатора
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.TroughBar.Value">
+            <summary>
+            Текущее значение
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Misc.TroughBar.IsFormed">
+            <summary>
+            Индикатор сформирован
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Indicators.Oscillator.Atr">
+            <summary>
+            The Average True Range is the average of the true ranges <see cref="T:StockSharp.Algo.Indicators.Oscillator.TrueRange"/> over the specified Period.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Atr.#ctor(System.Int32)">
+            <summary>
+            Создать <see cref="T:StockSharp.Algo.Indicators.Oscillator.Atr"/>.
+            </summary>
+            <param name="length">Период.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Indicators.Oscillator.Atr.Add(StockSharp.Algo.Candles.Candle)">
+            <summary>
+            Добавить новую свечку.
+            </summary>
+            <param name="newValue">Новая свечка.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Atr.Length">
+            <summary>
+            Период.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Atr.Value">
+            <summary>
+            Текущее значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Indicators.Oscillator.Atr.IsFormed">
+            <summary>
+            Значение сформировано.
+            </summary>
+        </member>
+    </members>
+</doc>

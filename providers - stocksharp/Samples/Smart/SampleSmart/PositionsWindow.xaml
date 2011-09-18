@@ -1,0 +1,29 @@
+﻿<Window x:Class="SampleSmart.PositionsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:EcngTradingXaml="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+	Title="Позиции" Height="300" Width="440">
+	<Window.Resources>
+		<EcngTradingXaml:BackgroundConvertor x:Key="myConverter" />
+
+		<Style x:Key="myItemStyle" TargetType="{x:Type ListViewItem}">
+			<Setter Property="Background">
+				<Setter.Value>
+					<Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource myConverter}"/>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
+    <Grid>
+        <ListView x:Name="PositionDetails" Grid.Column="0" Grid.Row="0" ItemContainerStyle="{StaticResource myItemStyle}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Width="100" Header="Счет" DisplayMemberBinding="{Binding Path=Portfolio.Name}" />
+					<GridViewColumn Width="100" Header="Инструмент" DisplayMemberBinding="{Binding Path=Security.Code}" />
+					<GridViewColumn Width="100" Header="Позиция" DisplayMemberBinding="{Binding Path=CurrentValue}" />
+					<GridViewColumn Width="100" Header="Заблокировано" DisplayMemberBinding="{Binding Path=BlockedValue}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+    </Grid>
+</Window>

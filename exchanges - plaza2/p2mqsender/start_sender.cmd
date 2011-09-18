@@ -1,0 +1,1 @@
+start p2mqsender.exe P2MQSender.ini 1

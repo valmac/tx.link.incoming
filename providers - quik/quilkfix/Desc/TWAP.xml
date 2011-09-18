@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<Description>
+	<Name>
+		<Value>TWAP</Value>
+	</Name>
+	<Transaction name="NEW_ORDER" info="46">
+		<Fields>
+		<!-- For the fiels default logic exists -->
+			<Field id="tradeaccount" info="3"/>
+			<Field id="firm" info="63"/>
+			<Field id="side" info="4"/>
+			<Field id="class" info="8"/>
+			<Field id="security" info="9"/>
+			<Field id="qty" info="13"/>
+			<Field id="value" info="37"/>
+			<Field id="clientcode" info="40"/>
+			<Field id="memo" info="42"/>
+		<!-- Specific fields -->
+			<Field id="qtyvalue" info="62" fixtag="6272">
+				<Value fix="0" quik="Q"/>
+				<Value fix="1" quik="V"/>
+			</Field>
+			<Field id="starttime" info="57" fixtag="6254"/>
+			<Field id="stoptime" info="58" fixtag="6255"/>
+			<Field id="timetype" info="61" fixtag="6273">
+				<Value fix="0" quik="C"/>
+				<Value fix="1" quik="T"/>
+			</Field>
+			<Field id="iternumber" info="59" fixtag="6256"/>
+			<Field id="pricelimit" info="60" fixtag="6264"/>
+		</Fields>
+	</Transaction>
+	<AlgoOrder>
+		<Fields>
+		<!-- Common order fields -->
+			<Field db_name="order_num" id="ordernum"/>
+			<Field db_name="order_date" id="orderdate"/>
+			<Field db_name="order_time" id="ordertime"/>
+			<Field db_name="kill_time" id="killtime"/>
+			<Field db_name="class_code" id="classcode"/>
+			<Field db_name="sec_code" id="seccode"/>
+			<Field db_name="buysell" id="side"/>
+			<Field db_name="account" id="tradeaccount"/>
+			<Field db_name="qty" id="qty"/>
+			<Field db_name="firmid" id="firm"/>
+			<Field db_name="value" id="value"/>
+			<Field db_name="client" id="clientcode"/>
+			<Field db_name="memo" id="memo"/>
+			<Field db_name="status" id="status"/>
+			<Field db_name="uid" id="uid"/>
+		<!-- Specific fields -->
+			<!-- Need to translate -->
+        		<Field db_name="limit" id="pricelimit" fixtag="6264"/>
+        		<Field db_name="start_time" id="starttime" fixtag="6254"/>
+        		<Field db_name="stop_time" id="stoptime" fixtag="6255"/>
+        		<Field db_name="number" id="iternumber" fixtag="6256"/>
+        		<Field db_name="current" id="currentiter" fixtag="6257"/>
+			<Field db_name="qty_value" id="qtyvalue" fixtag="6272"/>
+			<Field db_name="time_type" id="timetype" fixtag="6273"/>
+			<!-- Not need to translate -->
+			<Field db_name="class_name" id="classname"/>
+			<Field db_name="sec_name" id="secname"/>
+			<Field db_name="sec_fullname" id="secfullname"/>
+        		<Field db_name="algo_firm_code" id="algofirmcode"/>
+			<Field db_name="value_balance" id="valuebalance"/>
+			<Field db_name="qty_balance" id="balanceqty"/>
+			<Field db_name="vwap" id="avrprice"/>
+			<Field db_name="settle_code" id="settlecode"/>
+		</Fields>
+	</AlgoOrder>
+</Description>

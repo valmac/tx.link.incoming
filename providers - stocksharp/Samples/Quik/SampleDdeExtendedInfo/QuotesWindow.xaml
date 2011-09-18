@@ -1,0 +1,31 @@
+﻿<Window x:Class="SampleDdeExtendedInfo.QuotesWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Name="quotesWindow" Title="QuotesWindow" Height="400" Width="360">
+    <Grid>
+        <ListView ItemsSource="{Binding ElementName=quotesWindow, Path=Quotes}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Width="70" Header="Продажа" DisplayMemberBinding="{Binding Path=Ask}" />
+					<GridViewColumn Width="100" Header="Цена" DisplayMemberBinding="{Binding Path=Price}" />
+					<GridViewColumn Width="70" Header="Покупка" DisplayMemberBinding="{Binding Path=Bid}" />
+					<GridViewColumn Width="90" Header="Собст. объем">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock x:Name="OwnVolumeCtrl" Text="{Binding Path=OwnVolume}" FontWeight="Bold" TextAlignment="Center" />
+								<DataTemplate.Triggers>
+									<DataTrigger Binding="{Binding Path=HasOwnVolume}" Value="true">
+										<Setter TargetName="OwnVolumeCtrl" Property="Visibility" Value="Visible" />
+									</DataTrigger>
+									<DataTrigger Binding="{Binding Path=HasOwnVolume}" Value="false">
+										<Setter TargetName="OwnVolumeCtrl" Property="Visibility" Value="Hidden" />
+									</DataTrigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+				</GridView>
+			</ListView.View>
+		</ListView>
+    </Grid>
+</Window>

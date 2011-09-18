@@ -1,0 +1,675 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TRANS2QUIKSHARP</name>
+    </assembly>
+    <members>
+        <member name="T:TRANS2QUIKSHARP.eQUIKResult">
+            <summary>
+            Представляет результат выполнения функций (методов) библиотеки TRANS2QUIK.DLL
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.UNKNOWN">
+             <summary>
+             Результат выполнения неизвестен или функция не выполнялась
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.SUCCESS">
+             <summary>
+             Успешное выолнение функции
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.FAILED">
+             <summary>
+             Выполнении функции закончилось неудачей
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.QUIK_TERMINAL_NOT_FOUND">
+             <summary>
+             В указанном каталоге либо отсутствует INFO.EXE, 
+             либо у него не запущен сервис обработки внешних подключений
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.DLL_VERSION_NOT_SUPPORTED">
+             <summary>
+             Используемая версия библиотеки TRANS2QUIK.DLL указанным INFO.EXE не поддерживается
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.ALREADY_CONNECTED_TO_QUIK">
+             <summary>
+             Cоединение уже установлено
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.WRONG_SYNTAX">
+             <summary>
+             Строка транзакции заполнена неверно
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.QUIK_NOT_CONNECTED">
+             <summary>
+             Не установлена связь терминала QUIK с сервером 
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.DLL_NOT_CONNECTED">
+             <summary>
+             Не установлена связь библиотеки TRANS2QUIK.DLL с терминалом QUIK
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.QUIK_CONNECTED">
+             <summary>
+             Соединение терминала QUIK с сервером установлено
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.QUIK_DISCONNECTED">
+             <summary>
+             Соединение терминала QUIK с сервером разорвано
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.DLL_CONNECTED">
+             <summary>
+             Соединение библиотеки TRANS2QUIK.DLL с терминалом QUIK установлено
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.DLL_DISCONNECTED">
+             <summary>
+             Соединение библиотеки TRANS2QUIK.DLL с терминалом QUIK разорвано
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.MEMORY_ALLOCATION_ERROR">
+             <summary>
+             Ошибка распределения памяти
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.WRONG_CONNECTION_HANDLE">
+             <summary>
+             Ошибка при обработке соединения
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.eQUIKResult.WRONG_INPUT_PARAMS">
+             <summary>
+             Ошибочные входные параметры функции
+            </summary>
+        </member>
+        <member name="T:TRANS2QUIKSHARP.QUIKAPI">
+            <summary>
+            Класс предоставляет C# описание функций библиотеки TRANS2QUIK.DLL
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.QUIKAPI.m_LEF">
+            <summary>
+            Last Executed Function Name
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.QUIKAPI.m_EEC">
+            <summary>
+            Extended Error Code
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.QUIKAPI.m_ERM">
+            <summary>
+            Error Message
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.QUIKAPI.m_EMS">
+            <summary>
+            Error Message Size
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.QUIKAPI.m_RSM">
+            <summary>
+            Result Message
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.QUIKAPI.m_RPC">
+            <summary>
+            Reply Code
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.QUIKAPI.m_TID">
+            <summary>
+            TransactionID
+            </summary>
+        </member>
+        <member name="F:TRANS2QUIKSHARP.QUIKAPI.m_RMS">
+            <summary>
+            Result Message Size
+            </summary>
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.CONNECT(System.String,System.Int32@,System.String,System.UInt32)">
+            <summary>
+            Функция для установления связи библиотеки TRANS2QUIK.DLL с терминалом QUIK
+            </summary>
+            <param name="connectionParamsString">Полный путь к каталогу, в котором установлен INFO.EXE, с которым устанавливаем соединениею. Тип <b>String</b></param>
+            <param type="String"></param>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="errorMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            <param name="errorMessageSize">Содержит длину строки, на которую ссылается указатель errorMessage</param>
+            <returns>Возвращаемое число может принимать следующие значения: 
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_SUCCESS</term>
+            <description>соединение установлено успешно</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_QUIK_TERMINAL_NOT_FOUND</term>
+            <description>в указанном каталоге либо отсутствует INFO.EXE, либо у него не запущен сервис обработки
+            внешних подключений, в extendedErrorCode в этом случае передается 0</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_VERSION_NOT_SUPPORTED</term>
+            <description>используемая версия Trans2QUIK.DLL указанным INFO.EXE не поддерживается,
+            в extendedErrorCode в этом случае передается 0</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_ALREADY_CONNECTED_TO_QUIK</term>
+            <description>соединение уже установлено, в extendedErrorCode в этом случае передается 0</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_FAILED</term>
+            <description>произошла ошибка при установлении соединения, в extendedErrorCode в этом случае
+            передается дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.IS_DLL_CONNECTED(System.Int32@,System.String,System.UInt32)">
+            <summary>
+            Функция для проверки соединения библиотеки TRANS2QUIK.DLL с терминалом QUIK
+            </summary>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="errorMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            <param name="errorMessageSize">Содержит длину строки, на которую ссылается указатель errorMessage</param>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_DLL_CONNECTED</term>
+            <description>соединение библиотеки TRANS2QUIK.DLL с терминалом QUIK установлено</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_NOT_CONNECTED</term>
+            <description>не установлена связь библиотеки TRANS2QUIK.DLL с терминалом QUIK</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.DISCONNECT(System.Int32@,System.String,System.UInt32)">
+            <summary>
+            Функция для разрыва соединения библиотеки TRANS2QUIK.DLL с терминалом QUIK
+            </summary>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="errorMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            <param name="errorMessageSize">Содержит длину строки, на которую ссылается указатель errorMessage</param>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_SUCCESS</term>
+            <description>соединение библиотеки TRANS2QUIK.DLL с терминалом QUIK разорвано успешно</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_FAILED</term>
+            <description>произошла ошибка при разрыве соединения, в extendedErrorCode в этом случае
+            передается дополнительный код ошибки</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_NOT_CONNECTED</term>
+            <description>попытка разорвать соединение при не установленной связи. В этом случае в
+            extendedErrorCode может передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.IS_QUIK_CONNECTED(System.Int32@,System.String,System.UInt32)">
+            <summary>
+            Функция для проверки соединения терминала QUIK с сервером QUIK
+            </summary>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="errorMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            <param name="errorMessageSize">Содержит длину строки, на которую ссылается указатель errorMessage</param>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_QUIK_CONNECTED</term>
+            <description>соединение установлено</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_QUIK_NOT_CONNECTED</term>
+            <description>соединение не установлено</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_NOT_CONNECTED</term>
+            <description>не установлена связь библиотеки TRANS2QUIK.DLL с терминалом QUIK. В этом случае
+            проверить наличие или отсутствие связи терминала QUIK с сервером невозможно </description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.SEND_SYNC_TRANSACTION(System.String,System.Int32@,System.UInt32@,System.Double@,System.String,System.UInt32,System.Int32@,System.String,System.UInt32)">
+            <summary>
+            Функция для отправки синхронной транзакции
+            </summary>
+            <param name="transactionString">Строка с описанием транзакции. Формат строки тот же самый, что и при
+            отправке транзакций через файл</param>
+            <param name="replyCode">Получает статус выполнения транзакции. Значения статусов те же самые, что и
+            при подаче заявок через файл</param>
+            <param name="transactionID">Получает значение TransID транзакции, указанной пользователем.</param>
+            <param name="orderNumber">В случае успеха получает номер заявки в торговой системе</param>
+            <param name="resultMessage">В случае успеха содержит сообщение торговой системы</param>
+            <param name="resultMessageSize">Содержит длину строки, на которую ссылается указатель resultMessage</param>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="errorMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            <param name="errorMessageSize">Содержит длину строки, на которую ссылается указатель errorMessage</param>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_SUCCESS</term>
+            <description>транзакция отправлена успешно</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_WRONG_SYNTAX</term>
+            <description>строка транзакции заполнена неверно</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_NOT_CONNECTED</term>
+            <description>отсутствует соединение между библиотекой TRANS2QUIK.DLL и терминалом QUIK</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_QUIK_NOT_CONNECTED</term>
+            <description>отсутствует соединение между терминалом QUIK и сервером</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_FAILED</term>
+            <description>транзакцию отправить не удалось. В переменную extendedErrorCode в этом случае может
+            передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.SEND_ASYNC_TRANSACTION(System.String,System.Int32@,System.String,System.UInt32)">
+            <summary>
+            Функция для отправки асинхронной транзакции
+            </summary>
+            <param name="transactionString">Строка с описанием транзакции. Формат строки такой же, что и при
+            отправке транзакций через файл</param>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="errorMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            <param name="errorMessageSize">Содержит длину строки, на которую ссылается указатель errorMessage</param>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_SUCCESS</term>
+            <description>транзакция отправлена успешно</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_WRONG_SYNTAX</term>
+            <description>строка транзакции заполнена неверно</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_NOT_CONNECTED</term>
+            <description>отсутствует соединение между библиотекой TRANS2QUIK.DLL и терминалом QUIK</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_QUIK_NOT_CONNECTED</term>
+            <description>отсутствует соединение между терминалом квик и сервером</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_FAILED</term>
+            <description>транзакцию отправить не удалось. В переменную extendedErrorCode в этом случае может
+            передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.SET_CONNECTION_STATUS_CALLBACK(TRANS2QUIKSHARP.QUIKAPI.CONNECTION_STATUS_CALLBACK,System.Int32,System.String,System.UInt32)">
+            <summary>
+            Функция устанавливает функцию обратного вызова ConnectionStatusCallBack
+            </summary>
+            <param name="connectionStatusCallBack">Ссылается на функцию, которая будет обрабатывать информацию
+            о состоянии связи библиотеки TRANS2QUIK.DLL с терминалом QUIK или терминала QUIK с сервером</param>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="errorMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            <param name="errorMessageSize">Содержит длину строки, на которую ссылается указатель errorMessage</param>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_SUCCESS</term>
+            <description>функция обратного вызова установлена</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_FAILED</term>
+            <description>функцию обратного вызова установить не удалось. В этом случае в переменную 
+            extendedErrorCode может передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.SET_TRANSACTIONS_REPLY_CALLBACK(TRANS2QUIKSHARP.QUIKAPI.TRANSACTION_REPLY_CALLBACK,System.Int32,System.String,System.UInt32)">
+            <summary>
+            Функция устанавливает функцию обратного вызова TransactionReplyCallBack
+            </summary>
+            <param name="transactionReplyCallBack">Функция, которая будет обрабатывать информацию об отправленной транзакции</param>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="errorMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            <param name="errorMessageSize">Содержит длину строки, на которую ссылается указатель errorMessage</param>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_SUCCESS</term>
+            <description>функция обратного вызова установлена</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_FAILED</term>
+            <description>функцию обратного вызова установить не удалось. В этом случае в переменную
+            extendedErrorCode может передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.Connect(System.String)">
+            <summary>
+            Устанавливает связь между библиотекой TRANS2QUIK.DLL с терминалом QUIK
+            </summary>
+            <param name="thePathToQUIK">Полный путь к терминалу QUIK</param>
+            <returns>Возвращает значение типа <b>eQUIKResult</b> характеризующее результат. Может принимать следующие значения: 
+            <list type ="table">
+            <item>
+            <term>SUCCESS</term>
+            <description>соединение установлено успешно</description>
+            </item>
+            <item>
+            <term>QUIK_TERMINAL_NOT_FOUND</term>
+            <description>в указанном каталоге либо отсутствует INFO.EXE, либо у него не запущен сервис обработки
+            внешних подключений, в extendedErrorCode в этом случае передается 0</description>
+            </item>
+            <item>
+            <term>DLL_VERSION_NOT_SUPPORTED</term>
+            <description>используемая версия Trans2QUIK.DLL указанным INFO.EXE не поддерживается,
+            в extendedErrorCode в этом случае передается 0</description>
+            </item>
+            <item>
+            <term>ALREADY_CONNECTED_TO_QUIK</term>
+            <description>соединение уже установлено, в extendedErrorCode в этом случае передается 0</description>
+            </item>
+            <item>
+            <term>FAILED</term>
+            <description>произошла ошибка при установлении соединения, в [EEC] в этом случае
+            передается дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.Disconnect">
+            <summary>
+            Разрывает связь между библиотекой TRANS2QUIK.DLL с терминалом QUIK
+            </summary>
+            <returns>Возвращает значение типа <b>eQUIKResult</b> характеризующее результат. Может принимать следующие значения: 
+            <list type ="table">
+            <item>
+            <term>SUCCESS</term>
+            <description>соединение библиотеки TRANS2QUIK.DLL с терминалом QUIK разорвано успешно</description>
+            </item>
+            <item>
+            <term>DLL_NOT_CONNECTED</term>
+            <description>попытка разорвать соединение при не установленной связи. В этом случае в
+            [EEC] может передаваться дополнительный код ошибки</description>
+            </item>
+            <item>
+            <term>FAILED</term>
+            <description>произошла ошибка при разрыве соединения. В этом случае в
+            [EEC] передается дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+            
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.TestConnectionDLL">
+            <summary>
+            Проверят соединение библиотеки TRANS2QUIK.DLL с терминалом QUIK
+            </summary>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type="table">
+            <item>
+            <term><see cref="T:TRANS2QUIKSHARP.eQUIKResult"/>.DLL_CONNECTED</term>
+            <description>соединение библиотеки TRANS2QUIK.DLL с терминалом QUIK установлено</description>
+            </item>
+            <item>
+            <term><see cref="T:TRANS2QUIKSHARP.eQUIKResult"/>.DLL_NOT_CONNECTED</term>
+            <description>соединение библиотеки TRANS2QUIK.DLL с терминалом QUIK не установлено</description>
+            </item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.TestConnectionQUIK">
+            <summary>
+            Проверяет соединение терминала QUIK с сервером QUIK
+            </summary>
+            <returns>Возвращаемое число может принимать следующие значения:
+            <list type="table">
+            <item>
+            <term><see cref="T:TRANS2QUIKSHARP.eQUIKResult"/>.QUIK_CONNECTED</term>
+            <description>соединение терминала QUIK с сервером QUIK установлено</description>
+            </item>
+            <item>
+            <term><see cref="T:TRANS2QUIKSHARP.eQUIKResult"/>.QUIK_NOT_CONNECTED</term>
+            <description>соединение терминала QUIK с сервером QUIK не установлено</description>
+            </item>
+            <item>
+            <term><see cref="T:TRANS2QUIKSHARP.eQUIKResult"/>.DLL_NOT_CONNECTED</term>
+            <description>не установлена связь библиотеки TRANS2QUIK.DLL с терминалом QUIK. В этом случае
+            проверить наличие или отсутствие связи терминала QUIK с сервером невозможно </description>
+            </item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.SendSyncTransaction(System.String,System.Double)">
+            <summary>
+            Отправляет транзакции в синхронном режиме
+            </summary>
+            <param name="theTransactionDescription">Строка с описанием транзакции</param>
+            <param name="theOrderNumber">Если результат выполнения функции <b>SUCCESS</b>содержит номер заявки в торговой системе</param>
+            <returns>Возвращает значение типа <b>eQUIKResult</b> характеризующее результат. Может принимать следующие значения: 
+            <list type ="table">
+            <item>
+            <term>SUCCESS</term>
+            <description>транзакция отправлена успешно</description>
+            </item>
+            <item>
+            <term>WRONG_SYNTAX</term>
+            <description>строка транзакции заполнена неверно</description>
+            </item>
+            <item>
+            <term>DLL_NOT_CONNECTED</term>
+            <description>отсутствует соединение между библиотекой TRANS2QUIK.DLL и терминалом QUIK</description>
+            </item>
+            <item>
+            <term>QUIK_NOT_CONNECTED</term>
+            <description>отсутствует соединение между терминалом QUIK и сервером</description>
+            </item>
+            <item>
+            <term>FAILED</term>
+            <description>транзакцию отправить не удалось. В переменную extendedErrorCode в этом случае может
+            передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.SendAsyncTransaction(System.String)">
+            <summary>
+            Отправляет транзакции в асинхронном режиме
+            </summary>
+            <param name="theTransactionDescription">Строка с описанием транзакции</param>
+            
+            <returns>Возвращает значение типа <b>eQUIKResult</b> характеризующее результат. Может принимать следующие значения: 
+            <list type ="table">
+            <item>
+            <term>SUCCESS</term>
+            <description>транзакция отправлена успешно</description>
+            </item>
+            <item>
+            <term>WRONG_SYNTAX</term>
+            <description>строка транзакции заполнена неверно</description>
+            </item>
+            <item>
+            <term>DLL_NOT_CONNECTED</term>
+            <description>отсутствует соединение между библиотекой TRANS2QUIK.DLL и терминалом QUIK</description>
+            </item>
+            <item>
+            <term>QUIK_NOT_CONNECTED</term>
+            <description>отсутствует соединение между терминалом квик и сервером</description>
+            </item>
+            <item>
+            <term>FAILED</term>
+            <description>транзакцию отправить не удалось. В переменную extendedErrorCode в этом случае может
+            передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.SetConnectionStatusDelegate(TRANS2QUIKSHARP.QUIKAPI.CONNECTION_STATUS_CALLBACK)">
+            <summary>
+            Устанавливает функцию обратного вызова ConnectionStatusCallBack
+            </summary>
+            <param name="theConnectionStatusCallBack">Функция, которая будет обрабатывать информацию
+            о состоянии связи библиотеки TRANS2QUIK.DLL с терминалом QUIK или терминала QUIK с сервером</param>
+            <returns>Возвращает значение типа <b>eQUIKResult</b> характеризующее результат. Может принимать следующие значения: 
+            <list type ="table">
+            <item>
+            <term>SUCCESS</term>
+            <description>функция обратного вызова установлена</description>
+            </item>
+            <item>
+            <term>FAILED</term>
+            <description>функцию обратного вызова установить не удалось. В этом случае в переменную 
+            extendedErrorCode может передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+        </member>
+        <member name="M:TRANS2QUIKSHARP.QUIKAPI.SetTransactionReplyDelegate(TRANS2QUIKSHARP.QUIKAPI.TRANSACTION_REPLY_CALLBACK)">
+            <summary>
+            Устанавливает функцию обратного вызова TransactionReplyCallBack
+            </summary>
+            <param name="theTransactionReplyCallBack">Функция, которая будет обрабатывать информацию об отправленной транзакции</param>
+            <returns>Возвращает значение типа <b>eQUIKResult</b> характеризующее результат. Может принимать следующие значения: 
+            <list type ="table">
+            <item>
+            <term>SUCCESS</term>
+            <description>функция обратного вызова установлена</description>
+            </item>
+            <item>
+            <term>FAILED</term>
+            <description>функцию обратного вызова установить не удалось. В этом случае в переменную
+            extendedErrorCode может передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </returns>
+        </member>
+        <member name="P:TRANS2QUIKSHARP.QUIKAPI.LEF">
+            <summary>
+            <see cref="T:System.String"/>Возвращает название функции (метода) библиотеки выполнявшейся последней (Last Executed Function Name)
+            </summary>
+        </member>
+        <member name="P:TRANS2QUIKSHARP.QUIKAPI.EEC">
+            <summary>
+            <see cref="T:System.Int32"/>Возвращает Расширенный код ошибки (Extended Error Code)
+            </summary>
+        </member>
+        <member name="P:TRANS2QUIKSHARP.QUIKAPI.ERM">
+            <summary>
+            Возвращает сообщение об ошибке (Error Message)
+            </summary>
+        </member>
+        <member name="P:TRANS2QUIKSHARP.QUIKAPI.RSM">
+            <summary>
+            <see cref="T:System.String"/>Возвращает сообщение описывающее результат выполнения некоторых функций библиотеки (Result Message)
+            </summary>
+        </member>
+        <member name="P:TRANS2QUIKSHARP.QUIKAPI.RPC">
+            <summary>
+            <see cref="T:System.Int32"/>Возвращает код результа метода обратного вызова обработки транзакций (Reply Code)
+            </summary>
+        </member>
+        <member name="P:TRANS2QUIKSHARP.QUIKAPI.TID">
+            <summary>
+            <see cref="T:System.UInt32"/>Взвращает идентификатор транзакции (Transaction ID)
+            </summary>
+        </member>
+        <member name="T:TRANS2QUIKSHARP.QUIKAPI.CONNECTION_STATUS_CALLBACK">
+            <summary>
+            Описывает прототип функции обратного вызова для контроля за
+            состоянием соединения между TRANS2QUIK.DLL и используемым терминалом
+            QUIK и между используемым терминалом QUIK и сервером
+            </summary>
+            <param name="connectionEvent">Число может принимать следующие значения:
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_QUIK_CONNECTED</term>
+            <description>соединение между терминалом QUIK и сервером установлено</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_QUIK_DISCONNECTED</term>
+            <description>соединение между терминалом QUIK и сервером разорвано</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_CONNECTED</term>
+            <description>соединение между DLL и используемым терминалом QUIK установлено</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_DISCONNECTED</term>
+            <description>соединение между DLL и используемым терминалом QUIK разорвано</description>
+            </item>
+            </list>
+            </param>
+            <param name="extendedErrorCode">В случае возникновения ошибки может содержать расширенный код ошибки</param>
+            <param name="infoMessage">В случае возникновения ошибки может получать сообщение о возникшей ошибке</param>
+            
+        </member>
+        <member name="T:TRANS2QUIKSHARP.QUIKAPI.TRANSACTION_REPLY_CALLBACK">
+            <summary>
+            Описывает прототип функции обратного вызова для обработки полученной информации об отправленной
+            транзакции
+            </summary>
+            <param name="transactionResult">
+            <list type ="table">
+            <item>
+            <term>TRANS2QUIK_SUCCESS</term>
+            <description>транзакция передана успешно</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_WRONG_SYNTAX</term>
+            <description>строка транзакции заполнена неверно</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_DLL_NOT_CONNECTED</term>
+            <description>отсутствует соединение между библиотекой TRANS2QUIK.DLL и терминалом QUIK</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_QUIK_NOT_CONNECTED</term>
+            <description>отсутствует соединение между терминалом квик и сервером</description>
+            </item>
+            <item>
+            <term>TRANS2QUIK_FAILED</term>
+            <description>транзакцию передать не удалось. В этом случае в переменную extendedErrorCode может
+            передаваться дополнительный код ошибки</description>
+            </item>
+            </list>
+            </param>
+            <param name="transactionExtendedErrorCode">В случае возникновения проблемы при выходе из функции
+            обратного вызова в переменную может быть помещен расширенный код ошибки</param>
+            <param name="transactionReplyCode">Cтатус выполнения транзакции. Значения
+            статусов те же самые, что и при подаче заявок через файл</param>
+            <param name="transactionID">Содержимое параметра TransId, который получила зарегестрированная транзакция</param>
+            <param name="orderNumber">Номер транзакции, присвоенный торговой системой</param>
+            <param name="transactionReplyMessage">Сообщение от торговой системы или сервера QUIK</param>
+            
+        </member>
+    </members>
+</doc>

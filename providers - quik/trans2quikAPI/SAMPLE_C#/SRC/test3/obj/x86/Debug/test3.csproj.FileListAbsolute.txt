@@ -1,0 +1,5 @@
+D:\TFS\Quik_Front\Main\Components\Trans2Quik\CSharp\test3\bin\x86\Debug\test3.exe
+D:\TFS\Quik_Front\Main\Components\Trans2Quik\CSharp\test3\bin\x86\Debug\test3.pdb
+D:\TFS\Quik_Front\Main\Components\Trans2Quik\CSharp\test3\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\TFS\Quik_Front\Main\Components\Trans2Quik\CSharp\test3\obj\x86\Debug\test3.exe
+D:\TFS\Quik_Front\Main\Components\Trans2Quik\CSharp\test3\obj\x86\Debug\test3.pdb

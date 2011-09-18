@@ -1,0 +1,2808 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StockSharp.BusinessEntities</name>
+    </assembly>
+    <members>
+        <member name="T:StockSharp.BusinessEntities.IExtendableEntity">
+            <summary>
+            Интерфейс для всех бизнес-объектов, которые имеют свойство <see cref="P:StockSharp.BusinessEntities.IExtendableEntity.ExtensionInfo"/> для хранения расширенной информации.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.IExtendableEntity.ExtensionInfo">
+            <summary>
+            Расширенная информация по портфелю.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной с портфелем. Например, текущие денежные лимиты.
+            </remarks>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.WorkingTime">
+            <summary>
+            Класс, описывающий режим работы (время, выходные дни и т.д.).
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.WorkingTime.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.WorkingTime"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.WorkingTime.Times">
+            <summary>
+            Время работы биржи.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.WorkingTime.SpecialWorkingDays">
+            <summary>
+            Рабочие дни, выпадающие на субботу и воскресенье.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.WorkingTime.SpecialHolidays">
+            <summary>
+            Выходные дни, выпадающие на будни.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.OrderFail">
+            <summary>
+            Описание ошибки, которая произошла при регистрации заявки.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.OrderFail.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.OrderFail"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.OrderFail.Order">
+            <summary>
+            Заявка, которая не была зарегистрирована из-за ошибки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.OrderFail.Error">
+            <summary>
+            Системная информация об ошибке, содержащее причину отказа в регистрации.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.OrderFail.ExtensionInfo">
+            <summary>
+            Расширенная информация по заявке с ошибкой.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Trade">
+            <summary>
+            Сделка.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Trade.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.Trade"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Trade.Id">
+            <summary>
+            Идентификатор сделки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Trade.Security">
+            <summary>
+            Инструмент, по которому была совершена сделка.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Trade.Time">
+            <summary>
+            Время совершения сделки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Trade.Volume">
+            <summary>
+            Количество контрактов в сделке.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Trade.Price">
+            <summary>
+            Цена сделки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Trade.OrderDirection">
+            <summary>
+            Направление заявки (покупка или продажа), которая привела к сделке.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Trade.ExtensionInfo">
+            <summary>
+            Расширенная информация по сделке.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной со сделкой.
+            Например, операция, преведшая к сделке.
+            </remarks>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.AggregatedQuote">
+            <summary>
+            Агрегированная котировка.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Quote">
+            <summary>
+            Котировка.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Quote.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.Quote"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Quote.Clone">
+            <summary>
+             Создать копию объекта <see cref="T:StockSharp.BusinessEntities.Quote"/>.
+            </summary>
+            <returns>Копия.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Quote.OnEquals(StockSharp.BusinessEntities.Quote)">
+            <summary>
+            Сравнить две котировки на эквивалентность.
+            </summary>
+            <param name="other">Другая котировки, с которой необходимо сравнивать.</param>
+            <returns>true, если другая котировки равна текущей, иначе false.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Quote.GetHashCode">
+            <summary>
+            Рассчитать хеш-код котировки.
+            </summary>
+            <returns>Хеш-код.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Quote.ToString">
+            <summary>
+            Получить строковое представление.
+            </summary>
+            <returns>Строковое представление.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Quote.Security">
+            <summary>
+            Инструмент, по которому получена котировка.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Quote.Price">
+            <summary>
+            Цена котировки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Quote.Volume">
+            <summary>
+            Количество лотов.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Quote.OrderDirection">
+            <summary>
+            Направление (покупка или продажа).
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Quote.ExtensionInfo">
+            <summary>
+            Расширенная информация по котировке.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной с котировкой.
+            Например, количество собственных контрактов в стакане, сумму лучшей покупки-продажи.
+            </remarks>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.AggregatedQuote.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.AggregatedQuote"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.AggregatedQuote.Clone">
+            <summary>
+             Создать копию объекта <see cref="T:StockSharp.BusinessEntities.AggregatedQuote"/>.
+            </summary>
+            <returns>Копия.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.AggregatedQuote.InnerQuotes">
+            <summary>
+            Коллекция вложенных котировок, объединенных в одну единую котировку.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.BasketPortfolio">
+            <summary>
+            Корзина портфелей.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Portfolio">
+            <summary>
+            Портфель.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Portfolio.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.Portfolio"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Portfolio.ToString">
+            <summary>
+            Получить строковое представление.
+            </summary>
+            <returns>Строковое представление.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Portfolio.Name">
+            <summary>
+            Кодовое название портфеля.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Portfolio.Leverage">
+            <summary>
+            Плечо маржи.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Portfolio.BeginAmount">
+            <summary>
+            Размер денежных средств на начало торговой сессии.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Portfolio.CurrentAmount">
+            <summary>
+            Размер денежных средств на счету.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Portfolio.Commission">
+            <summary>
+            Общий размер комиссий.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Portfolio.ExtensionInfo">
+            <summary>
+            Расширенная информация по портфелю.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной с портфелем. Например, текущие денежные лимиты.
+            </remarks>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Portfolio.Trader">
+            <summary>
+            Шлюз к торговой системе, через который был загружен данный портфель.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Portfolio.Exchange">
+            <summary>
+            Биржа.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.BasketPortfolio.#ctor(StockSharp.BusinessEntities.Portfolio[])">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.BasketPortfolio"/>.
+            </summary>
+            <param name="innerPortfolios">Портфели, из которых создана данная корзина.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.BasketPortfolio.#ctor(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Portfolio})">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.BasketPortfolio"/>.
+            </summary>
+            <param name="innerPortfolios">Портфели, из которых создана данная корзина.</param>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.BasketPortfolio.InnerPortfolios">
+            <summary>
+            Портфели, из которых создана данная корзина.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.ITrader">
+            <summary>
+            Основной интерфейс, предоставляющий шлюз взаимодействия с торговыми системами.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.Connect">
+            <summary>
+            Подключиться к торговой системе.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.Disconnect">
+            <summary>
+            Отключиться от торговой системы.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.Reconnect">
+            <summary>
+            Переподключиться к торговой системе.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.StartExport">
+            <summary>
+            Запустить экспорт данных из торговой системы в программу (получение портфелей, инструментов, заявок и т.д.).
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.StopExport">
+            <summary>
+            Остановить экспорт данных из торговой системы в программу, запущенный через <see cref="M:StockSharp.BusinessEntities.ITrader.StartExport"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.ReStartExport">
+            <summary>
+            Перезапустить экспорт данных из торговой системы через методы <see cref="M:StockSharp.BusinessEntities.ITrader.StopExport"/> и <see cref="M:StockSharp.BusinessEntities.ITrader.StartExport"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.GetPosition(StockSharp.BusinessEntities.Portfolio,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Найти позицию по портфелю и инструменту.
+            </summary>
+            <param name="portfolio">Портфель, по которому нужно найти позицию.</param>
+            <param name="security">Инструмент, по которому нужно найти позицию.</param>
+            <returns>Позиция. Если позиции не найдена, то будет возвращено null.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.GetMarketDepth(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить стакан котировок.
+            </summary>
+            <param name="security">Инструмент, по которому нужно получить стакан.</param>
+            <returns>Найденный стакан.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.RegisterOrder(StockSharp.BusinessEntities.Order)">
+            <summary>
+            Зарегистрировать заявку на бирже.
+            </summary>
+            <param name="order">Заявка, содержащая информацию для регистрации.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.ReRegisterOrder(StockSharp.BusinessEntities.Order,StockSharp.BusinessEntities.Order)">
+            <summary>
+            Перерегистрировать заявку на бирже.
+            </summary>
+            <param name="oldOrder">Заявка, которую нужно снять.</param>
+            <param name="newOrder">Новая заявка, которую нужно зарегистрировать.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.ReRegisterOrder(StockSharp.BusinessEntities.Order,System.Decimal,System.Int32)">
+            <summary>
+            Перерегистрировать заявку на бирже.
+            </summary>
+            <param name="oldOrder">Заявка, которую нужно снять и на основе нее зарегистрировать новую.</param>
+            <param name="price">Цена новой заявки.</param>
+            <param name="volume">Объем новой заявки.</param>
+            <returns>Новая заявка.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.CancelOrder(StockSharp.BusinessEntities.Order)">
+            <summary>
+            Отменить заявку на бирже.
+            </summary>
+            <param name="order">Заявка, которую нужно отменить.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.CancelOrders(System.Nullable{System.Boolean},StockSharp.BusinessEntities.Portfolio,System.Nullable{StockSharp.BusinessEntities.OrderDirections},System.String,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Отменить группу заявок на бирже по фильтру.
+            </summary>
+            <param name="isStopOrder">True, если нужно отменить только стоп-заявки, false - если только обычный и null - если оба типа.</param>
+            <param name="portfolio">Портфель. Если значение равно null, то портфель не попадает в фильтр снятия заявок.</param>
+            <param name="direction">Направление заявки. Если значение равно null, то направление не попадает в фильтр снятия заявок.</param>
+            <param name="classCode">Код класса. Если переданная строка пустая, то код не попадает в фильтр снятия заявок.</param>
+            <param name="security">Инструмент. Если значение равно null, то инструмент не попадает в фильтр снятия заявок.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.RegisterQuotes(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Начать получать котировки (стакан) по инструменту.
+            Значение котировок можно получить через метод <see cref="M:StockSharp.BusinessEntities.ITrader.GetMarketDepth(StockSharp.BusinessEntities.Security)"/>.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо начать получать котировки.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.UnRegisterQuotes(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Остановить получение котировок по инструменту.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо остановить получение котировок.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.RegisterTrades(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Начать получать сделки (тиковые данные) по инструменту. Новые сделки будут приходить через
+            событие <see cref="E:StockSharp.BusinessEntities.ITrader.NewTrades"/>.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо начать получать сделки.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.UnRegisterTrades(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Остановить получение сделок (тиковые данные) по инструменту.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо остановить получение сделок.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.RegisterSecurity(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Начать получать новую информацию (например, <see cref="P:StockSharp.BusinessEntities.Security.LastTrade"/> или <see cref="P:StockSharp.BusinessEntities.Security.BestBid"/>) по инструменту.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо начать получать новую информацию.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.UnRegisterSecurity(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Остановить получение новой информации.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо остановить получение новой информации.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.RegisterPortfolio(StockSharp.BusinessEntities.Portfolio)">
+            <summary>
+            Начать получать новую информацию по портфелю.
+            </summary>
+            <param name="portfolio">Портфель, по которому необходимо начать получать новую информацию.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.ITrader.UnRegisterPortfolio(StockSharp.BusinessEntities.Portfolio)">
+            <summary>
+            Остановить получение новой информации по портфелю.
+            </summary>
+            <param name="portfolio">Портфель, по которому необходимо остановить получение новой информации.</param>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.NewMyTrades">
+            <summary>
+            Событие появления собственных новых сделок.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.NewTrades">
+            <summary>
+            Событие появления всех новых сделок.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.NewOrders">
+            <summary>
+            Событие появления новых заявок.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.OrdersChanged">
+            <summary>
+            Событие изменения состояния заявок (снята, удовлетворена).
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.OrdersFailed">
+            <summary>
+            Событие об ошибках, связанных с заявками.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.StopOrdersFailed">
+            <summary>
+            Событие об ошибках, связанных со стоп-заявками.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.NewStopOrders">
+            <summary>
+            Событие появления новых стоп-заявок.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.StopOrdersChanged">
+            <summary>
+            Событие изменения состояния стоп-заявок.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.NewSecurities">
+            <summary>
+            Событие появления новых инструментов.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.SecuritiesChanged">
+            <summary>
+            Событие изменения параметров инструментов.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.NewPortfolios">
+            <summary>
+            Событие появления новых портфелей.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.PortfoliosChanged">
+            <summary>
+            Событие изменения параметров портфелей.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.NewPositions">
+            <summary>
+            Событие появления новых позиций.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.PositionsChanged">
+            <summary>
+            Событие изменения параметров позиций.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.QuotesChanged">
+            <summary>
+            Событие изменения стаканов с котировками.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.Connected">
+            <summary>
+            Событие успешного подключения.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.Disconnected">
+            <summary>
+            Событие успешного отключения.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.ConnectionError">
+            <summary>
+            Событие ошибки подключения (например, соединения было разорвано).
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.ProcessDataError">
+            <summary>
+            Событие, сигнализирующее об ошибке при получении или обработке новых данных с сервера.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.NewDataExported">
+            <summary>
+            Событие, сигнализирующее о новых экспортируемых данных.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.ITrader.MarketTimeChanged">
+            <summary>
+            Событие, сигнализирующее об изменении текущего времени.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.Securities">
+            <summary>
+            Список всех загруженных инструментов.
+            Вызывать необходимо после того, как пришло событие <see cref="E:StockSharp.BusinessEntities.ITrader.NewSecurities"/>. Иначе будет возвращено постое множество.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.MarketTimeOffset">
+            <summary>
+            Временное смещение. Неоходимо устанавливать, когда торговая программа работает во временной зоне, отличной от биржевой.
+            Значение <see cref="P:StockSharp.BusinessEntities.ITrader.MarketTime"/> будет корректироваться в зависимости от установленного значения.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.MarketTime">
+            <summary>
+            Получить биржевое время. Значение зависит от <see cref="P:StockSharp.BusinessEntities.ITrader.MarketTimeOffset"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.Orders">
+            <summary>
+            Получить все заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.StopOrders">
+            <summary>
+            Получить все стоп-заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.OrderFails">
+            <summary>
+            Получить все заявки с ошибками.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.Trades">
+            <summary>
+            Получить все сделки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.MyTrades">
+            <summary>
+            Получить все собственные сделки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.Portfolios">
+            <summary>
+            Получить все портфели.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.Positions">
+            <summary>
+            Получить все позиции.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.IsConnected">
+            <summary>
+            Проверить соединение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.IsExportRunning">
+            <summary>
+            Запущен ли экспорт. Экспорт запускается через метод <see cref="M:StockSharp.BusinessEntities.ITrader.StartExport"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.ITrader.IsSupportAtomicReRegister">
+            <summary>
+            Поддерживается ли перерегистрация заявок через метод <see cref="M:StockSharp.BusinessEntities.ITrader.ReRegisterOrder(StockSharp.BusinessEntities.Order,StockSharp.BusinessEntities.Order)"/>
+            в виде одной транзакции.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.OrderDirections">
+            <summary>
+            Направления заявки.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderDirections.Buy">
+            <summary>
+            Заявка на покупку.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderDirections.Sell">
+            <summary>
+            Заявка на продажу.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.OrderStates">
+            <summary>
+            Состояния заявки.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStates.None">
+            <summary>
+            Не отправлена в торговую систему.
+            </summary>
+            <remarks>
+            Первоначальное значение заявки, когда еще программа не отправила транзакцию в торговую систему, или ожидает от биржи подтверждение регистрации.
+            </remarks>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStates.Active">
+            <summary>
+            Заявка принята биржей и активна.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStates.Done">
+            <summary>
+            Заявка больше не активна на бирже (была полностью удовлетворена или снята из программы).
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStates.Failed">
+            <summary>
+            Заявка не принята торговой системой.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.OrderTypes">
+            <summary>
+            Типы заявок.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderTypes.Limit">
+            <summary>
+            Лимитированная.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderTypes.Market">
+            <summary>
+            Рыночная.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderTypes.Conditional">
+            <summary>
+            Условная (стоп, тейк-профик).
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.StopCondition">
+            <summary>
+            Базовое условие для формирования стоп-заявок.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.StopCondition.#ctor">
+            <summary>
+            Инициализировать <see cref="T:StockSharp.BusinessEntities.StopCondition"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.StopCondition.TryActivate(StockSharp.BusinessEntities.MarketDepth)">
+            <summary>
+            Проверить, возможно ли по рыночной цене активизировать заявку. И возвратить демо заявки, если это возможно.
+            </summary>
+            <param name="depth">Стакан, отражающий текущую рыночную ситуацию.</param>
+            <returns>Демо заявки.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.StopCondition.Parameters">
+            <summary>
+            Параметры условия стоп-заявок.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.OrderExecutionConditions">
+            <summary>
+            Условия исполнения лимитированной заявки.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderExecutionConditions.PutInQueue">
+            <summary>
+            Поставить в очередь.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderExecutionConditions.FillOrCancel">
+            <summary>
+            Немедленно или отклонить.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderExecutionConditions.CancelBalance">
+            <summary>
+            Cнять остаток.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.OrderStatus">
+            <summary>
+            Системные статусы заявки.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.SentToServer">
+            <summary>
+            Транзакция отправлена на сервер.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.ReceiveByServer">
+            <summary>
+            Транзакция получена сервером.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.GateError">
+            <summary>
+            Ошибка отправки транзакции на биржу.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.Accepted">
+            <summary>
+            Транзакция принята биржей.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.NotDone">
+            <summary>
+            Транзакция не принята биржей.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.NotValidated">
+            <summary>
+            Транзакция не прошла проверку сервера по каким-либо критериям.
+            Например, проверку на наличие прав у пользователя на отправку транзакции данного типа.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.NotValidatedLimit">
+            <summary>
+            Транзакция не прошла проверку лимитов сервера.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.AcceptedByManager">
+            <summary>
+            Транзакция клиента, работающего с подтверждением, подтверждена менеджером фирмы.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.NotAcceptedByManager">
+            <summary>
+            Транзакция клиента, работающего с подтверждением, не подтверждена менеджером фирмы.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.CanceledByManager">
+            <summary>
+            Транзакция клиента, работающего с подтверждением, снята менеджером фирмы.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.NotSupported">
+            <summary>
+            Транзакция не поддерживается торговой системой.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OrderStatus.NotSigned">
+            <summary>
+            Транзакция не прошла проверку правильности электронной подписи. К примеру, если ключи,
+            зарегистрированные на сервере, не соответствуют подписи отправленной транзакции.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Order">
+            <summary>
+            Заявка.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Order.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.Order"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Order.Clone">
+            <summary>
+            Создать копию заявки (копирование параметров заявки).
+            </summary>
+            <returns>Копия заявки.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Latency">
+            <summary>
+            Время, которое потребовалось для регистрации заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Id">
+            <summary>
+            Идентификатор заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Time">
+            <summary>
+            Время выставления заявки на бирже.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.TransactionId">
+            <summary>
+            Номер транзакции. Автоматически устанавливается при вызове метода <see cref="M:StockSharp.BusinessEntities.ITrader.RegisterOrder(StockSharp.BusinessEntities.Order)"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Security">
+            <summary>
+            Инструмент, по которому выставляется заявка.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.State">
+            <summary>
+            Состояние заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Portfolio">
+            <summary>
+            Портфель, в рамках которого торгуется заявка.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Messages">
+            <summary>
+            Сообщения к заявке (создаются торговой системой при регистрации, изменении или снятии).
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.CancelTime">
+            <summary>
+            Время снятия заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Price">
+            <summary>
+            Цена заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Volume">
+            <summary>
+            Количество контрактов в заявке.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Direction">
+            <summary>
+            Направление заявки (покупка или продажа).
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Balance">
+            <summary>
+            Остаток контрактов в заявке.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Status">
+            <summary>
+            Системный статус заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Comment">
+            <summary>
+            Комментарий к выставляемой заявке.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Type">
+            <summary>
+            Тип заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.StopCondition">
+            <summary>
+            Условие для стоп-заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.ExecutionCondition">
+            <summary>
+            Условие исполнения лимитированной заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.DerivedOrder">
+            <summary>
+            Биржевая заявка, которая была создана стоп-заявкой при активации условия (null, если стоп-условие еще не было активировано).
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.ExtensionInfo">
+            <summary>
+            Расширенная информация по заявке.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной с заявкой.
+            Например, время активации, доходность для обычных заявок, или номер заявки-условия для стоп-заявки.
+            </remarks>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Order.Trader">
+            <summary>
+            Шлюз к торговой системе, через который была зарегистрирована данная заявка.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.MarketDepthPair">
+            <summary>
+            Пара котировок.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepthPair.#ctor(StockSharp.BusinessEntities.Quote,StockSharp.BusinessEntities.Quote)">
+            <summary>
+            Создать пару котировок.
+            </summary>
+            <param name="bid">Бид.</param>
+            <param name="ask">Оффер.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepthPair.Clone">
+            <summary>
+            Создать копию пары котировок.
+            </summary>
+            <returns>Копия.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepthPair.OnEquals(StockSharp.BusinessEntities.MarketDepthPair)">
+            <summary>
+            Сравнить две пары котировок на эквивалентность. 
+            </summary>
+            <param name="other">Другая пара котировок, с которой необходимо сравнивать.</param>
+            <returns>True, если другая пара котировок равна текущей, иначе false.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepthPair.Bid">
+            <summary>
+            Бид.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepthPair.Ask">
+            <summary>
+            Оффер.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepthPair.SpreadPrice">
+            <summary>
+            Размер спреда по цене.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepthPair.SpreadVolume">
+            <summary>
+            Размер спреда по объему. Если значение отрицательное, значит лучший оффер имеет больший объем, чем лучший бид.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.BasketSecurity">
+            <summary>
+            Корзина инструментов.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Security">
+            <summary>
+            Инструмент (акция, фьючерс, опцион).
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Security.#ctor">
+            <summary>
+            Создать объект инструмента.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Security.ToString">
+            <summary>
+            Получить строковое представление.
+            </summary>
+            <returns>Строковое представление.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Id">
+            <summary>
+            Идентификатор инструмента.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Name">
+            <summary>
+            Название инструмента.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.ShortName">
+            <summary>
+            Короткое название инструмента.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Code">
+            <summary>
+            Код инструмента.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Class">
+            <summary>
+            Класс инструмента.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.MinStepSize">
+            <summary>
+            Минимальный шаг цены.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.MinStepPrice">
+            <summary>
+            Стоимость шага цены.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.MinLotSize">
+            <summary>
+            Минимальный размер лота.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Decimals">
+            <summary>
+            Количество знаков в цене после запятой. Автоматически выставляется при присвоении <see cref="P:StockSharp.BusinessEntities.Security.MinStepSize"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.LastTrade">
+            <summary>
+            Информация о последней сделке. Если за сессию по инструменту не было сделок, то значение равно null.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.OpenPrice">
+            <summary>
+            Первая цена сделки за сессию.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.ClosePrice">
+            <summary>
+            Последняя цена сделки за предыдущую сессию.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.LowPrice">
+            <summary>
+            Минимальная цена сделки за сессию.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.HighPrice">
+            <summary>
+            Максимальная цена сделки за сессию.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.BestBid">
+            <summary>
+            Цена лучшей покупки в стакане.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.BestAsk">
+            <summary>
+            Цена лучшей продажи в стакане.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.BestPair">
+            <summary>
+            Лучшая пара котировок.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.State">
+            <summary>
+            Текущее состояние инструмента.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Type">
+            <summary>
+            Тип инструмента.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.ExtensionInfo">
+            <summary>
+            Расширенная информация по инструменту.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной с инструментом.
+            Например, дата экспирации инструмента (если эта опцион) или информация о базовом активе, если это фьючерсный контракт.
+            </remarks>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.MinPrice">
+            <summary>
+            Нижний лимит цены.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.MaxPrice">
+            <summary>
+            Верхний лимит цены.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.MarginBuy">
+            <summary>
+            Гарантийное обеспечение на покупку.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.MarginSell">
+            <summary>
+            Гарантийное обеспечение на продажу.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.ExpiryDate">
+            <summary>
+            Дата экспирация инструмента (для деривативов - экспирация, для облигаций - погашение).
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.SettlementDate">
+            <summary>
+            Дата выплат по инструмента (для деривативов и облигаций).
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Trader">
+            <summary>
+            Шлюз к торговой системе, через который был загружен данный инструмент.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Exchange">
+            <summary>
+            Биржа.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.UnderlyingSecurityId">
+            <summary>
+            Базовый фьючерсный инструмент, на основе которого построен опцион.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Strike">
+            <summary>
+            Страйк.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.OptionType">
+            <summary>
+            Тип опциона.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.Volatility">
+            <summary>
+            Волатильность.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Security.TheorPrice">
+            <summary>
+            Теоретическая цена.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.BasketSecurity.#ctor(StockSharp.BusinessEntities.Security[])">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.BasketSecurity"/>.
+            </summary>
+            <param name="innerSecurities">Инструменты, из которых создана данная корзина.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.BasketSecurity.#ctor(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Security})">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.BasketSecurity"/>.
+            </summary>
+            <param name="innerSecurities">Инструменты, из которых создана данная корзина.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.BasketSecurity.Calculate">
+            <summary>
+            Вычислить цены <see cref="P:StockSharp.BusinessEntities.Security.LastTrade"/>, <see cref="P:StockSharp.BusinessEntities.Security.BestBid"/>, <see cref="P:StockSharp.BusinessEntities.Security.BestAsk"/> корзины.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.BasketSecurity.InnerSecurities">
+            <summary>
+            Инструменты, из которых создана данная корзина.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.BasketSecurity.Weights">
+            <summary>
+            Весовые коэффициенты инструментов в корзине.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.CurrencyTypes">
+            <summary>
+            Тип валюты.
+            </summary>
+            <summary>
+            Коды прописаны в соответствии со стандартом ISO 4217 Currency Codes.
+            </summary>
+            <remarks/>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.AFA">
+            <summary>
+            Afghanistan, Afghanis.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TMT">
+            <summary>
+            Turkmenistan, Turkmenistani manat.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.UZS">
+            <summary>
+            Uzbekistan, Uzbekistan som.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TJS">
+            <summary>
+            Tajikistan, Somoni.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.AMD">
+            <summary>
+            Armenia, Armenian dram.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XDR">
+            <summary>
+            International Monetary Fund, Special Drawing Rights.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.AZN">
+            <summary>
+            Azerbaijan, Azerbaijani manat.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BYR">
+            <summary>
+            Belarus, Belarusian ruble.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.RON">
+            <summary>
+            Romania, Romanian new leu.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BGN">
+            <summary>
+            Bulgaria, Bulgarian lev.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KGS">
+            <summary>
+            Kyrgyzstan, Kyrgyzstani som.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ALL">
+            <summary>
+            Albania, Leke.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.DZD">
+            <summary>
+            Algeria, Algeria Dinars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ARS">
+            <summary>
+            Argentina, Pesos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.AWG">
+            <summary>
+            Aruba, Guilders (also called Florins).
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.AUD">
+            <summary>
+            Australia, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BSD">
+            <summary>
+            Bahamas, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BHD">
+            <summary>
+            Bahrain, Dinars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BDT">
+            <summary>
+            Bangladesh, Taka.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BBD">
+            <summary>
+            Barbados, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BZD">
+            <summary>
+            Belize, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BMD">
+            <summary>
+            Bermuda, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BTN">
+            <summary>
+            Bhutan, Ngultrum.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BOB">
+            <summary>
+            Bolivia, Bolivianos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BWP">
+            <summary>
+            Botswana, Pulas.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BRL">
+            <summary>
+            Brazil, Brazil Real.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.GBP">
+            <summary>
+            United Kingdom, Pounds.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BND">
+            <summary>
+            Brunei Darussalam, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.BIF">
+            <summary>
+            Burundi, Francs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XOF">
+            <summary>
+            Communaute Financiere Africaine BCEAO, Francs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XAF">
+            <summary>
+            Communaute Financiere Africaine BEAC, Francs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KHR">
+            <summary>
+            Cambodia, Riels.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CAD">
+            <summary>
+            Canada, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CVE">
+            <summary>
+            Cape Verde, Escudos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KYD">
+            <summary>
+            Cayman Islands, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CLP">
+            <summary>
+            Chile, Pesos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CNY">
+            <summary>
+            China, Yuan Renminbi.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.COP">
+            <summary>
+            Colombia, Pesos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KMF">
+            <summary>
+            Comoros, Francs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CRC">
+            <summary>
+            Costa Rica, Colones.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.HRK">
+            <summary>
+            Croatia, Kuna.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CUP">
+            <summary>
+            Cuba, Pesos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CYP">
+            <summary>
+            Cyprus, Pounds.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CZK">
+            <summary>
+            Czech Republic, Koruny.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.DKK">
+            <summary>
+            Denmark, Kroner.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.DJF">
+            <summary>
+            Djibouti, Francs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.DOP">
+            <summary>
+            Dominican Republic, Pesos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XCD">
+            <summary>
+            East Caribbean Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.EGP">
+            <summary>
+            Egypt, Pounds.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SVC">
+            <summary>
+            El Salvador, Colones.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.EEK">
+            <summary>
+            Estonia, Krooni.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ETB">
+            <summary>
+            Ethiopia, Birr.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.EUR">
+            <summary>
+            Euro Member Countries, Euro.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.FKP">
+            <summary>
+            Falkland Islands (Malvinas), Pounds.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.GMD">
+            <summary>
+            Gambia, Dalasi.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.GHC">
+            <summary>
+            Ghana, Cedis.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.GIP">
+            <summary>
+            Gibraltar, Pounds.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XAU">
+            <summary>
+            Gold, Ounces.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.GTQ">
+            <summary>
+            Guatemala, Quetzales.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.GNF">
+            <summary>
+            Guinea, Francs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.GYD">
+            <summary>
+            Guyana, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.HTG">
+            <summary>
+            Haiti, Gourdes.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.HNL">
+            <summary>
+            Honduras, Lempiras.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.HKD">
+            <summary>
+            Hong Kong, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.HUF">
+            <summary>
+            Hungary, Forint.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ISK">
+            <summary>
+            Iceland, Kronur.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.INR">
+            <summary>
+            India, Rupees.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.IDR">
+            <summary>
+            Indonesia, Rupiahs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.IQD">
+            <summary>
+            Iraq, Dinars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ILS">
+            <summary>
+            Israel, New Shekels.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.JMD">
+            <summary>
+            Jamaica, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.JPY">
+            <summary>
+            Japan, Yen.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.JOD">
+            <summary>
+            Jordan, Dinars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KZT">
+            <summary>
+            Kazakstan, Tenge.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KES">
+            <summary>
+            Kenya, Shillings.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KRW">
+            <summary>
+            Korea (South), Won.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KWD">
+            <summary>
+            Kuwait, Dinars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.LAK">
+            <summary>
+            Laos, Kips.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.LVL">
+            <summary>
+            Latvia, Lati.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.LBP">
+            <summary>
+            Lebanon, Pounds.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.LSL">
+            <summary>
+            Lesotho, Maloti.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.LRD">
+            <summary>
+            Liberia, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.LYD">
+            <summary>
+            Libya, Dinars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.LTL">
+            <summary>
+            Lithuania, Litai.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MOP">
+            <summary>
+            Macau, Patacas.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MKD">
+            <summary>
+            Macedonia, Denars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MGF">
+            <summary>
+            .
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MWK">
+            <summary>
+            Malawi, Kwachas.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MYR">
+            <summary>
+            Malaysia, Ringgits.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MVR">
+            <summary>
+            Maldives (Maldive Islands), Rufiyaa.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MTL">
+            <summary>
+            Malta, Liri.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MRO">
+            <summary>
+            Mauritania, Ouguiyas.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MUR">
+            <summary>
+            Mauritius, Rupees.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MXN">
+            <summary>
+            Mexico, Pesos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MDL">
+            <summary>
+            Moldova, Lei.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MNT">
+            <summary>
+            Mongolia, Tugriks.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MAD">
+            <summary>
+            Morocco, Dirhams.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MZM">
+            <summary>
+            Mozambique, Meticais.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.MMK">
+            <summary>
+            Myanmar (Burma), Kyats.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.NAD">
+            <summary>
+            Namibia, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.NPR">
+            <summary>
+            Nepal, Nepal Rupees.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ANG">
+            <summary>
+            Netherlands Antilles, Guilders (also called Florins).
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.NZD">
+            <summary>
+            New Zealand, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.NIO">
+            <summary>
+            Nicaragua, Gold Cordobas.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.NGN">
+            <summary>
+            Nigeria, Nairas.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.KPW">
+            <summary>
+            Korea (North), Won.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.NOK">
+            <summary>
+            Norway, Krone.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.OMR">
+            <summary>
+            Oman, Rials.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XPF">
+            <summary>
+            Comptoirs Francais du Pacifique Francs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.PKR">
+            <summary>
+            Pakistan, Rupees.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XPD">
+            <summary>
+            Palladium Ounces.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.PAB">
+            <summary>
+            Panama, Balboa.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.PGK">
+            <summary>
+            Papua New Guinea, Kina.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.PYG">
+            <summary>
+            Paraguay, Guarani.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.PEN">
+            <summary>
+            Peru, Nuevos Soles.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.PHP">
+            <summary>
+            Philippines, Pesos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XPT">
+            <summary>
+            Platinum, Ounces.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.PLN">
+            <summary>
+            Poland, Zlotych.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.QAR">
+            <summary>
+            Qatar, Rials.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.RUB">
+            <summary>
+            Russia, Abkhazia, South Ossetia, Russian rouble.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.WST">
+            <summary>
+            Samoa, Tala.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.STD">
+            <summary>
+            Sao Tome and Principe, Dobras.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SAR">
+            <summary>
+            Saudi Arabia, Riyals.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SCR">
+            <summary>
+            Seychelles, Rupees.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SLL">
+            <summary>
+            Sierra Leone, Leones.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.XAG">
+            <summary>
+            Silver, Ounces.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SGD">
+            <summary>
+            Singapore, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SKK">
+            <summary>
+            Slovakia, Koruny.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SIT">
+            <summary>
+            Slovenia, Tolars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SBD">
+            <summary>
+            Solomon Islands, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SOS">
+            <summary>
+            Somalia, Shillings.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ZAR">
+            <summary>
+            South Africa, Rand.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.LKR">
+            <summary>
+            Sri Lanka, Rupees.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SHP">
+            <summary>
+            Saint Helena, Pounds.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SDD">
+            <summary>
+            Sudan, Dinars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SRD">
+            <summary>
+            Surinamese dollar.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SZL">
+            <summary>
+            Swaziland, Emalangeni.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SEK">
+            <summary>
+            Sweden, Kronor.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CHF">
+            <summary>
+            Switzerland, Francs.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.SYP">
+            <summary>
+            Syria, Pounds.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TWD">
+            <summary>
+            Taiwan, New Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TZS">
+            <summary>
+            Tanzania, Shillings.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.THB">
+            <summary>
+            Thailand, Baht.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TOP">
+            <summary>
+            Tonga, Pa'anga.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TTD">
+            <summary>
+            Trinidad and Tobago, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TND">
+            <summary>
+            Tunisia, Dinars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TRL">
+            <summary>
+            Turkey, Liras.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.USD">
+            <summary>
+            United States of America, Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.AED">
+            <summary>
+            United Arab Emirates, Dirhams.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.UGX">
+            <summary>
+            Uganda, Shillings.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.UAH">
+            <summary>
+            Ukraine, Hryvnia.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.UYU">
+            <summary>
+            Uruguay, Pesos.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.VUV">
+            <summary>
+            Vanuatu, Vatu.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.VEB">
+            <summary>
+            Venezuela, Bolivares.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.VND">
+            <summary>
+            Viet Nam, Dong.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.YER">
+            <summary>
+            Yemen, Rials.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.CSD">
+            <summary>
+            Serbian dinar.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ZMK">
+            <summary>
+            Zambia, Kwacha.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.ZWD">
+            <summary>
+            Zimbabwe, Zimbabwe Dollars.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.CurrencyTypes.TRY">
+            <summary>
+            Turkey, Northern Cyprus, Turkish lira.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Position">
+            <summary>
+            Позиция по инструменту.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Position.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.Position"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Position.Portfolio">
+            <summary>
+            Портфель, в котором создана позиция.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Position.Security">
+            <summary>
+            Инструмент, по которому создана позиция.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Position.BeginValue">
+            <summary>
+            Размер позиции на начало торговой сессии.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Position.CurrentValue">
+            <summary>
+            Размер текущей позиции.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Position.BlockedValue">
+            <summary>
+            Размер позиции, зарезервированная под активные заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Position.ExtensionInfo">
+            <summary>
+            Расширенная информация по позиции.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной с позицией. Например, размер уплаченной комиссии.
+            </remarks>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.UnitTypes">
+            <summary>
+            Единицы измерения.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.UnitTypes.Absolute">
+            <summary>
+            Абсолютное значение. Шаг изменения равен шагу цены по данному инструменту.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.UnitTypes.Percent">
+            <summary>
+            Проценты. Шаг изменения – одна сотая процента.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.UnitTypes.Point">
+            <summary>
+            Пункт цены инструмента. Вычисляется на основе значения <see cref="P:StockSharp.BusinessEntities.Security.MinStepPrice"/>.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.UnitTypes.Step">
+            <summary>
+            Шаг цены инструмента. Вычисляется на основе значения <see cref="P:StockSharp.BusinessEntities.Security.MinStepSize"/>.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Unit">
+            <summary>
+            Специальный класс, позволяющий задавать величины в процентном, абсолютном, пунктовым и пипсовых значениях.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.#ctor">
+            <summary>
+            Создать величину.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.#ctor(System.Decimal)">
+            <summary>
+            Создать абсолютную величину <see cref="F:StockSharp.BusinessEntities.UnitTypes.Absolute"/>.
+            </summary>
+            <param name="value">Значение.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.#ctor(System.Decimal,StockSharp.BusinessEntities.UnitTypes)">
+            <summary>
+            Создать величину типа <see cref="F:StockSharp.BusinessEntities.UnitTypes.Absolute"/> или <see cref="F:StockSharp.BusinessEntities.UnitTypes.Percent"/>.
+            </summary>
+            <param name="value">Значение.</param>
+            <param name="type">Единица измерения.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.#ctor(System.Decimal,StockSharp.BusinessEntities.UnitTypes,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Создать величину типа <see cref="F:StockSharp.BusinessEntities.UnitTypes.Point"/> или <see cref="F:StockSharp.BusinessEntities.UnitTypes.Step"/>.
+            </summary>
+            <param name="value">Значение.</param>
+            <param name="type">Единица измерения.</param>
+            <param name="security">Информация по инструменту.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.Clone">
+            <summary>
+             Создать копию объекта <see cref="T:StockSharp.BusinessEntities.Unit"/>.
+            </summary>
+            <returns>Копия.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Implicit(System.Decimal)~StockSharp.BusinessEntities.Unit">
+            <summary>
+            Привести <see cref="T:System.Decimal"/> значение к объекту <see cref="T:StockSharp.BusinessEntities.Unit"/>.
+            </summary>
+            <param name="value"><see cref="T:System.Decimal"/> значение.</param>
+            <returns>Объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Implicit(System.Int32)~StockSharp.BusinessEntities.Unit">
+            <summary>
+            Привести <see cref="T:System.Int32"/> значение к объекту <see cref="T:StockSharp.BusinessEntities.Unit"/>.
+            </summary>
+            <param name="value"><see cref="T:System.Int32"/> значение.</param>
+            <returns>Объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Explicit(StockSharp.BusinessEntities.Unit)~System.Decimal">
+            <summary>
+            Привести объект <see cref="T:StockSharp.BusinessEntities.Unit"/> к <see cref="T:System.Decimal"/> значению.
+            </summary>
+            <param name="unit">Объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <returns><see cref="T:System.Decimal"/> значение.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Implicit(System.Double)~StockSharp.BusinessEntities.Unit">
+            <summary>
+            Привести <see cref="T:System.Double"/> значение к объекту <see cref="T:StockSharp.BusinessEntities.Unit"/>.
+            </summary>
+            <param name="value"><see cref="T:System.Double"/> значение.</param>
+            <returns>Объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Explicit(StockSharp.BusinessEntities.Unit)~System.Double">
+            <summary>
+            Привести объект <see cref="T:StockSharp.BusinessEntities.Unit"/> к <see cref="T:System.Double"/> значению.
+            </summary>
+            <param name="unit">Объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <returns><see cref="T:System.Double"/> значение.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Addition(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Сложить два объекта <see cref="T:StockSharp.BusinessEntities.Unit"/>.
+            </summary>
+            <param name="u1">Первый объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <param name="u2">Второй объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <returns>Результат сложения.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Multiply(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Перемножить два объекта <see cref="T:StockSharp.BusinessEntities.Unit"/>.
+            </summary>
+            <param name="u1">Первый объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <param name="u2">Второй объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <returns>Результат перемножения.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Subtraction(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Вычесть одну величину <see cref="T:StockSharp.BusinessEntities.Unit"/> из другой.
+            </summary>
+            <param name="u1">Первый объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <param name="u2">Второй объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <returns>Результат вычитания.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_Division(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Поделить одну величину <see cref="T:StockSharp.BusinessEntities.Unit"/> на другую.
+            </summary>
+            <param name="u1">Первый объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <param name="u2">Второй объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <returns>Результат деления.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.GetHashCode">
+            <summary>
+            Для внутреннего использования.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.OnEquals(StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Сравнить две величины на эквивалентность.
+            </summary>
+            <param name="other">Другая величина, с которой необходимо сравнивать.</param>
+            <returns>true, если другая величина равна текущей, иначе false.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.ToString">
+            <summary>
+            Получить строковое представление.
+            </summary>
+            <returns>Строковое представление.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_GreaterThan(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Проверить, является ли первая величина больше второй.
+            </summary>
+            <param name="u1">Первая величина.</param>
+            <param name="u2">Вторая величина.</param>
+            <returns>true, если первая величина больше второй, иначе false.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_GreaterThanOrEqual(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Проверить, является ли первая величина больше или равной второй.
+            </summary>
+            <param name="u1">Первая величина.</param>
+            <param name="u2">Вторая величина.</param>
+            <returns>true, если первая величина больше или равной второй, иначе false.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_LessThan(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Проверить, является ли первая величина меньше второй.
+            </summary>
+            <param name="u1">Первая величина.</param>
+            <param name="u2">Вторая величина.</param>
+            <returns>true, если первая величина меньше второй, иначе false.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Unit.op_LessThanOrEqual(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.Unit)">
+            <summary>
+            Проверить, является ли первая величина меньше или равной второй.
+            </summary>
+            <param name="u1">Первая величина.</param>
+            <param name="u2">Вторая величина.</param>
+            <returns>true, если первая величина меньше или равной второй, иначе false.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Unit.Type">
+            <summary>
+            Единица измерения.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Unit.Value">
+            <summary>
+            Значение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Unit.Security">
+            <summary>
+            Информация по инструменту. Необходима при использовании <see cref="F:StockSharp.BusinessEntities.UnitTypes.Point"/> и <see cref="F:StockSharp.BusinessEntities.UnitTypes.Step"/>.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.UnitHelper">
+            <summary>
+            Вспомогательный класс для <see cref="T:StockSharp.BusinessEntities.Unit"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Pips(System.Int32,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Создать из <see cref="T:System.Int32"/> значения пипсы.
+            </summary>
+            <param name="value"><see cref="T:System.Int32"/> значение.</param>
+            <param name="security">Инструмент, из которого берется информация по шагу цены.</param>
+            <returns>Пипсы.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Pips(System.Double,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Создать из <see cref="T:System.Double"/> значения пипсы.
+            </summary>
+            <param name="value"><see cref="T:System.Double"/> значение.</param>
+            <param name="security">Инструмент, из которого берется информация по шагу цены.</param>
+            <returns>Пипсы.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Pips(System.Decimal,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Создать из <see cref="T:System.Decimal"/> значения пипсы.
+            </summary>
+            <param name="value"><see cref="T:System.Decimal"/> значение.</param>
+            <param name="security">Инструмент, из которого берется информация по шагу цены.</param>
+            <returns>Пипсы.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Points(System.Int32,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Создать из <see cref="T:System.Int32"/> значения пункты.
+            </summary>
+            <param name="value"><see cref="T:System.Int32"/> значение.</param>
+            <param name="security">Инструмент, из которого берется информация по стоимости шага цены.</param>
+            <returns>Пункты.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Points(System.Double,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Создать из <see cref="T:System.Double"/> значения пункты.
+            </summary>
+            <param name="value"><see cref="T:System.Double"/> значение.</param>
+            <param name="security">Инструмент, из которого берется информация по стоимости шага цены.</param>
+            <returns>Пункты.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Points(System.Decimal,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Создать из <see cref="T:System.Decimal"/> значения пункты.
+            </summary>
+            <param name="value"><see cref="T:System.Decimal"/> значение.</param>
+            <param name="security">Инструмент, из которого берется информация по стоимости шага цены.</param>
+            <returns>Пункты.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Percents(System.Int32)">
+            <summary>
+            Создать из <see cref="T:System.Int32"/> значения проценты.
+            </summary>
+            <param name="value"><see cref="T:System.Int32"/> значение.</param>
+            <returns>Проценты.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Percents(System.Double)">
+            <summary>
+            Создать из <see cref="T:System.Double"/> значения проценты.
+            </summary>
+            <param name="value"><see cref="T:System.Double"/> значение.</param>
+            <returns>Проценты.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Percents(System.Decimal)">
+            <summary>
+            Создать из <see cref="T:System.Decimal"/> значения проценты.
+            </summary>
+            <param name="value"><see cref="T:System.Decimal"/> значение.</param>
+            <returns>Проценты.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.ToUnit(System.String,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Пробразовать строку в <see cref="T:StockSharp.BusinessEntities.Unit"/>.
+            </summary>
+            <param name="str">Строковое представление <see cref="T:StockSharp.BusinessEntities.Unit"/>.</param>
+            <param name="security">Информация по инструменту. Необходима при использовании <see cref="F:StockSharp.BusinessEntities.UnitTypes.Point"/> и <see cref="F:StockSharp.BusinessEntities.UnitTypes.Step"/>.</param>
+            <returns>Объект <see cref="T:StockSharp.BusinessEntities.Unit"/>.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Convert(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.UnitTypes)">
+            <summary>
+            Перевести величину в другой тип измерения.
+            </summary>
+            <param name="unit">Исходная величина.</param>
+            <param name="destinationType">Тип измерения, в который необходимо перевести.</param>
+            <returns>Сконвертированная величина.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.UnitHelper.Convert(StockSharp.BusinessEntities.Unit,StockSharp.BusinessEntities.UnitTypes,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Перевести величину в другой тип измерения.
+            </summary>
+            <param name="unit">Исходная величина.</param>
+            <param name="destinationType">Тип измерения, в который необходимо перевести.</param>
+            <param name="security">Информация по инструменту. Необходима при использовании <see cref="F:StockSharp.BusinessEntities.UnitTypes.Point"/> и <see cref="F:StockSharp.BusinessEntities.UnitTypes.Step"/>.</param>
+            <returns>Сконвертированная величина.</returns>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.MarketDepth">
+            <summary>
+            Стакан с котировками.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.#ctor(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Создать стакан.
+            </summary>
+            <param name="security">Инструмент стакана.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.#ctor(StockSharp.BusinessEntities.Security,System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Quote})">
+            <summary>
+            Создать стакан.
+            </summary>
+            <param name="security">Инструмент стакана.</param>
+            <param name="quotes">Котировки стакана.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.#ctor(StockSharp.BusinessEntities.Security,System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Quote},System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Quote})">
+            <summary>
+            Создать стакан.
+            </summary>
+            <param name="security">Инструмент стакана.</param>
+            <param name="bids">Биды.</param>
+            <param name="asks">Оффера.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.Decrease(System.Int32)">
+            <summary>
+            Уменьшить стакан до необходимой глубины.
+            </summary>
+            <param name="newDepth">Новая глубина стакана.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.GetQuote(StockSharp.BusinessEntities.OrderDirections,System.Int32)">
+            <summary>
+            Получить котировку по направлению <see cref="T:StockSharp.BusinessEntities.OrderDirections"/> и индексу глубины.
+            </summary>
+            <param name="orderDirection">Направление заявок.</param>
+            <param name="depthIndex">Индекс глубины. Нулевой индекс означает лучшую котировку.</param>
+            <returns>Котировка. Если для заданной глубины не существует котировки, то будет возвращено null.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.GetQuote(System.Decimal)">
+            <summary>
+            Получить котировку по цене.
+            </summary>
+            <param name="price">Цена котировки.</param>
+            <returns>Найденная котировка. Если для переданной цены в стакане не существует котировки, то будет возвращено null.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.GetQuotes(StockSharp.BusinessEntities.OrderDirections)">
+            <summary>
+            Получить котировки по направлению <see cref="T:StockSharp.BusinessEntities.OrderDirections"/>.
+            </summary>
+            <param name="orderDirection">Направление заявок.</param>
+            <returns>Котировки.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.GetBestQuote(StockSharp.BusinessEntities.OrderDirections)">
+            <summary>
+            Получить лучшую котировку по направлению <see cref="T:StockSharp.BusinessEntities.OrderDirections"/>.
+            </summary>
+            <param name="orderDirection">Направление заявки.</param>
+            <returns>Лучшая котировка. Если стакан пустой, то будет возвращено null.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.GetPair(System.Int32)">
+            <summary>
+            Получить пару котировок (бид + оффер) по индексу глубины.
+            </summary>
+            <param name="depthIndex">Индекс глубины. Нулевой индекс означает лучшую пару котировок.</param>
+            <returns>Пара котировок. Если индекс больше глубины стакана <see cref="P:StockSharp.BusinessEntities.MarketDepth.Depth"/>, то возвращается null.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.GetTopPairs(System.Int32)">
+            <summary>
+            Получить край стакана на заданную глубину в виде пар котировок.
+            </summary>
+            <param name="depth">Глубина края стакана. Отсчет идет от лучших котировок.</param>
+            <returns>Край стакана.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.GetTopQuotes(System.Int32)">
+            <summary>
+            Получить край стакана на заданную глубину в виде котировок.
+            </summary>
+            <param name="depth">Глубина края стакана. Котировки идут в порядке увеличения цены от бидов до офферов.</param>
+            <returns>Край стакана.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.Update(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Quote})">
+            <summary>
+            Обновить стакан новыми котировками.
+            </summary>
+            <remarks>
+            Старые котировки удаляются из стакана.
+            </remarks>
+            <param name="quotes">Новые котировки.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.Update(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Quote},System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Quote},System.Boolean)">
+            <summary>
+            Обновить стакан новыми бидами и офферами.
+            </summary>
+            <remarks>
+            Старые котировки удаляются из стакана.
+            </remarks>
+            <param name="bids">Новые биды.</param>
+            <param name="asks">Новые оффера.</param>
+            <param name="isSorted">Отсортированы ли котировки. Параметр используется в целях оптимизации для предотвращения повторной сортировки.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.UpdateQuote(StockSharp.BusinessEntities.Quote)">
+            <summary>
+            Обновить котировку. Если котировка с такое ценой уже присутствует в стакане, то она обновляется переданной.
+            Иначе, она автоматически перестраивает стакан.
+            </summary>
+            <param name="quote">Новая котировка.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.AddQuote(StockSharp.BusinessEntities.Quote)">
+            <summary>
+            Добавить котировку. Если котировка с такое ценой уже присутствует в стакане, то они объединяются в <see cref="T:StockSharp.BusinessEntities.AggregatedQuote"/>.
+            </summary>
+            <param name="quote">Новая котировка.</param>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.GetEnumerator">
+            <summary>
+            Получить объект-перечислитель.
+            </summary>
+            <returns>Объект-перечислитель.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Получить объект-перечислитель.
+            </summary>
+            <returns>Объект-перечислитель.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.ToPairs">
+            <summary>
+            Получить все пары из стакана.
+            </summary>
+            <returns>Пары, из которых составлен стакан.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.Remove(StockSharp.BusinessEntities.Quote)">
+            <summary>
+            Удалить котировку из стакана.
+            </summary>
+            <param name="quote">Котировка, которую необходимо удалить.</param>
+            <returns>True, если котировка была найдена в стакане, иначе false.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.Remove(System.Decimal)">
+            <summary>
+            Удалить котировку для заданной цены.
+            </summary>
+            <param name="price">Цена, для которой необходимо удалить котировку.</param>
+            <returns>True, если котировка была найдена в стакане, иначе false.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MarketDepth.Clone">
+            <summary>
+            Создать копию объекта <see cref="T:StockSharp.BusinessEntities.MarketDepth"/>.
+            </summary>
+            <returns>Копия.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.MaxDepth">
+            <summary>
+            Максимальная глубина стакана.
+            </summary>
+            <remarks>
+            По умолчанию значение равно 100. Если новая котировка превысила максимальную глубину, то будет вызвано событие <see cref="E:StockSharp.BusinessEntities.MarketDepth.QuoteOutOfDepth"/>.
+            </remarks>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.Security">
+            <summary>
+            Инструмент стакана.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.Trader">
+            <summary>
+            Шлюз к торговой системе.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.LastChangeTime">
+            <summary>
+            Время последнего изменения стакана.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.Bids">
+            <summary>
+            Возвращает массив бидов упорядоченных по убыванию цены. Первый бид будет иметь максимальную цену, и будет являться лучшим.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.Asks">
+            <summary>
+            Возвращает массив офферов упорядоченных по возрастанию цены. Первый оффер будет иметь минимальную цену, и будет являться лучшим.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.BestBid">
+            <summary>
+            Лучший бид. Если стакан пустой, то будет возвращена котировка с нулевой ценой.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.BestAsk">
+            <summary>
+            Лучший оффер. Если стакан пустой, то будет возвращена котировка с нулевой ценой.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.BestPair">
+            <summary>
+            Лучшая пара котировок.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.TotalBidsPrice">
+            <summary>
+            Получить общий ценовой размер по бидам.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.TotalAsksPrice">
+            <summary>
+            Получить общий ценовой размер по офферам.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.TotalBidsVolume">
+            <summary>
+            Получить общий объем по бидам.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.TotalAsksVolume">
+            <summary>
+            Получить общий объем по офферам.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.TotalVolume">
+            <summary>
+            Получить общий объем.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.TotalPrice">
+            <summary>
+            Получить общий ценовой размер.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.SpreadPrice">
+            <summary>
+            Размер спреда по цене.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.SpreadVolume">
+            <summary>
+            Размер спреда по объему. Если значение отрицательное, значит лучший оффер имеет больший объем, чем лучший бид.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.Count">
+            <summary>
+            Общее количество котировок (бидов + оферов) в стакане.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MarketDepth.Depth">
+            <summary>
+            Глубина стакана.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.MarketDepth.QuoteOutOfDepth">
+            <summary>
+            Событие о превышении котировки максимально допустимой глубины в стакане.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.MarketDepth.DepthChanged">
+            <summary>
+            Событие об изменении глубины стакана <see cref="P:StockSharp.BusinessEntities.MarketDepth.Depth"/>.
+            </summary>
+        </member>
+        <member name="E:StockSharp.BusinessEntities.MarketDepth.QuotesChanged">
+            <summary>
+            Событие изменения котировок в стакане.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Exchange">
+            <summary>
+            Класс-хранилище, предоставляющий информацию по биржам.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Exchange.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.Exchange"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Exchange.ToString">
+            <summary>
+            Получить строковое представление.
+            </summary>
+            <returns>Строковое представление.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Exchange.OnEquals(StockSharp.BusinessEntities.Exchange)">
+            <summary>
+            Сравнить два объекта <see cref="T:StockSharp.BusinessEntities.Exchange"/> на эквивалентность.
+            </summary>
+            <param name="other">Объект для сравнения.</param>
+            <returns>true, если другой объект равен текущему, иначе false.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Exchange.Clone">
+            <summary>
+             Создать копию объекта <see cref="T:StockSharp.BusinessEntities.Exchange"/>.
+            </summary>
+            <returns>Копия.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Exchange.Name">
+            <summary>
+            Название биржи.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Exchange.WorkingTime">
+            <summary>
+            Время работы биржи.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Exchange.Rts">
+            <summary>
+            Информация о бирже РТС.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Exchange.Micex">
+            <summary>
+            Информация о бирже ММВБ.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Exchange.Test">
+            <summary>
+            Информация о тестовой бирже, не имеющая ограничения в расписание работы.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Exchange.Ux">
+            <summary>
+            Информация о бирже РТС.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Exchange.ExtensionInfo">
+            <summary>
+            Расширенная информация по бирже.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной с биржей.
+            </remarks>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.Currency">
+            <summary>
+            Валюта.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.#ctor">
+            <summary>
+            Создать объект валюты.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.Clone">
+            <summary>
+            Создать копию валюты (копирование параметров валюты).
+            </summary>
+            <returns>Копия валюты.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.OnEquals(StockSharp.BusinessEntities.Currency)">
+            <summary>
+            Сравнить на равенство.
+            </summary>
+            <param name="other">Валюта, с которой нужно сравнить.</param>
+            <returns>Результат сравнения.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.GetHashCode">
+            <summary>
+            Рассчитать хеш-код валюты.
+            </summary>
+            <returns>Хеш-код.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.ToString">
+            <summary>
+            Получить строковое представление.
+            </summary>
+            <returns>Строковое представление.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.op_Implicit(System.Decimal)~StockSharp.BusinessEntities.Currency">
+            <summary>
+            Привести <see cref="T:System.Decimal"/> значение к объекту <see cref="T:StockSharp.BusinessEntities.Currency"/>.
+            </summary>
+            <param name="value"><see cref="T:System.Decimal"/> значение.</param>
+            <returns>Объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.op_Explicit(StockSharp.BusinessEntities.Currency)~System.Decimal">
+            <summary>
+            Привести объект <see cref="T:StockSharp.BusinessEntities.Currency"/> к <see cref="T:System.Decimal"/> значению.
+            </summary>
+            <param name="unit">Объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <returns><see cref="T:System.Decimal"/> значение.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.op_Addition(StockSharp.BusinessEntities.Currency,StockSharp.BusinessEntities.Currency)">
+            <summary>
+            Сложить два объекта <see cref="T:StockSharp.BusinessEntities.Currency"/>.
+            </summary>
+            <remarks>
+            Величины должны иметь одинаковый <see cref="P:StockSharp.BusinessEntities.Currency.Type"/>.
+            </remarks>
+            <param name="c1">Первый объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <param name="c2">Второй объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <returns>Результат сложения.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.op_Subtraction(StockSharp.BusinessEntities.Currency,StockSharp.BusinessEntities.Currency)">
+            <summary>
+            Вычесть одну величину из другой величины.
+            </summary>
+            <param name="c1">Первый объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <param name="c2">Второй объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <returns>Результат вычитания.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.op_Multiply(StockSharp.BusinessEntities.Currency,StockSharp.BusinessEntities.Currency)">
+            <summary>
+            Умножить одну величину на другую.
+            </summary>
+            <param name="c1">Первый объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <param name="c2">Второй объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <returns>Результат умножения.</returns>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.Currency.op_Division(StockSharp.BusinessEntities.Currency,StockSharp.BusinessEntities.Currency)">
+            <summary>
+            Поделить одну величину на другую.
+            </summary>
+            <param name="c1">Первый объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <param name="c2">Второй объект <see cref="T:StockSharp.BusinessEntities.Currency"/>.</param>
+            <returns>Результат деления.</returns>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Currency.Type">
+            <summary>
+            Тип валюты. По умолчанию, стоит значение <see cref="F:StockSharp.BusinessEntities.CurrencyTypes.RUB"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.Currency.Value">
+            <summary>
+            Значение в единицах <see cref="T:StockSharp.BusinessEntities.CurrencyTypes"/>.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.SecurityStates">
+            <summary>
+            Состояния инструмента.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.SecurityStates.Trading">
+            <summary>
+            Торгуется.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.SecurityStates.Stoped">
+            <summary>
+            Торги приостановлены.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.SecurityTypes">
+            <summary>
+            Типы инструментов.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.SecurityTypes.Equity">
+            <summary>
+            Ценная бумага.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.SecurityTypes.Future">
+            <summary>
+            Фьючерс.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.SecurityTypes.Option">
+            <summary>
+            Опцион.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.OptionTypes">
+            <summary>
+            Типы опционов.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OptionTypes.Call">
+            <summary>
+            Кол.
+            </summary>
+        </member>
+        <member name="F:StockSharp.BusinessEntities.OptionTypes.Put">
+            <summary>
+            Пут.
+            </summary>
+        </member>
+        <member name="T:StockSharp.BusinessEntities.MyTrade">
+            <summary>
+            Собственная сделка.
+            </summary>
+        </member>
+        <member name="M:StockSharp.BusinessEntities.MyTrade.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.BusinessEntities.MyTrade"/>.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MyTrade.Order">
+            <summary>
+            Заявка, по которой совершена сделка.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MyTrade.Trade">
+            <summary>
+            Информация о сделке.
+            </summary>
+        </member>
+        <member name="P:StockSharp.BusinessEntities.MyTrade.ExtensionInfo">
+            <summary>
+            Расширенная информация по собственной сделке.
+            </summary>
+            <remarks>
+            Необходима в случае хранения в программе дополнительной информации, ассоциированной с собственной сделкой.
+            Например, размер комиссии, валюту, тип сделки.
+            </remarks>
+        </member>
+    </members>
+</doc>

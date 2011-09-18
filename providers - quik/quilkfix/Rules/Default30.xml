@@ -1,0 +1,336 @@
+<Rules>
+
+	<!-- Standard header -->
+	<Rule MessType="!">
+		<Translate>
+			<Tag ID="34"/>
+			<Tag ID="35"/>
+			<Tag ID="43"/>
+			<Tag ID="49"/>
+			<Tag ID="52"/>
+			<Tag ID="56"/>
+			<Tag ID="115"/>
+			<Tag ID="122"/>
+			<Tag ID="128"/>
+			<Tag ID="1128"/>
+		</Translate>
+	</Rule>
+	
+	<!-- Heartbeat -->
+	<Rule MessType="0"> 
+		<Translate>
+			<Tag ID="112"/>
+		</Translate>
+	</Rule>
+
+	<!-- Test -->
+	<Rule MessType="1">
+		<Translate>
+			<Tag ID="112"/>
+		</Translate>
+	</Rule>
+
+	<!-- Logon -->
+	<Rule MessType="A">
+		<Translate>
+			<Tag ID="98"/>
+			<Tag ID="108"/>
+			<Tag ID="1137"/>
+		</Translate>
+	</Rule>
+
+	<!-- Logout -->
+	<Rule MessType="5">
+		<Translate>
+			<Tag ID="58"/>
+		</Translate>
+	</Rule>
+
+	<!-- Resend -->
+	<Rule MessType="2">
+		<Translate>
+			<Tag ID="7"/>
+			<Tag ID="16"/>
+		</Translate>
+	</Rule>
+
+	<!-- Security Definition -->
+	<Rule MessType="d">
+		<Translate>
+			<!-- Header -->
+			<Tag ID="146"/>
+			<Tag ID="320"/>
+			<Tag ID="322"/>
+			<Tag ID="323"/>
+			<Tag ID="393"/>
+			<!-- Security item -->
+			<Tag ID="305"/>
+			<Tag ID="307"/>
+			<Tag ID="308"/>
+			<Tag ID="309"/>
+			<Tag ID="310"/>
+			<Tag ID="311"/>
+			<Tag ID="312"/>
+			<Tag ID="313"/>
+			<Tag ID="315"/>
+			<Tag ID="316"/>
+			<Tag ID="318"/>
+		</Translate>
+		<Move>
+			<Tag S="393" T="711"/>
+		</Move>
+	</Rule>
+
+	<!-- Market Data Full Refresh-->
+	<Rule MessType="W">
+		<Translate>
+			<!-- Header -->
+			<Tag ID="22"/>
+			<Tag ID="48"/>
+			<Tag ID="55"/>
+			<Tag ID="262"/>
+			<Tag ID="268"/>
+			<!-- MDEntry -->
+			<Tag ID="269"/>
+			<Tag ID="270"/>
+			<Tag ID="271"/>
+			<Tag ID="273"/>
+		</Translate>
+	</Rule>
+
+	<!-- Market Data Incremental Refresh-->
+	<Rule MessType="X">
+		<Translate>
+			<!-- Header -->
+			<Tag ID="262"/>
+			<Tag ID="268"/>
+			<!-- MDEntry -->
+			<Tag ID="22"/>
+			<Tag ID="48"/>
+			<Tag ID="55"/>
+			<Tag ID="269"/>
+			<Tag ID="270"/>
+			<Tag ID="271"/>
+			<Tag ID="273"/>
+			<Tag ID="279"/>
+		</Translate>
+	</Rule>
+
+	<!-- Market Data Request Reject-->
+	<Rule MessType="Y">
+		<Translate>
+			<Tag ID="58"/>
+			<Tag ID="262"/>
+			<Tag ID="281"/>
+		</Translate>
+	</Rule>
+
+	<!-- Execution Report -->
+	<Rule MessType="8">
+		<Translate>
+			<Tag ID="1"/>
+			<Tag ID="6"/>
+			<Tag ID="11"/>
+			<Tag ID="12"/>
+			<Tag ID="13"/>
+			<Tag ID="14"/>
+			<Tag ID="15"/>
+			<Tag ID="17"/>
+			<Tag ID="18"/>
+			<Tag ID="19"/>
+			<Tag ID="20"/>
+			<Tag ID="21"/>
+			<Tag ID="22"/>
+			<Tag ID="31"/>
+			<Tag ID="32"/>
+			<Tag ID="37"/>
+			<Tag ID="38"/>
+			<Tag ID="39"/>
+			<Tag ID="40"/>
+			<Tag ID="41"/>
+			<Tag ID="44"/>
+			<Tag ID="48"/>
+			<Tag ID="50"/>
+			<Tag ID="54"/>
+			<Tag ID="55"/>
+			<Tag ID="57"/>
+			<Tag ID="58"/>
+			<Tag ID="59"/>
+			<Tag ID="60"/>
+			<Tag ID="63"/>
+			<Tag ID="64"/>
+			<Tag ID="75"/>
+			<Tag ID="76"/>
+			<Tag ID="103"/>
+			<Tag ID="109"/>
+			<Tag ID="116"/>
+			<Tag ID="120"/>
+			<Tag ID="129"/>
+			<Tag ID="150"/>
+			<Tag ID="151"/>
+			<Tag ID="192"/>
+			<Tag ID="193"/>
+			<Tag ID="194"/>
+			<Tag ID="200"/>
+			<Tag ID="205"/>
+			<Tag ID="207"/>
+			<Tag ID="375"/>
+			<Tag ID="376"/>
+			<Tag ID="528"/>
+			<Tag ID="640"/>
+			<Tag ID="790"/>
+			<Tag ID="5001"/>
+			<Tag ID="5002"/>
+			<Tag ID="5003"/>
+			<Tag ID="5004"/>
+			<Tag ID="5005"/>
+			<Tag ID="5006"/>
+			<Tag ID="5007"/>
+			<Tag ID="5008"/>
+			<Tag ID="5009"/>
+			<Tag ID="5010"/>
+			<Tag ID="5011"/>
+			<Tag ID="5012"/>
+			<Tag ID="5013"/>
+			<Tag ID="5014"/>
+			<Tag ID="5015"/>
+			<Tag ID="5016"/>
+			<Tag ID="5017"/>
+			<Tag ID="5018"/>
+			<Tag ID="5019"/>
+			<Tag ID="5020"/>
+			<Tag ID="5021"/>
+			<Tag ID="5022"/>
+			<Tag ID="6251"/>
+        		<Tag ID="6254"/>
+        		<Tag ID="6255"/>
+        		<Tag ID="6256"/>
+        		<Tag ID="6257"/>
+        		<Tag ID="6258"/>
+			<Tag ID="6261"/>
+			<Tag ID="6264"/>
+        		<Tag ID="6265"/>
+			<Tag ID="6271"/>
+			<Tag ID="6272"/>
+			<Tag ID="6273"/>
+			<Tag ID="6274"/>
+			<Tag ID="6275"/>
+        		<Tag ID="6276"/>
+        		<Tag ID="6277"/>
+			<Tag ID="6278"/>
+			<Tag ID="6283"/>
+			<Tag ID="6284"/>
+			<Tag ID="6285"/>
+			<Tag ID="9906"/>
+			<Tag ID="10039"/>
+		</Translate>
+	</Rule>
+
+	<!-- Order Cancel Reject -->
+	<Rule MessType="9">
+		<Translate>
+			<Tag ID="11"/>
+			<Tag ID="37"/>
+			<Tag ID="39"/>
+			<Tag ID="41"/>
+			<Tag ID="58"/>
+			<Tag ID="102"/>
+			<Tag ID="109"/>
+			<Tag ID="434"/>
+		</Translate>
+	</Rule>
+
+	<!-- Reject -->
+	<Rule MessType="3">
+		<Translate>
+			<Tag ID="45"/>
+			<Tag ID="58"/>
+			<Tag ID="371"/>
+			<Tag ID="373"/>
+		</Translate>
+	</Rule>
+
+	<!-- Sequence Reset -->
+	<Rule MessType="4">
+		<Translate>
+			<Tag ID="36"/>
+			<Tag ID="123"/>
+		</Translate>
+	</Rule>
+
+	<!-- Security Status -->
+	<Rule MessType="f">
+		<Translate>
+			<Tag ID="324"/>
+			<Tag ID="325"/>
+
+			<Tag ID="15"/>
+			<Tag ID="22"/>
+			<Tag ID="48"/>
+			<Tag ID="55"/>
+			<Tag ID="167"/>
+			<Tag ID="200"/>
+			<Tag ID="201"/>
+			<Tag ID="202"/>
+			<Tag ID="205"/>
+			<Tag ID="207"/>
+
+			<Tag ID="31"/>
+			<Tag ID="326"/>
+			<Tag ID="332"/>
+			<Tag ID="333"/>
+		</Translate>
+	</Rule>
+
+	<!-- User Response -->
+	<Rule MessType="BF">
+		<Translate>
+			<Tag ID="553"/>
+			<Tag ID="923"/>
+			<Tag ID="926"/>
+			<Tag ID="927"/>
+		</Translate>
+	</Rule>
+
+	<!-- Trade Capture Report -->
+	<Rule MessType="AE">
+		<Translate>
+			<Tag ID="11"/>
+			<Tag ID="17"/>
+			<Tag ID="22"/>
+			<Tag ID="31"/>
+			<Tag ID="32"/>
+			<Tag ID="37"/>
+			<Tag ID="48"/>
+			<Tag ID="54"/>
+			<Tag ID="55"/>
+			<Tag ID="60"/>
+			<Tag ID="64"/>
+			<Tag ID="75"/>
+			<Tag ID="447"/>
+			<Tag ID="448"/>
+			<Tag ID="452"/>
+			<Tag ID="453"/>
+			<Tag ID="552"/>
+			<Tag ID="568"/>
+			<Tag ID="573"/>
+			<Tag ID="912"/>
+			<Tag ID="1003"/>
+			<Tag ID="1057"/>
+		</Translate>
+	</Rule>
+
+	<!-- Trade Capture Report Ack -->
+	<Rule MessType="AR">
+		<Translate>
+			<Tag ID="58"/>
+			<Tag ID="568"/>
+			<Tag ID="569"/>
+			<Tag ID="748"/>
+			<Tag ID="749"/>
+			<Tag ID="750"/>
+		</Translate>
+	</Rule>
+
+	
+</Rules>

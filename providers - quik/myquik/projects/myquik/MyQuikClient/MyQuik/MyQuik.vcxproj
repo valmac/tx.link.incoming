@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{303CAC46-CB39-4CB4-AAB8-245E2DC002ED}</ProjectGuid>
+    <RootNamespace>MyQuik</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LIB_ATL)\include;$(LIB_WTL)\Include;$(MYDEVELOP)\cpp\lib;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LIB_ATL)\include;$(LIB_WTL)\Include;$(MYDEVELOP)\cpp\lib;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)MyQuik.tlb</TypeLibraryName>
+      <HeaderFileName>MyQuik.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>MyQuik_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>MyQuik_p.c</ProxyFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\WTL81\Include;$(MYDEVELOP)\cpp\lib;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(WTL_LIB)\Include;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Version.lib;UxTheme.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AssemblyDebug>true</AssemblyDebug>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)MyQuik.tlb</TypeLibraryName>
+      <HeaderFileName>MyQuik.h</HeaderFileName>
+      <DllDataFileName>
+      </DllDataFileName>
+      <InterfaceIdentifierFileName>MyQuik_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>MyQuik_p.c</ProxyFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/EHsc %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\WTL81\Include;$(MYDEVELOP)\cpp\lib;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(WTL_LIB)\Include;$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Version.lib;UxTheme.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\ctrl.cpp" />
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\str.cpp" />
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\window.cpp" />
+    <ClCompile Include="accounts.cpp" />
+    <ClCompile Include="actions.cpp" />
+    <ClCompile Include="myctrlx.cpp" />
+    <ClCompile Include="dlg.cpp" />
+    <ClCompile Include="DlgAbout.cpp" />
+    <ClCompile Include="DlgGlass.cpp" />
+    <ClCompile Include="DlgHistory.cpp" />
+    <ClCompile Include="DlgLog.cpp" />
+    <ClCompile Include="DlgProperties.cpp" />
+    <ClCompile Include="DlgStop2.cpp" />
+    <ClCompile Include="history.cpp" />
+    <ClCompile Include="mcapture.cpp" />
+    <ClCompile Include="myclient.cpp" />
+    <ClCompile Include="MyQuik.cpp" />
+    <ClCompile Include="MyTradeListCtrl.cpp" />
+    <ClCompile Include="paint.cpp" />
+    <ClCompile Include="PropertyPageCommon.cpp" />
+    <ClCompile Include="PropertyPageGlass.cpp" />
+    <ClCompile Include="PropertyPageInstruments.cpp" />
+    <ClCompile Include="PropertyPageKeys.cpp" />
+    <ClCompile Include="PropertyPageListOfDeals.cpp" />
+    <ClCompile Include="PropertyPageOSD.cpp" />
+    <ClCompile Include="PropertyPageTrading.cpp" />
+    <ClCompile Include="PropertyPageView.cpp" />
+    <ClCompile Include="PropertySheetSettings.cpp" />
+    <ClCompile Include="reg.cpp" />
+    <ClCompile Include="shortcuts.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="strings.cpp" />
+    <ClCompile Include="tables.cpp" />
+    <ClCompile Include="trade.cpp" />
+    <ClCompile Include="TradeDlg.cpp" />
+    <ClCompile Include="TradeDlg2.cpp" />
+    <ClCompile Include="trans2quik.cpp" />
+    <ClCompile Include="transactions.cpp" />
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\color.cpp" />
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\file.cpp" />
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\mydde.cpp" />
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\thread.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\ctrl.h" />
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\str.h" />
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\xltable.h" />
+    <ClInclude Include="accounts.h" />
+    <ClInclude Include="actions.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="myctrlx.h" />
+    <ClInclude Include="dlg.h" />
+    <ClInclude Include="DlgAbout.h" />
+    <ClInclude Include="DlgGlass.h" />
+    <ClInclude Include="DlgHistory.h" />
+    <ClInclude Include="DlgLog.h" />
+    <ClInclude Include="DlgProperties.h" />
+    <ClInclude Include="DlgStop2.h" />
+    <ClInclude Include="history.h" />
+    <ClInclude Include="mcapture.h" />
+    <ClInclude Include="myclient.h" />
+    <ClInclude Include="MyQuik.h" />
+    <ClInclude Include="MyTradeListCtrl.h" />
+    <ClInclude Include="paint.h" />
+    <ClInclude Include="PropertyPageCommon.h" />
+    <ClInclude Include="PropertyPageGlass.h" />
+    <ClInclude Include="PropertyPageInstruments.h" />
+    <ClInclude Include="PropertyPageKeys.h" />
+    <ClInclude Include="PropertyPageListOfDeals.h" />
+    <ClInclude Include="PropertyPageOSD.h" />
+    <ClInclude Include="PropertyPageTrading.h" />
+    <ClInclude Include="PropertyPageView.h" />
+    <ClInclude Include="PropertySheetSettings.h" />
+    <ClInclude Include="reg.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="shortcuts.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="strings.h" />
+    <ClInclude Include="tables.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="trade.h" />
+    <ClInclude Include="TradeDlg.h" />
+    <ClInclude Include="TradeDlg2.h" />
+    <ClInclude Include="trans2quik.h" />
+    <ClInclude Include="trans2quik_api.h" />
+    <ClInclude Include="transactions.h" />
+    <ClInclude Include="types.h" />
+    <ClInclude Include="um.h" />
+    <ClInclude Include="version.h" />
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\color.h" />
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\file.h" />
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\mydde.h" />
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\std.h" />
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\thread.h" />
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\active_buy.ico" />
+    <None Include="res\active_sell.ico" />
+    <None Include="res\active_stop_buy.ico" />
+    <None Include="res\active_stop_sell.ico" />
+    <None Include="res\arrow_down.ico" />
+    <None Include="res\arrow_up.ico" />
+    <None Include="res\buy.ico" />
+    <None Include="res\buy_sell.ico" />
+    <None Include="res\buy_small.ico" />
+    <None Include="res\buy_small_gray.ico" />
+    <None Include="res\cancel.ico" />
+    <None Include="res\cancel_buy.ico" />
+    <None Include="res\cancel_sell.ico" />
+    <None Include="res\cancel_stop.ico" />
+    <None Include="res\cancel_stop_buy.ico" />
+    <None Include="res\cancel_stop_sell.ico" />
+    <None Include="res\delete.ico" />
+    <None Include="res\icon_buy_sell_small.ico" />
+    <None Include="res\icon_copy_16x16.ico" />
+    <None Include="res\icon_edit_16x16.ico" />
+    <None Include="res\icon_move_down_16x16.ico" />
+    <None Include="res\icon_move_up_16x16.ico" />
+    <None Include="res\icon_new_16x16.ico" />
+    <None Include="res\icon_output_16x16.ico" />
+    <None Include="res\icon_time_list_16x16.ico" />
+    <None Include="res\icon_tools_16x16_z.ico" />
+    <None Include="res\MyQuik.ico" />
+    <None Include="res\select.ico" />
+    <None Include="res\sell.ico" />
+    <None Include="res\sell_small.ico" />
+    <None Include="res\sell_small_gray.ico" />
+    <None Include="res\sent.ico" />
+    <None Include="res\stop.ico" />
+    <None Include="res\stop_buy.ico" />
+    <None Include="res\stop_buy_small.ico" />
+    <None Include="res\stop_sell.ico" />
+    <None Include="res\stop_sell_small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MyQuik.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<Description>
+	<Name>
+		<Value>Iceberg</Value>
+	</Name>
+	<Transaction name="NEW_ORDER" info="43">
+		<Fields>
+		<!-- For the fiels default logic exists -->
+			<Field id="tradeaccount" info="3"/>
+			<Field id="firm" info="63"/>
+			<Field id="side" info="4"/>
+			<Field id="class" info="8"/>
+			<Field id="security" info="9"/>
+			<Field id="mktlimit" info="52"/>
+			<Field id="price" info="12"/>
+			<Field id="qty" info="13"/>
+			<Field id="clientcode" info="40"/>
+			<Field id="memo" info="42"/>
+		<!-- Specific fields -->
+			<Field id="displayedqty" behavior="qty" info="54" fixtag="6251"/>
+			<Field id="cancelflag" info="55" fixtag="6271">
+				<Value fix="0" quik="N"/>
+				<Value fix="1" quik="Y"/>
+			</Field>
+			<Field id="aggressive" info="56" fixtag="6261">
+				<Value fix="0" quik="N"/>
+				<Value fix="1" quik="C"/>
+				<Value fix="2" quik="B"/>
+			</Field>
+		</Fields>
+	</Transaction>
+	<AlgoOrder>
+		<Fields>
+		<!-- Common order fields -->
+			<Field db_name="order_num" id="ordernum"/>
+			<Field db_name="order_date" id="orderdate"/>
+			<Field db_name="order_time" id="ordertime"/>
+			<Field db_name="kill_time" id="killtime"/>
+			<Field db_name="class_code" id="classcode"/>
+			<Field db_name="sec_code" id="seccode"/>
+			<Field db_name="buysell" id="side"/>
+			<Field db_name="mktlimit" id="mktlimit"/>
+			<Field db_name="account" id="tradeaccount"/>
+			<Field db_name="firmid" id="firm"/>
+			<Field db_name="price" id="price"/>
+			<Field db_name="qty" id="qty"/>
+			<Field db_name="client" id="clientcode"/>
+			<Field db_name="memo" id="memo"/>
+			<Field db_name="status" id="status"/>
+			<Field db_name="uid" id="uid"/>
+		<!-- Specific fields -->
+			<!-- Need to translate -->
+			<Field db_name="displayedqty" behavior="qty" id="displayedqty" fixtag="6251"/>
+			<Field db_name="cancel_flag" id="cancelflag" fixtag="6271"/>
+			<Field db_name="aggressive" id="aggressive" fixtag="6261"/>
+			<!-- Not need to translate -->
+			<Field db_name="class_name" id="classname"/>
+			<Field db_name="sec_name" id="secname"/>
+			<Field db_name="sec_fullname" id="secfullname"/>
+			<Field db_name="algo_firm_code" id="algofirmcode"/>
+			<Field db_name="balance" id="balanceqty"/>
+			<Field db_name="value" id="value"/>
+			<Field db_name="vwap" id="avrprice"/>
+			<Field db_name="settle_code" id="settlecode"/>
+		</Fields>
+	</AlgoOrder>
+</Description>

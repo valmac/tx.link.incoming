@@ -1,0 +1,1208 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StockSharp.Smart</name>
+    </assembly>
+    <members>
+        <member name="T:StockSharp.Smart.SmartStopCondition">
+            <summary>
+            Условие для формирования стоп-заявок, специфичных для <see cref="T:StockSharp.Smart.SmartTrader"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartStopCondition.#ctor">
+            <summary>
+            Создать <see cref="T:StockSharp.Smart.SmartStopCondition"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartStopCondition.Clone">
+            <summary>
+            Создать копию условия (копирование параметров условия).
+            </summary>
+            <returns>Копия условия.</returns>
+        </member>
+        <member name="P:StockSharp.Smart.SmartStopCondition.IsOneDay">
+            <summary>
+            Срок действия условной заявки.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartStopCondition.StopPrice">
+            <summary>
+            Стоп-цена заявки.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Smart.SmartComWrapper">
+            <summary>
+            Обертка над SmartCOM API.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.Connect">
+            <summary>
+            Подключиться к SmartCOM.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.Disconnect">
+            <summary>
+            Отключиться от SmartCOM.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.StartExport">
+            <summary>
+            Запустить экспорт данных.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.RegisterSecurity(System.String)">
+            <summary>
+            Начать получать новую информацию (например, <see cref="P:StockSharp.BusinessEntities.Security.LastTrade"/> или <see cref="P:StockSharp.BusinessEntities.Security.BestBid"/>) по инструменту.
+            </summary>
+            <param name="securityId">Идентификатор инструмента, по которому необходимо начать получать новую информацию.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.UnRegisterSecurity(System.String)">
+            <summary>
+            Остановить получение новой информации.
+            </summary>
+            <param name="securityId">Идентификатор инструмента, по которому необходимо остановить получение новой информации.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.RegisterOrder(System.String,System.String,StClientLib.StOrder_Action,StClientLib.StOrder_Type,System.Boolean,System.Double,System.Int32,System.Double,System.Int32)">
+            <summary>
+            Зарегистрировать заявку.
+            </summary>
+            <param name="portfolioName">Номер портфеля.</param>
+            <param name="securityId">Идентификатор инструмента.</param>
+            <param name="action">Направление действия.</param>
+            <param name="type">Тип заявки.</param>
+            <param name="isOneDay">Время действия.</param>
+            <param name="price">Цена.</param>
+            <param name="volume">Объем.</param>
+            <param name="stopPrice">Стоп цена (если регистрируется стоп-заявка).</param>
+            <param name="transactionId">Уникальный номер транзакции.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.ReRegisterOrder(System.String,System.Double,System.String)">
+            <summary>
+            Перерегистрировать заявку.
+            </summary>
+            <param name="portfolioName">Номер портфеля.</param>
+            <param name="newPrice">Новая цена.</param>
+            <param name="smartId">SmartCOM идентификатор заявки.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.CancelOrder(System.String,System.String,System.String)">
+            <summary>
+            Отменить заявку.
+            </summary>
+            <param name="portfolioName">Номер портфеля.</param>
+            <param name="securityId">Идентификатор инструмента.</param>
+            <param name="smartId">SmartCOM идентификатор заявки.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.CancelAllOrders">
+            <summary>
+            Отменить все активные заявки.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.RegisterQuotes(System.String)">
+            <summary>
+            Начать получать котировки (стакан) по инструменту.
+            Значение котировок можно получить через событие <see cref="E:StockSharp.Smart.SmartComWrapper.QuoteChanged"/>.
+            </summary>
+            <param name="securityId">Идентификатор инструмента, по которому необходимо начать получать котировки.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.UnRegisterQuotes(System.String)">
+            <summary>
+            Остановить получение котировок по инструменту.
+            </summary>
+            <param name="securityId">Идентификатор инструмента, по которому необходимо остановить получение котировок.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.RegisterTrades(System.String)">
+            <summary>
+            Начать получать сделки (тиковые данные) по инструменту. Новые сделки будут приходить через событие <see cref="E:StockSharp.Smart.SmartComWrapper.NewTrade"/>.
+            </summary>
+            <param name="securityId">Идентификатор инструмента, по которому необходимо начать получать сделки.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.UnRegisterTrades(System.String)">
+            <summary>
+            Остановить получение сделок (тиковые данные) по инструменту.
+            </summary>
+            <param name="securityId">Идентификатор инструмента, по которому необходимо остановить получение сделок.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.RegisterPortfolio(System.String)">
+            <summary>
+            Начать получать новую информацию по портфелю.
+            </summary>
+            <param name="portfolioName">Номер портфеля, по которому необходимо начать получать новую информацию.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.UnRegisterPortfolio(System.String)">
+            <summary>
+            Остановить получение новой информации по портфелю.
+            </summary>
+            <param name="portfolioName">Номер портфеля, по которому необходимо остановить получение новой информации.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.RegisterHistoryTrades(System.String,System.DateTime,System.Int32)">
+            <summary>
+            Начать получать исторические тиковые сделки от сервера SmartCOM через событие <see cref="E:StockSharp.Smart.SmartComWrapper.NewHistoryTrade"/>.
+            </summary>
+            <param name="securityId">Идентификатор инструмента, для которого необходимо начать получать исторические сделки.</param>
+            <param name="from">Временная точка отсчета.</param>
+            <param name="count">Количество сделок.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.RegisterHistoryBars(System.String,StockSharp.Smart.SmartTimeFrames,System.DateTime,System.Int32)">
+            <summary>
+            Начать получать исторические временные свечки от сервера SmartCOM через событие <see cref="E:StockSharp.Smart.SmartComWrapper.NewBar"/>.
+            </summary>
+            <param name="securityId">Идентификатор инструмента, для которого необходимо начать получать исторические свечки.</param>
+            <param name="timeFrame">Тайм-фрейм.</param>
+            <param name="from">Временная точка отсчета.</param>
+            <param name="count">Количество свечек.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartComWrapper.DisposeManaged">
+            <summary>
+            Освободить занятые ресурсы. В частности, отключиться от сервера SmartCOM.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartComWrapper.IsConnected">
+            <summary>
+            Доступно ли соединение.
+            </summary>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.NewSecurity">
+            <summary>
+            Событие о появлении инструмента.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Номер инструмента в справочнике.</description>
+            </item>
+            <item>
+            <description>Всего инструментов в справочнике.</description>
+            </item>
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Краткое наименование.</description>
+            </item>
+            <item>
+            <description>Полное наименование.</description>
+            </item>
+            <item>
+            <description>Код типа из справочника SmartTrade.</description>
+            </item>
+            <item>
+            <description>Точность цены.</description>
+            </item>
+            <item>
+            <description>Размер лота ценных бумаг.</description>
+            </item>
+            <item>
+            <description>Цена минимального шага.</description>
+            </item>
+            <item>
+            <description>Минимальный шаг цены.</description>
+            </item>
+            <item>
+            <description>ISIN.</description>
+            </item>
+            <item>
+            <description>Наименование площадки.</description>
+            </item>
+            <item>
+            <description>Дата экспирации.</description>
+            </item>
+            <item>
+            <description>Дней до экспирации.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.SecurityChanged">
+            <summary>
+            Событие об изменении инструмента.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Информация о последней сделке.</description>
+            </item>
+            <item>
+            <description>Цена первой сделки в текущей сессии.</description>
+            </item>
+            <item>
+            <description>Максимальная цена сделки в текущей сессии.</description>
+            </item>
+            <item>
+            <description>Минимальная цена сделки в текущей сессии.</description>
+            </item>
+            <item>
+            <description>Цена последней сделки предыдущей торговой сессии.</description>
+            </item>
+            <item>
+            <description>Объём по ЦБ за текущую торговую сессию.</description>
+            </item>
+            <item>
+            <description>Информация о спросе.</description>
+            </item>
+            <item>
+            <description>Информация о предложении.</description>
+            </item>
+            <item>
+            <description>Совокупная стоимость открытых позиций.</description>
+            </item>
+            <item>
+            <description>Гарантийное обеспечение (фьючерсы).</description>
+            </item>
+            <item>
+            <description>Гарантийное обеспечение продажи опционов и по синтетическим позициям (опционы).</description>
+            </item>
+            <item>
+            <description>Лимит цены.</description>
+            </item>
+            <item>
+            <description>Статус.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.NewPortfolio">
+            <summary>
+            Событие о появлении портфеля.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Номер счета в списке.</description>
+            </item>
+            <item>
+            <description>Всего счетов в списке.</description>
+            </item>
+            <item>
+            <description>Наименование портфеля.</description>
+            </item>
+            <item>
+            <description>Площадка доступная для портфеля.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.PortfolioChanged">
+            <summary>
+            Событие об изменении портфеля.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Номер торгового счёта на торговой площадке.</description>
+            </item>
+            <item>
+            <description>Сумма доступных наличных средств на счёте.</description>
+            </item>
+            <item>
+            <description>Плечо для маржинальной торговли.</description>
+            </item>
+            <item>
+            <description>Сумма биржевой комиссии за торговый день.</description>
+            </item>
+            <item>
+            <description>Сальдо торгового дня.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.PositionChanged">
+            <summary>
+            Событие об изменении позиции.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Номер торгового счёта на торговой площадке.</description>
+            </item>
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Средневзвешенная цена.</description>
+            </item>
+            <item>
+            <description>Объём сделки, если положительный Long, отрицательный в случае Short.</description>
+            </item>
+            <item>
+            <description>Количество ЦБ с учетом выставленных заявок.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.NewMyTrade">
+            <summary>
+            Событие о появлении собственной сделки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Номер торгового счёта на торговой площадке.</description>
+            </item>
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Номер заявки на сервере котировок.</description>
+            </item>
+            <item>
+            <description>Цена сделки.</description>
+            </item>
+            <item>
+            <description>Объём сделки.</description>
+            </item>
+            <item>
+            <description>Время сделки.</description>
+            </item>
+            <item>
+            <description>Id сделки на рынке.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.NewTrade">
+            <summary>
+            Событие о появлении тиковой сделки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Время сделки.</description>
+            </item>
+            <item>
+            <description>Цена сделки.</description>
+            </item>
+            <item>
+            <description>Объём сделки.</description>
+            </item>
+            <item>
+            <description>Id сделки на рынке.</description>
+            </item>
+            <item>
+            <description>Направление сделки.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.NewHistoryTrade">
+            <summary>
+            Событие о появлении исторической тиковой сделки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Номер сделки в списке.</description>
+            </item>
+            <item>
+            <description>Всего сделок в списке.</description>
+            </item>
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Время сделки.</description>
+            </item>
+            <item>
+            <description>Цена сделки.</description>
+            </item>
+            <item>
+            <description>Объём сделки.</description>
+            </item>
+            <item>
+            <description>Id сделки на рынке.</description>
+            </item>
+            <item>
+            <description>Направление сделки.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.NewBar">
+            <summary>
+            Событие о появлении исторической временной свечки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Номер бара в списке.</description>
+            </item>
+            <item>
+            <description>Всего баров в списке.</description>
+            </item>
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Интервал времени.</description>
+            </item>
+            <item>
+            <description>Дата и время интервала.</description>
+            </item>
+            <item>
+            <description>Цена первой сделки после открытия в интервале.</description>
+            </item>
+            <item>
+            <description>Максимальная цена сделки в интервале.</description>
+            </item>
+            <item>
+            <description>Минимальная цена сделки в интервале.</description>
+            </item>
+            <item>
+            <description>Цена последней сделки в интервале.</description>
+            </item>
+            <item>
+            <description>Объём сделок в интервале.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.NewOrder">
+            <summary>
+            Событие о появлении новой заявки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Уникальный номер заявки.</description>
+            </item>
+            <item>
+            <description>Id заявки на сервере котировок.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.OrderChanged">
+            <summary>
+            Событие об изменении заявки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Номер торгового счёта на торговой площадке.</description>
+            </item>
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Состояние заявки.</description>
+            </item>
+            <item>
+            <description>Вид торговой операции.</description>
+            </item>
+            <item>
+            <description>Тип заявки.</description>
+            </item>
+            <item>
+            <description>Срок действия приказа. True - один день, false - до отмены.</description>
+            </item>
+            <item>
+            <description>Цена Лимит для заявок типа Лимит и Стоп-Лимит.</description>
+            </item>
+            <item>
+            <description>Объем заявки.</description>
+            </item>
+            <item>
+            <description>Цена СТОП для заявок типа Стоп и Стоп-Лимит.</description>
+            </item>
+            <item>
+            <description>Объем, оставшийся в заявке.</description>
+            </item>
+            <item>
+            <description>Время последнего изменения заявки.</description>
+            </item>
+            <item>
+            <description>Id приказа на сервере котировок.</description>
+            </item>
+            <item>
+            <description>Номер приказа на сервере котировок.</description>
+            </item>
+            <item>
+            <description>Системный статус.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.OrderFailed">
+            <summary>
+            Событие об ошибке при регистрации заявки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Уникальный номер заявки.</description>
+            </item>
+            <item>
+            <description>Id заявки на сервере котировок.</description>
+            </item>
+            <item>
+            <description>Причина.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.OrderReRegistered">
+            <summary>
+            Событие об успешной перерегистрации заявки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Id заявки на сервере котировок.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.OrderReRegisterFailed">
+            <summary>
+            Событие об ошибке при перерегистрации заявки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Id заявки на сервере котировок.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.OrderCancelled">
+            <summary>
+            Событие об успешной отмене заявки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Id заявки на сервере котировок.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.OrderCancelFailed">
+            <summary>
+            Событие об ошибке при отмене заявки.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Id заявки на сервере котировок.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.QuoteChanged">
+            <summary>
+            Событие изменения стакана.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Код ЦБ из таблицы котировок SmartTrade.</description>
+            </item>
+            <item>
+            <description>Порядковый номер строки в очереди заявок.</description>
+            </item>
+            <item>
+            <description>Общее количество строк в очереди заявок.</description>
+            </item>
+            <item>
+            <description>Цена на покупку.</description>
+            </item>
+            <item>
+            <description>Объем ценных бумаг по цене на покупку.</description>
+            </item>
+            <item>
+            <description>Цена на продажу.</description>
+            </item>
+            <item>
+            <description>Объем ценных бумаг по цене на продажу.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.Connected">
+            <summary>
+            Событие об успешном подсоединении к серверу SmartCOM.
+            </summary>
+        </member>
+        <member name="E:StockSharp.Smart.SmartComWrapper.Disconnected">
+            <summary>
+            Событие об успешном отсоединении от сервера SmartCOM или о разрыве соединения.
+            </summary>
+            <remarks>
+            Передаваемые параметры:
+            <list type="number">
+            <item>
+            <description>Причина.</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="T:StockSharp.Smart.SmartAddresses">
+            <summary>
+            Адреса серверов системы SmartCOM. Описание доступно по адресу http://www.itinvest.ru/services/internet_trading/trade-servers/.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartAddresses.DefaultPort">
+            <summary>
+            Порт сервера по умолчанию, равный 8090.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartAddresses.Major">
+            <summary>
+            Основной сервер. IP адрес 82.204.220.34.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartAddresses.Minor">
+            <summary>
+            Вспомагательный сервер. IP адрес 213.247.232.238.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartAddresses.Reserv">
+            <summary>
+            Резервный сервер. IP адрес 87.118.223.109.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartAddresses.Stalker">
+            <summary>
+            Cервер сталкера. IP адрес 89.175.35.230.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartAddresses.Demo">
+            <summary>
+            Демо сервер. IP адрес 89.175.35.229.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Smart.SmartExtensionInfoHelper">
+            <summary>
+            Вспомагательный класс, который используется для доступа к специфичной SmartCOM информации через <see cref="P:StockSharp.BusinessEntities.IExtendableEntity.ExtensionInfo"/>.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityTotalBidsVolume">
+            <summary>
+            Суммарный объем по бидам.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityTotalAsksVolume">
+            <summary>
+            Суммарный объем по офферам.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityTotalVolume">
+            <summary>
+            Сумарный объем за текущую торговую сессию.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityOpenedPositionsPrice">
+            <summary>
+            Совокупная стоимость открытых позиций.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityIsin">
+            <summary>
+            Международный идентификационный код ценной бумаги.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecuritySmartId">
+            <summary>
+            Уникальный идентификатор инструмента системы SmartCOM.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityBoard">
+            <summary>
+            Название площадки инструмента в системе SmartCOM.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityDaysBeforeExpiry">
+            <summary>
+            Дней до экспирации.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityOptionsMargin">
+            <summary>
+            Гарантийное обеспечение продажи опционов.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.SecurityOptionsSyntheticMargin">
+            <summary>
+            Гарантийное обеспечение по синтетическим позициям.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.OrderSmartId">
+            <summary>
+            Уникальный идентификатор заявки системы SmartCOM.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.OrderSmartStatus">
+            <summary>
+            Состояние заявки в системе SmartCOM.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartExtensionInfoHelper.PortfolioExchange">
+            <summary>
+            Название площадки.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetTotalBidsVolume(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить сумарный объем по бидам для инструмента.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Сумарный объем по бидам.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetTotalAsksVolume(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить сумарный объем по офферам для инструмента.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Сумарный объем по офферам.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetTotalVolume(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить сумарный объем за текущую торговую сессию для инструмента.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Сумарный объем за текущую торговую сессию.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetOpenedPositionsPrice(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить совокупную стоимость открытых позиций для инструмента.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Совокупная стоимость открытых позиций.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetIsin(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить ISIN инструмента.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>ISIN.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetSmartId(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить уникальный идентификатор инструмента системы SmartCOM.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Уникальный идентификатор инструмента системы SmartCOM.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetBoard(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить название площадки инструмента в системе SmartCOM.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Название площадки инструмента в системе SmartCOM.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetDaysBeforeExpiry(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить количество дней до экспирации для инструмента.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Дней до экспирации.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetOptionsMargin(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить гарантийное обеспечение продажи опционов для инструмента.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Гарантийное обеспечение продажи опционов.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetOptionsSyntheticMargin(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Получить гарантийное обеспечение по синтетическим позициям для инструмента.
+            </summary>
+            <param name="security">Инструмент.</param>
+            <returns>Гарантийное обеспечение по синтетическим позициям.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetSmartId(StockSharp.BusinessEntities.Order)">
+            <summary>
+            Получить уникальный идентификатор заявки системы SmartCOM..
+            </summary>
+            <param name="order">Заявка.</param>
+            <returns>Уникальный идентификатор заявки системы SmartCOM.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetSmartStatus(StockSharp.BusinessEntities.Order)">
+            <summary>
+            Получить SmartCOM статус заявки.
+            </summary>
+            <param name="order">Заявка.</param>
+            <returns>SmartCOM статус заявки.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartExtensionInfoHelper.GetExchange(StockSharp.BusinessEntities.Portfolio)">
+            <summary>
+            Получить SmartCOM название биржи из портфеля.
+            </summary>
+            <param name="portfolio">Портфель.</param>
+            <returns>Название биржи.</returns>
+        </member>
+        <member name="T:StockSharp.Smart.SmartTrader">
+            <summary>
+            Реализация интерфейса <see cref="T:StockSharp.BusinessEntities.ITrader"/>, предоставляющая шлюз взаимодействия с системой SmartCOM.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.#ctor(System.String,System.String)">
+            <summary>
+            Создать шлюз с подключением по адресу <see cref="F:StockSharp.Smart.SmartAddresses.Major"/>.
+            </summary>
+            <param name="login">Логин.</param>
+            <param name="password">Пароль.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.#ctor(System.String,System.String,System.Net.IPAddress)">
+            <summary>
+            Создать шлюз с подключением к заданному IP адресу.
+            </summary>
+            <param name="login">Логин.</param>
+            <param name="password">Пароль.</param>
+            <param name="address">IP адрес сервера.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.#ctor(System.String,System.String,System.Net.IPEndPoint)">
+            <summary>
+            Создать шлюз с подключением к заданному IP адресу и порту.
+            </summary>
+            <param name="login">Логин.</param>
+            <param name="password">Пароль.</param>
+            <param name="address">IP адрес и порт сервера.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterHistoryRealTimeCandles(StockSharp.BusinessEntities.Security,StockSharp.Smart.SmartTimeFrames)">
+            <summary>
+            Начать получать непрерывно исторические тайм-фрейм свечки от сервера SmartCOM, а так же свечки реального времени.
+            </summary>
+            <remarks>
+            После окончания получения исторических свечек возвращаются свечки реального времени.
+            </remarks>
+            <param name="security">Инструмент, для которого необходимо начать получать исторические свечки.</param>
+            <param name="timeFrame">Тайм-фрейм.</param>
+            <returns>Идентификатор непрерывного получения свечек. Необходим для отмены через метод <see cref="M:StockSharp.Smart.SmartTrader.UnRegisterHistoryRealTimeCandles(StockSharp.Algo.Candles.CandleToken)"/>.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterHistoryRealTimeCandles(StockSharp.BusinessEntities.Security,StockSharp.Smart.SmartTimeFrames,System.DateTime)">
+            <summary>
+            Начать получать непрерывно исторические тайм-фрейм свечки от сервера SmartCOM, а так же свечки реального времени.
+            </summary>
+            <remarks>
+            После окончания получения исторических свечек возвращаются свечки реального времени.
+            </remarks>
+            <param name="security">Инструмент, для которого необходимо начать получать исторические свечки.</param>
+            <param name="timeFrame">Тайм-фрейм.</param>
+            <param name="from">Временная точка отсчета, с которой необходимо начать получать свечки.</param>
+            <returns>Идентификатор непрерывного получения свечек. Необходим для отмены через метод <see cref="M:StockSharp.Smart.SmartTrader.UnRegisterHistoryRealTimeCandles(StockSharp.Algo.Candles.CandleToken)"/>.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.UnRegisterHistoryRealTimeCandles(StockSharp.Algo.Candles.CandleToken)">
+            <summary>
+            Отменить получение исторических свечек, зарегистрированные через
+            <see cref="M:StockSharp.Smart.SmartTrader.RegisterHistoryRealTimeCandles(StockSharp.BusinessEntities.Security,StockSharp.Smart.SmartTimeFrames)"/>.
+            </summary>
+            <param name="token">Идентификатор группировки свечек.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterHistoryCandles(StockSharp.BusinessEntities.Security,StockSharp.Smart.SmartTimeFrames,Ecng.ComponentModel.Range{System.DateTime})">
+            <summary>
+            Начать получать исторические тайм-фрейм свечки от сервера SmartCOM.
+            </summary>
+            <param name="security">Инструмент, для которого необходимо начать получать исторические свечки.</param>
+            <param name="timeFrame">Тайм-фрейм.</param>
+            <param name="range">Диапазон времени, для которого нужно получить свечки.</param>
+            <returns>Идентификатор получения исторических свечек.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterHistoryCandles(StockSharp.BusinessEntities.Security,StockSharp.Smart.SmartTimeFrames,System.DateTime,System.Int32,StockSharp.Smart.SmartHistoryDirections)">
+            <summary>
+            Начать получать исторические тайм-фрейм свечки от сервера SmartCOM.
+            </summary>
+            <param name="security">Инструмент, для которого необходимо начать получать исторические свечки.</param>
+            <param name="timeFrame">Тайм-фрейм.</param>
+            <param name="from">Временная точка отсчета.</param>
+            <param name="count">Количество свечек.</param>
+            <param name="direction">Направление поиска относительно параметра from. Если значение равно <see cref="F:StockSharp.Smart.SmartHistoryDirections.Forward"/>,
+            то данные ищутся от from в сторону увеличения времени. Если значение равно <see cref="F:StockSharp.Smart.SmartHistoryDirections.Backward"/>, то свечки
+            ищутся до from в сторону уменьшения времени.</param>
+            <returns>Идентификатор получения исторических свечек.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.KillSmartComProcess">
+            <summary>
+            Остановить процесс SmartCom2.exe.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.OnConnect">
+            <summary>
+            Подключиться к торговой системе.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.OnDisconnect">
+            <summary>
+            Отключиться от торговой системы.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.StartExport">
+            <summary>
+            Запустить экспорт данных из торговой системы в программу (получение портфелей, инструментов, заявок и т.д.).
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.StopExport">
+            <summary>
+            Остановить экспорт данных из торговой системы в программу, запущенный через <see cref="M:StockSharp.BusinessEntities.ITrader.StartExport"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.ReStartExport">
+            <summary>
+            Перезапустить экспорт данных из торговой системы через методы <see cref="M:StockSharp.BusinessEntities.ITrader.StopExport"/> и <see cref="M:StockSharp.BusinessEntities.ITrader.StartExport"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.FormatOrder(StockSharp.BusinessEntities.Order)">
+            <summary>
+            Вернуть строку отображающую информацию о заявке для логирования.
+            </summary>
+            <param name="order">Заявка.</param>
+            <returns>Информационная строка.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.OnRegisterOrder(StockSharp.BusinessEntities.Order)">
+            <summary>
+            Зарегистрировать заявку на бирже.
+            </summary>
+            <param name="order">Заявка, содержащая информацию для регистрации.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.OnReRegisterOrder(StockSharp.BusinessEntities.Order,StockSharp.BusinessEntities.Order)">
+            <summary>
+            Перерегистрировать заявку на бирже.
+            </summary>
+            <param name="oldOrder">Старая заявка, которую нужно перерегистрировать.</param>
+            <param name="newOrder">Информация о новой заявке.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.OnCancelOrder(StockSharp.BusinessEntities.Order)">
+            <summary>
+            Отменить заявку на бирже.
+            </summary>
+            <param name="order">Заявка, которую нужно отменять.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.CancelOrders(System.Nullable{System.Boolean},StockSharp.BusinessEntities.Portfolio,System.Nullable{StockSharp.BusinessEntities.OrderDirections},System.String,StockSharp.BusinessEntities.Security)">
+            <summary>
+            Отменить группу заявок на бирже по фильтру.
+            </summary>
+            <param name="isStopOrder">True, если нужно отменить только стоп-заявки, false - если только обычный и null - если оба типа.</param>
+            <param name="portfolio">Портфель. Если значение равно null, то портфель не попадает в фильтр снятия заявок.</param>
+            <param name="direction">Направление заявки. Если значение равно null, то направление не попадает в фильтр снятия заявок.</param>
+            <param name="classCode">Код класса. Если переданная строка пустая, то код не попадает в фильтр снятия заявок.</param>
+            <param name="security">Инструмент. Если значение равно null, то инструмент не попадает в фильтр снятия заявок.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterSecurity(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Начать получать новую информацию (например, <see cref="P:StockSharp.BusinessEntities.Security.LastTrade"/> или <see cref="P:StockSharp.BusinessEntities.Security.BestBid"/>) по инструменту.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо начать получать новую информацию.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.UnRegisterSecurity(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Остановить получение новой информации.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо остановить получение новой информации.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterQuotes(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Начать получать котировки (стакан) по инструменту.
+            Значение котировок можно получить через метод <see cref="M:StockSharp.BusinessEntities.ITrader.GetMarketDepth(StockSharp.BusinessEntities.Security)"/>.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо начать получать котировки.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.UnRegisterQuotes(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Остановить получение котировок по инструменту.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо остановить получение котировок.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterTrades(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Начать получать сделки (тиковые данные) по инструменту. Новые сделки будут приходить через событие <see cref="E:StockSharp.BusinessEntities.ITrader.NewTrades"/>.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо начать получать сделки.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterTrades(StockSharp.BusinessEntities.Security,System.Boolean)">
+            <summary>
+            Начать получать сделки (тиковые данные) по инструменту. Новые сделки будут приходить через событие <see cref="E:StockSharp.BusinessEntities.ITrader.NewTrades"/>.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо начать получать сделки.</param>
+            <param name="fromSessionStart">Получать ли сделки с начала сессии.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.UnRegisterTrades(StockSharp.BusinessEntities.Security)">
+            <summary>
+            Остановить получение сделок (тиковые данные) по инструменту.
+            </summary>
+            <param name="security">Инструмент, по которому необходимо остановить получение сделок.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.RegisterPortfolio(StockSharp.BusinessEntities.Portfolio)">
+            <summary>
+            Начать получать новую информацию по портфелю.
+            </summary>
+            <param name="portfolio">Портфель, по которому необходимо начать получать новую информацию.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.UnRegisterPortfolio(StockSharp.BusinessEntities.Portfolio)">
+            <summary>
+            Остановить получение новой информации по портфелю.
+            </summary>
+            <param name="portfolio">Портфель, по которому необходимо остановить получение новой информации.</param>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTrader.DisposeManaged">
+            <summary>
+            Освободить занятые ресурсы. В частности, отключиться от сервера SmartCOM.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTrader.Wrapper">
+            <summary>
+            Обертка над SmartCOM API.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTrader.Address">
+            <summary>
+            IP адрес и порт сервера.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTrader.Login">
+            <summary>
+            Логин.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTrader.Password">
+            <summary>
+            Пароль.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTrader.IsConnected">
+            <summary>
+            Проверить соединение.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTrader.IsAutoSaveOrders">
+            <summary>
+            Автоматическое сохранение зарегистрированных заявок в файле orders.xml.
+            </summary>
+            <remarks>
+            Необходимо для предотвращения потери заявок в случае нестабильной работы SmartCOM.
+            </remarks>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTrader.ExchangeCodes">
+            <summary>
+            Ассоциация площадок и их кодами, для заполнения <see cref="P:StockSharp.BusinessEntities.Portfolio.Exchange"/>.
+            </summary>
+        </member>
+        <member name="E:StockSharp.Smart.SmartTrader.NewHistoryCandles">
+            <summary>
+            Событие появления исторических тайм-фрейм свечек от сервера SmartCOM, запрос на получение которых был отправлен через метод
+            <see cref="M:StockSharp.Smart.SmartTrader.RegisterHistoryCandles(StockSharp.BusinessEntities.Security,StockSharp.Smart.SmartTimeFrames,System.DateTime,System.Int32,StockSharp.Smart.SmartHistoryDirections)"/>.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Smart.SmartTimeFrames">
+            <summary>
+            Тайм-фреймы для исторических свечек SmartCOM.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTimeFrames.op_Implicit(System.TimeSpan)~StockSharp.Smart.SmartTimeFrames">
+            <summary>
+            Привести <see cref="T:System.TimeSpan"/> значение к объекту <see cref="T:StockSharp.Smart.SmartTimeFrames"/>.
+            </summary>
+            <param name="value"><see cref="T:System.TimeSpan"/> значение.</param>
+            <returns>Объект <see cref="T:StockSharp.Smart.SmartTimeFrames"/>.</returns>
+        </member>
+        <member name="M:StockSharp.Smart.SmartTimeFrames.op_Explicit(StockSharp.Smart.SmartTimeFrames)~System.TimeSpan">
+            <summary>
+            Привести объект <see cref="T:StockSharp.Smart.SmartTimeFrames"/> к <see cref="T:System.TimeSpan"/> значению.
+            </summary>
+            <param name="timeFrame">Объект <see cref="T:StockSharp.Smart.SmartTimeFrames"/>.</param>
+            <returns><see cref="T:System.TimeSpan"/> значение.</returns>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Minute1">
+            <summary>
+            Минутный тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Minute5">
+            <summary>
+            Пяти минутный тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Minute10">
+            <summary>
+            Десяти минутный тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Minute15">
+            <summary>
+            Пятнадцати минутный тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Minute30">
+            <summary>
+            Тридцати минутный тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Hour1">
+            <summary>
+            Часовой тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Hour2">
+            <summary>
+            Двух часовой тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Hour4">
+            <summary>
+            Четырех часовой тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Day">
+            <summary>
+            Дневной тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Week">
+            <summary>
+            Недельный тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Month1">
+            <summary>
+            Месячный тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Month3">
+            <summary>
+            Трех месячный тайм-фрейм.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Smart.SmartTimeFrames.Year">
+            <summary>
+            Годовой тайм-фрейм.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Smart.SmartHistoryDirections">
+            <summary>
+            Направления получения исторических данных.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartHistoryDirections.Forward">
+            <summary>
+            По возрастанию.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Smart.SmartHistoryDirections.Backward">
+            <summary>
+            По убыванию.
+            </summary>
+        </member>
+    </members>
+</doc>

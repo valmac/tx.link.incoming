@@ -1,0 +1,95 @@
+﻿<Window x:Class="Sample.NewStopOrderWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:EcngTradingXaml="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+	xmlns:Avalon="clr-namespace:AC.AvalonControlsLibrary.Controls;assembly=AvalonControlsLibrary"
+	xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Shared;assembly=Syncfusion.Shared.Wpf"
+	Title="NewStopOrderWindow" Height="492" Width="262">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="100" />
+			<ColumnDefinition Width="140" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Label Grid.Column="0" Grid.Row="0" Content="Счет:" />
+		<EcngTradingXaml:PortfolioComboBox x:Name="Portfolio" Grid.Column="1" Grid.Row="0" />
+
+		<ComboBox x:Name="StopOrderType" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalContentAlignment="Right" SelectionChanged="StopOrderType_SelectionChanged" >
+			<ComboBoxItem x:Name="LinkedOrderType" Content="Связ. заявка" IsSelected="True"></ComboBoxItem>
+			<ComboBoxItem Content="Стоп-лимит"></ComboBoxItem>
+			<ComboBoxItem x:Name="OtherSecurityType" Content="По др. иструменту"></ComboBoxItem>
+			<ComboBoxItem Content="Тейк-профит"></ComboBoxItem>
+			<ComboBoxItem Content="Тэйк-профит и стоп-лимит"></ComboBoxItem>
+		</ComboBox>
+		
+		<Label Grid.Column="0" Grid.Row="2" Content="Срок:" HorizontalAlignment="Right" />
+		<syncfusion:DateTimeEdit x:Name="ExpirationDate" Grid.Column="1" Grid.Row="2" />
+		
+		<ComboBox x:Name="StopPriceCondition" Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right">
+			<ComboBoxItem Content="&lt;=" IsSelected="True" />
+			<ComboBoxItem Content="&gt;=" />
+		</ComboBox>
+		<TextBox x:Name="StopPrice" Text="0" Grid.Column="1" Grid.Row="3" HorizontalContentAlignment="Right" />
+
+		<Label Grid.Column="0" Grid.Row="4" Content="Цена:" HorizontalAlignment="Right" />
+		<TextBox x:Name="Price" Text="0" Grid.Column="1" Grid.Row="4" TextAlignment="Right" />
+
+		<Label Grid.Column="0" Grid.Row="5" Content="Объем:" HorizontalAlignment="Right" />
+		<TextBox x:Name="Volume" Text="0" Grid.Column="1" Grid.Row="5" TextAlignment="Right" />
+
+		<RadioButton x:Name="IsBuy" Content="Покупка" GroupName="Direction" IsChecked="True" Grid.Column="0" Grid.Row="6" />
+		<RadioButton x:Name="IsSell" Content="Продажа" GroupName="Direction" Grid.Column="1" Grid.Row="6" />
+		
+		<Label Grid.Column="0" Grid.Row="7" Content="Отступ:" HorizontalAlignment="Right" />
+		<EcngTradingXaml:UnitControl Grid.Column="1" Grid.Row="7" x:Name="Offset" />
+		
+		<Label Grid.Column="0" Grid.Row="8" Content="Спрэд:" HorizontalAlignment="Right" />
+		<EcngTradingXaml:UnitControl Grid.Column="1" Grid.Row="8" x:Name="Spread" />
+		
+		<Label Grid.Column="0" Grid.Row="9" Content="Др. инструмент:" HorizontalAlignment="Right" />
+		<ComboBox x:Name="OtherSecurities" DisplayMemberPath="Name" Grid.Column="1" Grid.Row="9" />
+		
+		<Label Grid.Column="0" Grid.Row="10" Content="Цена св. заявки:" HorizontalAlignment="Right" />
+		<TextBox x:Name="LinkedOrderPrice" Text="0" Grid.Column="1" Grid.Row="10" HorizontalContentAlignment="Right" />
+		
+		<Label Grid.Column="0" Grid.Row="11" Content="Снять стоп:" HorizontalAlignment="Right" />
+		<CheckBox x:Name="LinkedOrderCancel" Grid.Column="1" Grid.Row="11" HorizontalContentAlignment="Right" VerticalAlignment="Center" />
+		
+		<Label Grid.Column="0" Grid.Row="12" Content="Время действия:" HorizontalAlignment="Right" />
+		<CheckBox x:Name="IsActiveTime" Grid.Column="1" Grid.Row="12" HorizontalContentAlignment="Right" VerticalAlignment="Center" Checked="IsActiveTime_Checked" />
+		
+		<Avalon:TimePicker x:Name="ActiveTimeFrom" Grid.Column="0" IsEnabled="False" Grid.Row="13" />
+		<Avalon:TimePicker x:Name="ActiveTimeTo" Grid.Column="1" IsEnabled="False" Grid.Row="13" />
+		
+		<Label Grid.Column="0" Grid.Row="14" Content="Частич. исполн.:" HorizontalAlignment="Right" />
+		<CheckBox x:Name="PartiallyMatched" Grid.Column="1" Grid.Row="14" HorizontalContentAlignment="Right" VerticalAlignment="Center" IsChecked="{x:Null}" IsEnabled="False" />
+		
+		<Label Grid.Column="0" Grid.Row="15" Content="Исполн. объем:" HorizontalAlignment="Right" />
+		<CheckBox x:Name="UseMatchedBalance" Grid.Column="1" Grid.Row="15" HorizontalContentAlignment="Right" VerticalAlignment="Center" IsChecked="{x:Null}" IsEnabled="False" />
+		
+		<Label Grid.Column="0" Grid.Row="16" Content="Лимит Цена:" HorizontalAlignment="Right" />
+		<TextBox x:Name="StopLimitPrice" Text="0" Grid.Column="1" Grid.Row="16" TextAlignment="Right" IsEnabled="False" />
+
+		<Button x:Name="Send" Content="Отправить" IsDefault="True" Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2" Width="100" Height="22" Click="Send_Click" />
+	</Grid>
+</Window>

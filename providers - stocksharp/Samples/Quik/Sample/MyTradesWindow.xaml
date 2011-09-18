@@ -1,0 +1,33 @@
+﻿<Window x:Class="Sample.MyTradesWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:EcngTradingXaml="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+	x:Name="tradesWindow"
+    Title="Мои сделки" Height="284" Width="644">
+	<Window.Resources>
+		<EcngTradingXaml:BackgroundConvertor x:Key="myConverter" />
+
+		<Style x:Key="myItemStyle" TargetType="{x:Type ListViewItem}">
+			<Setter Property="Background">
+				<Setter.Value>
+					<Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource myConverter}"/>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
+	<Grid>
+		<ListView x:Name="TradesDetails" Grid.Column="0" Grid.Row="0" ItemContainerStyle="{StaticResource myItemStyle}" ItemsSource="{Binding ElementName=tradesWindow, Path=Trades}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Width="90" Header="Номер" DisplayMemberBinding="{Binding Path=Trade.Id}" />
+					<GridViewColumn Width="120" Header="Время" DisplayMemberBinding="{Binding Path=Trade.Time}" />
+					<GridViewColumn Width="70" Header="Цена" DisplayMemberBinding="{Binding Path=Trade.Price}" />
+					<GridViewColumn Width="60" Header="Кол-во" DisplayMemberBinding="{Binding Path=Trade.Volume}" />
+					<GridViewColumn Width="100" Header="Инструмент" DisplayMemberBinding="{Binding Path=Trade.Security.Code}" />
+					<GridViewColumn Width="80" Header="Направление" DisplayMemberBinding="{Binding Path=Order.Direction}" />
+					<GridViewColumn Width="90" Header="Заявка" DisplayMemberBinding="{Binding Path=Order.Id}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</Grid>
+</Window>

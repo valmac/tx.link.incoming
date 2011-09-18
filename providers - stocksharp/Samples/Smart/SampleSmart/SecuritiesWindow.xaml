@@ -1,0 +1,72 @@
+﻿<Window x:Class="SampleSmart.SecuritiesWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:EcngTradingXaml="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+	x:Name="securitiesWindow" Title="Инструменты" Height="415" Width="1081">
+	<Window.Resources>
+		<EcngTradingXaml:BackgroundConvertor x:Key="myConverter" />
+		<EcngTradingXaml:QuoteConverter x:Key="quoteConverter" />
+
+		<Style x:Key="myItemStyle" TargetType="{x:Type ListViewItem}">
+			<Setter Property="Background">
+				<Setter.Value>
+					<Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource myConverter}"/>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+			<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		</Style>
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		
+		<Grid Grid.Row="0" HorizontalAlignment="Right">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<TextBox x:Name="SecurityName" Width="100" Grid.Column="0" TextChanged="SecurityName_TextChanged" />
+			<ComboBox x:Name="SecurityTypes" Width="100" Grid.Column="1" SelectionChanged="SecurityTypes_SelectionChanged" />
+			<ComboBox x:Name="SecurityClasses" Width="100" Grid.Column="2" SelectionChanged="SecurityClasses_SelectionChanged" />
+		</Grid>
+		
+		<ListView x:Name="SecuritiesDetails" Grid.Column="0" Grid.Row="1" ItemContainerStyle="{StaticResource myItemStyle}" ItemsSource="{Binding ElementName=securitiesWindow, Path=Securities}" SelectionChanged="SecuritiesDetails_SelectionChanged">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Width="120" Header="Название" DisplayMemberBinding="{Binding Path=Name}" />
+					<GridViewColumn Width="100" Header="Код" DisplayMemberBinding="{Binding Path=Code}" />
+					<GridViewColumn Width="60" Header="Класс" DisplayMemberBinding="{Binding Path=Class}" />
+					<GridViewColumn Width="150" Header="Bid" DisplayMemberBinding="{Binding Path=BestBid, Converter={StaticResource quoteConverter}}" />
+					<GridViewColumn Width="150" Header="Ask" DisplayMemberBinding="{Binding Path=BestAsk, Converter={StaticResource quoteConverter}}" />
+					<GridViewColumn Width="140" Header="Послед. сделка" DisplayMemberBinding="{Binding Path=LastTrade.Time}" />
+					<GridViewColumn Width="100" Header="Послед. цена" DisplayMemberBinding="{Binding Path=LastTrade.Price}" />
+					<GridViewColumn Width="90" Header="Послед. кол-во" DisplayMemberBinding="{Binding Path=LastTrade.Volume}" />
+					<GridViewColumn Width="40" Header="Лот" DisplayMemberBinding="{Binding Path=MinLotSize}" />
+					<GridViewColumn Width="60" Header="Точность" DisplayMemberBinding="{Binding Path=Decimals}" />
+					<GridViewColumn Width="40" Header="Шаг" DisplayMemberBinding="{Binding Path=MinStepSize}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+		
+		<Grid Grid.Row="2" HorizontalAlignment="Right">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<Button x:Name="BidAsk" Grid.Column="0" Content="Вид-Оффер" Width="100" IsEnabled="False" Click="BidAsk_Click" />
+			<Button x:Name="Quotes" Grid.Column="1" Content="Стакан..." Width="100" IsEnabled="False" Click="Quotes_Click" />
+			<Button x:Name="NewOrder" Grid.Column="2" Content="Новая заявка..." Width="100" IsEnabled="False" Click="NewOrder_Click" />
+			<Button x:Name="NewStopOrder" Grid.Column="3" Content="Новая стоп-заявка..." Width="120" IsEnabled="False" Click="NewStopOrder_Click" />
+		</Grid>
+	</Grid>
+</Window>

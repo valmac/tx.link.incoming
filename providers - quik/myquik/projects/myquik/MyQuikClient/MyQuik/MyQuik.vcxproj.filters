@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{81a4ec19-84d7-46b5-93de-70558b8d8beb}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{19837e43-d7b5-49ca-b539-4d5a96411a55}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{ccd6e251-b33d-4cda-9485-76b8bbfed14c}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{263240af-1380-4c10-8930-c2753e25a409}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="accounts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgAbout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgGlass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgHistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgProperties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgStop2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="history.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="myclient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyQuik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTradeListCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="paint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPageCommon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPageGlass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPageInstruments.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPageKeys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPageListOfDeals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPageOSD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPageTrading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertySheetSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shortcuts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="trade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TradeDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="trans2quik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="transactions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\color.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\file.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\mydde.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\thread.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyPageView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mcapture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\str.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\ctrl.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\develop\cpp\lib\window.cpp">
+      <Filter>lib</Filter>
+    </ClCompile>
+    <ClCompile Include="actions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TradeDlg2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="myctrlx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="accounts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgAbout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgGlass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgHistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgProperties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgStop2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="history.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="myclient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyQuik.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTradeListCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="paint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPageCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPageGlass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPageInstruments.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPageKeys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPageListOfDeals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPageOSD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPageTrading.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertySheetSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shortcuts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="strings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TradeDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trans2quik.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="trans2quik_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="transactions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="um.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\color.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\file.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\mydde.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\std.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\thread.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\window.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyPageView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mcapture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\str.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\ctrl.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="actions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\develop\cpp\lib\xltable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TradeDlg2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="myctrlx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\active_buy.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\active_sell.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\active_stop_buy.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\active_stop_sell.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arrow_down.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arrow_up.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\buy.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\buy_sell.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\buy_small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\buy_small_gray.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cancel.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cancel_buy.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cancel_sell.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cancel_stop.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cancel_stop_buy.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cancel_stop_sell.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\delete.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_buy_sell_small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_copy_16x16.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_edit_16x16.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_move_down_16x16.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_move_up_16x16.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_new_16x16.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_output_16x16.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_time_list_16x16.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon_tools_16x16_z.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\MyQuik.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\select.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\sell.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\sell_small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\sell_small_gray.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\sent.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\stop.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\stop_buy.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\stop_buy_small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\stop_sell.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\stop_sell_small.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MyQuik.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

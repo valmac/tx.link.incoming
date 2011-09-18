@@ -1,0 +1,46 @@
+﻿<Window x:Class="SampleEmulationTesting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Пример тестирование на случайных данных" Height="460" Width="604"
+		xmlns:my="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="85*" />
+			<ColumnDefinition Width="497*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid Grid.ColumnSpan="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="10" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="10" />
+			</Grid.RowDefinitions>
+
+			<Button x:Name="StartBtn" Content="Старт" Grid.Row="0" Click="StartBtn_Click" />
+			<ProgressBar x:Name="TestingProcess" Grid.Column="1" Grid.Row="0" />
+
+			<Button x:Name="Report" Content="Отчет" Grid.Row="0" Width="75" IsEnabled="False" Click="Report_Click" Grid.Column="2" Margin="0,0,0,-1" />
+		</Grid>
+		
+		<Grid Grid.Row="2" Grid.ColumnSpan="2">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="180"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<my:EquityParameterPanel Grid.Column="0" x:Name="ParametersPanel" />
+				<my:EquityCurveChart Grid.Column="1" x:Name="Curve" />
+			</Grid>
+		</Grid>
+	</Grid>
+</Window>

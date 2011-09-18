@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4A556B2E-F9E6-49A9-BDBC-870424AA4DEF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAFBreakdown</RootNamespace>
+    <AssemblyName>DAFBreakdown</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BreakdownForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BreakdownForm.Designer.cs">
+      <DependentUpon>BreakdownForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\Control\FavoritesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DAFGroup\Control\FavoritesControl.Designer.cs">
+      <DependentUpon>FavoritesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\Control\IPPortControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DAFGroup\Control\IPPortControl.Designer.cs">
+      <DependentUpon>IPPortControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\Control\PortfolioControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DAFGroup\Control\PortfolioControl.Designer.cs">
+      <DependentUpon>PortfolioControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\Control\SymbolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DAFGroup\Control\SymbolControl.Designer.cs">
+      <DependentUpon>SymbolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\Control\TikersControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DAFGroup\Control\TikersControl.Designer.cs">
+      <DependentUpon>TikersControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\Control\SymbolPageControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DAFGroup\Control\SymbolPageControl.Designer.cs">
+      <DependentUpon>SymbolPageControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\DAFLog.cs" />
+    <Compile Include="DAFGroup\Events.cs" />
+    <Compile Include="DAFGroup\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DAFGroup\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\LogoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DAFGroup\LogoForm.Designer.cs">
+      <DependentUpon>LogoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAFGroup\SmartCOM.cs" />
+    <Compile Include="DAFGroup\Header.cs" />
+    <Compile Include="FormClose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormClose.Designer.cs">
+      <DependentUpon>FormClose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BreakdownForm.resx">
+      <DependentUpon>BreakdownForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAFGroup\Control\FavoritesControl.resx">
+      <DependentUpon>FavoritesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAFGroup\Control\IPPortControl.resx">
+      <DependentUpon>IPPortControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAFGroup\Control\PortfolioControl.resx">
+      <DependentUpon>PortfolioControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAFGroup\Control\SymbolControl.resx">
+      <DependentUpon>SymbolControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAFGroup\Control\TikersControl.resx">
+      <DependentUpon>TikersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAFGroup\Control\SymbolPageControl.resx">
+      <DependentUpon>SymbolPageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAFGroup\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAFGroup\LogoForm.resx">
+      <DependentUpon>LogoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormClose.resx">
+      <DependentUpon>FormClose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\DAFLogo.png" />
+    <Content Include="Resources\ToLeft.png" />
+    <Content Include="Resources\ToRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="StClientLib">
+      <Guid>{AE0A53F5-46EF-4660-A1A7-2AF9F946C6E3}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

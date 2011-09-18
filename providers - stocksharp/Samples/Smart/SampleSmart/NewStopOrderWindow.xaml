@@ -1,0 +1,48 @@
+﻿<Window x:Class="SampleSmart.NewStopOrderWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:EcngTradingXaml="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+	x:Name="newStopOrderWindow" Title="NewStopOrderWindow" Height="232" Width="262">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="100" />
+			<ColumnDefinition Width="140" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		
+		<Label Grid.Column="0" Grid.Row="0" Content="Счет:" HorizontalAlignment="Right" />
+        <EcngTradingXaml:PortfolioComboBox Grid.Column="1" Grid.Row="0" x:Name="Portfolio" SelectionChanged="Portfolio_SelectionChanged" />
+		
+		<Label Grid.Column="0" Grid.Row="1" Content="Тип:" HorizontalAlignment="Right" />
+		<ComboBox x:Name="StopOrderType" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Right" SelectionChanged="StopOrderType_SelectionChanged" >
+			<ComboBoxItem Content="Стоп" IsSelected="True"></ComboBoxItem>
+			<ComboBoxItem Content="Стоп-лимит"></ComboBoxItem>
+		</ComboBox>
+		
+		<Label Grid.Column="0" Grid.Row="2" Content="Один день:" HorizontalAlignment="Right" />
+		<CheckBox x:Name="IsOneDay" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" IsChecked="True" />
+		
+		<Label Grid.Column="0" Grid.Row="3" Content="Стоп-цена:" HorizontalAlignment="Right" />
+		<TextBox x:Name="StopPrice" Text="0" Grid.Column="1" Grid.Row="3" HorizontalContentAlignment="Right" />
+
+		<Label Grid.Column="0" Grid.Row="4" Content="Цена:" HorizontalAlignment="Right" />
+		<TextBox x:Name="Price" Text="0" Grid.Column="1" Grid.Row="4" IsEnabled="False" TextAlignment="Right" />
+
+		<Label Grid.Column="0" Grid.Row="5" Content="Объем:" HorizontalAlignment="Right" />
+		<TextBox x:Name="Volume" Text="0" Grid.Column="1" Grid.Row="5" TextAlignment="Right" />
+
+		<RadioButton x:Name="IsBuy" Content="Покупка" GroupName="Direction" IsChecked="True" Grid.Column="0" Grid.Row="6" />
+		<RadioButton x:Name="IsSell" Content="Продажа" GroupName="Direction" Grid.Column="1" Grid.Row="6" />
+		
+		<Button x:Name="Send" Content="Отправить" IsEnabled="False" IsDefault="True" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Width="100" Click="Send_Click" />
+	</Grid>
+</Window>

@@ -1,0 +1,44 @@
+﻿<Window x:Class="SampleDdeExtendedInfo.SecuritiesWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:EcngTradingXaml="clr-namespace:StockSharp.Xaml;assembly=StockSharp.Xaml"
+	x:Name="securitiesWindow" Title="Инструменты" Height="415" Width="900">
+	<Window.Resources>
+		<EcngTradingXaml:BackgroundConvertor x:Key="myConverter" />
+		<EcngTradingXaml:QuoteConverter x:Key="quoteConverter" />
+		<EcngTradingXaml:ExtensionInfoConverter x:Key="extInfoConverter" />
+
+		<Style x:Key="myItemStyle" TargetType="{x:Type ListViewItem}">
+			<Setter Property="Background">
+				<Setter.Value>
+					<Binding RelativeSource="{RelativeSource Self}" Converter="{StaticResource myConverter}"/>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+			<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		</Style>
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		
+		<ListView x:Name="SecuritiesDetails" Grid.Column="0" Grid.Row="0" ItemContainerStyle="{StaticResource myItemStyle}" ItemsSource="{Binding ElementName=securitiesWindow, Path=Securities}" SelectionChanged="SecuritiesDetails_SelectionChanged">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Width="120" Header="Название" DisplayMemberBinding="{Binding Path=Name}" />
+					<GridViewColumn Width="100" Header="Код" DisplayMemberBinding="{Binding Path=Code}" />
+					<GridViewColumn Width="60" Header="Класс" DisplayMemberBinding="{Binding Path=Class}" />
+					<GridViewColumn Width="150" Header="Bid" DisplayMemberBinding="{Binding Path=BestBid, Converter={StaticResource quoteConverter}}" />
+					<GridViewColumn Width="150" Header="Ask" DisplayMemberBinding="{Binding Path=BestAsk, Converter={StaticResource quoteConverter}}" />
+					<GridViewColumn Width="110" Header="Волатильность" DisplayMemberBinding="{Binding Path=., Converter={StaticResource extInfoConverter}, ConverterParameter=Volatility}" />
+					<GridViewColumn Width="100" Header="Теор. цена" DisplayMemberBinding="{Binding Path=., Converter={StaticResource extInfoConverter}, ConverterParameter=TheorPrice}" />
+					<GridViewColumn Width="80" Header="Баз. актив" DisplayMemberBinding="{Binding Path=., Converter={StaticResource extInfoConverter}, ConverterParameter=BaseSecurity}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+		
+		<Button x:Name="Quotes" Grid.Row="1" Content="Стакан..." Width="100" IsEnabled="False" HorizontalAlignment="Right" Click="Quotes_Click" />
+	</Grid>
+</Window>

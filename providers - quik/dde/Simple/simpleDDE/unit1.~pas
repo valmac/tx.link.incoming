@@ -1,0 +1,99 @@
+//----------------------------------------------------------------------------//
+// ƒанный пример иллюстрирует работу модул€ DdeExlUnt                         //
+// суть программы - вывод лбой таблицы из Quik по DDE                         //
+//                                                                            //
+// ---------------------------------------------------------------------------//
+
+
+unit unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls, Grids, DdeExlUnt, Math, XPMan;
+
+type
+  TForm1 = class(TForm)
+    StringGrid1: TStringGrid;
+    Memo1: TMemo;
+    Splitter1: TSplitter;
+    Panel1: TPanel;
+    Button1: TButton;
+    XPManifest1: TXPManifest;
+    Label1: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    procedure OnDdePoke(Topic: string; var Action: TPokeAction);
+    procedure OnDdeData(Topic: string; Cells: TRect; Data: TVariantTable);
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  // создаем экземпл€р сервера, переменна€ уже описана в DdeExlUnt
+  DdeExcel := TDdeExcel.Create(self);
+  // назначаем обработчики событий дл€ сервера
+  DdeExcel.OnPoke := OnDdePoke;
+  DdeExcel.OnData := OnDdeData
+end;
+
+procedure TForm1.OnDdePoke(Topic: string; var Action: TPokeAction);
+// обработчик событи€ OnPoke, возникает когда Quik пытваетс€ передать данные
+// Topic содержит им€ передаваемой таблицы в формате "[ нига1]Ћист1"
+// Action - это наша реакци€ на принимаемые данные, вырианты:
+//   Action := paAccept // да, мы хотим получить данные
+//   Action := pa уоусе // нет, мы не хотим данные (только экспорт при этом оборветс€)
+//   Action := paMiss   // сейчас данные не нужны, но экспорт пусть продолжаетс€ (но Quik будет
+//                      // считать, что данные он передал; можем что-то упустить)
+begin
+  Action := paAccept
+end;
+
+procedure TForm1.OnDdeData(Topic: string; Cells: TRect; Data: TVariantTable);
+// ќбработчик данных, событие OnData возникает после OnPoke если мы задали Action := paAccept
+// Topic - им€ передаваемой таблицы
+// Cells - диапазон изменившихс€ €чеек (нумераци€ €чеек начинаетс€ с 1
+// Data - содержит “ќЋ№ ќ изменившиес€ €чейки. т.е. строка є 0 в массиве Data - это
+//    строка є Cells.Top в общей таблице
+var
+  i, j: integer;
+begin
+  // фиксируем дл€ какой таблицы и какие €чейки обновлены
+  Memo1.Lines.Add(TimeToStr(now)+ ': ƒанные дл€ темы '''+Topic+''', в €чейки R'+inttostr(Cells.Top)+
+      'C'+inttostr(Cells.Left)+':R'+inttostr(Cells.Bottom)+'C'+inttostr(Cells.Right));
+  // мен€ем размер сетки
+  StringGrid1.RowCount := max(StringGrid1.RowCount, Cells.Bottom+1);
+  StringGrid1.ColCount := max(StringGrid1.ColCount, Cells.Right+1);
+  // заполн€ем сетку значен€ми не равными 0
+  For i :=  Cells.Top to Cells.Bottom do
+    For j := Cells.Left to Cells.Right do
+      If (Data.Cells[i-Cells.Top, j-Cells.Left] <> '0') and (Data.Cells[i-Cells.Top, j-Cells.Left] <> '0,00') then
+        StringGrid1.Cells[j, i] := Data.Cells[i-Cells.Top, j-Cells.Left];
+end;
+
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  i, j: integer;
+begin
+  // очищаем сетку и мемо
+  For i := 0 to StringGrid1.RowCount-1 do
+    For j := 0 to StringGrid1.ColCount-1 do
+      StringGrid1.Cells[j, i] := '';
+  StringGrid1.RowCount := 2;
+  StringGrid1.ColCount := 2;
+  Memo1.Clear;
+end;
+
+end.
