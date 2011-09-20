@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <start>
+        <element name="fundsTransferFailed">
+            <ref name="FundsTransferFailedType"/>
+        </element>
+    </start>
+    <define name="FundsTransferFailedType">
+        <element name="accountId">
+            <ref name="AccountIdType"/>
+        </element>
+        <element name="correlationId">
+            <ref name="CorrelationIdType"/>
+        </element>
+        <element name="status">
+            <ref name="FundsTransferRejectedStatusEnum"/>
+        </element>
+        <optional>
+            <!--The additional funds required to cover the exposure of the order.-->
+            <element name="requiredFunds">
+                <ref name="PriceType"/>
+            </element>
+        </optional>
+    </define>
+</grammar>

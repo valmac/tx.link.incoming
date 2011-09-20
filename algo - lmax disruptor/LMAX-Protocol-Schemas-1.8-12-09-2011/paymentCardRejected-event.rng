@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <start>
+        <element name="paymentCardRejected">
+            <ref name="PaymentCardRejectedType"/>
+        </element>
+    </start>
+    <define name="PaymentCardRejectedType">
+         <element name="accountId">
+             <ref name="AccountIdType"/>
+         </element>
+         <element name="shortNumber">
+             <ref name="ShortNumberType"/>
+         </element>
+         <element name="expiryDate">
+             <ref name="CardDateType"/>
+         </element>
+         <element name="status">
+             <ref name="FundsTransferRejectedStatusEnum"/>
+         </element>
+         <element name="warnings">
+             <zeroOrMore>
+                 <element name="warning">
+                     <text/>
+                 </element>
+             </zeroOrMore>
+         </element>
+     </define>
+
+</grammar>

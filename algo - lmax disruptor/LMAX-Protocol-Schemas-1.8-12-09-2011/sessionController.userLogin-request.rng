@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <include href="tfx-request.rng">
+        <define name="RequestBody">
+            <interleave>
+                <element name="username">
+                    <ref name="UsernameType"/>
+                </element>
+                <element name="password">
+                    <ref name="LoginAttemptPasswordType"/>
+                </element>
+                <element name="productType">
+                    <ref name="ProductType"/>
+                </element>
+                <optional>
+                    <element name="protocolVersion">
+                        <ref name="StringType"/>
+                    </element>
+                </optional>
+            </interleave>
+            <optional>
+                <!-- Used for password reset when the user must enter the temporary password and the password they wish to use -->
+                <element name="newPassword">
+                    <ref name="PasswordType"/>
+                </element>
+            </optional>
+        </define>
+    </include>
+</grammar>

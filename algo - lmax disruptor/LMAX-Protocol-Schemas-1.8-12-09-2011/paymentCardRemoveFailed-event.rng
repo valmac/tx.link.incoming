@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <start>
+        <element name="paymentCardRemoveFailed">
+            <ref name="PaymentCardRemoveFailedType"/>
+        </element>
+    </start>
+
+    <define name="PaymentCardRemoveFailedType">
+        <element name="id">
+            <ref name="PaymentCardIdType"/>
+        </element>
+        <element name="accountId">
+            <ref name="AccountIdType"/>
+        </element>
+        <element name="reason">
+            <ref name="PaymentCardRemoveFailedReasonEnum"/>
+        </element>
+    </define>
+
+</grammar>

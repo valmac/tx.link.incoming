@@ -1,0 +1,667 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <!-- The supported Time In Force Policies -->
+    <define name="TimeInForceEnum">
+        <choice>
+            <value>GoodTilCancelled</value>
+            <value>GoodForDay</value>
+            <value>ImmediateOrCancel</value>
+            <value>FillOrKill</value>
+        </choice>
+    </define>
+
+    <!--Enumeration of Position types.-->
+    <define name="PositionTypeEnum">
+        <choice>
+            <!--Identifies a LONG position.-->
+            <value>LONG</value>
+            <!--Identifies a SHORT position.-->
+            <value>SHORT</value>
+        </choice>
+    </define>
+
+    <define name="OrderTypeEnum">
+        <choice>
+            <value>MARKET</value>
+            <value>STOP_MARKET_ORDER</value>
+            <value>STOP_MARKET_OPENING_ORDER</value>
+            <value>PRICE_LIMIT</value>
+            <value>STOP_COMPOUND_PRICE_LIMIT</value>
+            <value>STOP_COMPOUND_MARKET</value>
+            <value>CLOSE_OUT_ORDER</value>
+            <value>CLOSE_OUT_POSITION</value>
+            <value>STOP_LOSS_ORDER</value>
+            <value>STOP_PROFIT_ORDER</value>
+            <value>SETTLEMENT_ORDER</value>
+            <value>OFF_ORDERBOOK</value>
+            <value>REVERSAL</value>
+        </choice>
+    </define>
+    
+    <!--Enumeration of transaction types.-->
+    <define name="AccountStatementTransactionEnum">
+        <choice>
+            <!--A profit or loss resulting from settlement of an execution.-->
+            <value>EXECUTION</value>
+            <!--Commission charged resulting from profit settlement of an execution.-->
+            <value>EXECUTION_COMMISSION</value>
+            <!--Commission revenue paid to introducers.-->
+            <value>EXECUTION_COMMISSION_REVENUE</value>
+            <!--Opening balance.-->
+            <value>OPENING_BALANCE</value>
+            <!--A transfer to or from a payment card.-->
+            <value>PAYMENT_CARD_TRANSFER</value>
+            <!--A refund to a payment card for a failed withdraw attempt.-->
+            <value>ROLLBACK_REFUND</value>
+            <!--Promotional transfer-->
+            <value>PROMOTION_TRANSFER</value>
+            <!--Demo Funds Transfer-->
+            <value>DEMO_FUNDS_TRANSFER</value>
+            <!--Withdrawal-->
+            <value>TRADEFAIR_WITHDRAWAL</value>
+            <!--Account Adjustment-->
+            <value>TRADEFAIR_ACCOUNT_ADJUSTMENT</value>
+            <!--Dealer Error correction-->
+            <value>TRADEFAIR_DEALER_ERROR</value>
+            <!--Operator Error correction-->
+            <value>TRADEFAIR_OPERATOR_ERROR</value>
+            <!--Deposit-->
+            <value>TRADEFAIR_DEPOSIT</value>
+            <!--Goodwill-->
+            <value>TRADEFAIR_GOODWILL</value>
+            <!--Refund-->
+            <value>TRADEFAIR_REFUND</value>
+            <!--Marketing-->
+            <value>TRADEFAIR_MARKETING</value>
+            <!--Education-->
+            <value>TRADEFAIR_EDUCATION</value>
+            <!--Promotion-->
+            <value>TRADEFAIR_PROMOTION</value>
+            <!--Bank Transfer-->
+            <value>BANK_TRANSFER</value>
+            <!--Bank Transfer with currency conversion-->
+            <value>BANK_TRANSFER_CURRENCY_CONVERSION</value>
+            <!--Currency sweep into base currency wallet -->
+            <value>CURRENCY_SWEEP_BASE</value>
+            <!--Currency sweep into foreign currency wallet -->
+            <value>CURRENCY_SWEEP_FOREIGN</value>
+            <!--Apply funding -->
+            <value>FUNDING_CHARGES</value>
+            <!--Apply funding correction -->
+            <value>FUNDING_CORRECTION</value>
+            <!--Instrument settlement -->
+            <value>SETTLEMENT</value>
+            <!--Commission charged resulting from settlement of an execution.-->
+            <value>SETTLEMENT_COMMISSION</value>
+            <!--Commission revenue paid to introducers.-->
+            <value>SETTLEMENT_COMMISSION_REVENUE</value>
+            <!--Apply Dividend-->
+            <value>DIVIDEND</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <define name="TitleType">
+        <choice>
+            <value>Mr</value>
+            <value>Miss</value>
+            <value>Mrs</value>
+            <value>Ms</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <define name="NationalityEnum">
+        <choice>
+            <value>Afghan</value>
+            <value>Albanian</value>
+            <value>Algerian</value>
+            <value>American</value>
+            <value>Angolan</value>
+            <value>Antiguan</value>
+            <value>Argentine</value>
+            <value>Armenian</value>
+            <value>Australian</value>
+            <value>Austrian</value>
+            <value>Azerbaijani</value>
+            <value>Bahamian</value>
+            <value>Bahraini</value>
+            <value>Bangladeshi</value>
+            <value>Barbadian</value>
+            <value>Belarusian</value>
+            <value>Belgian</value>
+            <value>Belizean</value>
+            <value>Beninese</value>
+            <value>Bhutanese</value>
+            <value>Bolivian</value>
+            <value>Bosnian</value>
+            <value>Botswanan</value>
+            <value>Brazilian</value>
+            <value>British</value>
+            <value>British</value>
+            <value>Bruneian</value>
+            <value>Bulgarian</value>
+            <value>Burkinabe</value>
+            <value>Burmese</value>
+            <value>Burundian</value>
+            <value>Cambodian</value>
+            <value>Cameroonian</value>
+            <value>Canadian</value>
+            <value>CapeVerdean</value>
+            <value>Caymanian</value>
+            <value>CentralAfrican</value>
+            <value>Chadian</value>
+            <value>Chilean</value>
+            <value>Chinese</value>
+            <value>Colombian</value>
+            <value>Comorian</value>
+            <value>Congolese</value>
+            <value>CostaRican</value>
+            <value>Croatian</value>
+            <value>Cuban</value>
+            <value>Cypriot</value>
+            <value>Czech</value>
+            <value>Danish</value>
+            <value>Djiboutian</value>
+            <value>Dominican</value>
+            <value>Dutch</value>
+            <value>EastTimorese</value>
+            <value>Ecuadorian</value>
+            <value>Egyptian</value>
+            <value>Emirian</value>
+            <value>Equatoguinean</value>
+            <value>Eritrean</value>
+            <value>Estonian</value>
+            <value>Ethiopian</value>
+            <value>Finnish</value>
+            <value>French</value>
+            <value>Gabonese</value>
+            <value>Gambian</value>
+            <value>Georgian</value>
+            <value>German</value>
+            <value>German</value>
+            <value>Ghanaian</value>
+            <value>Greek</value>
+            <value>Grenadian</value>
+            <value>Guamanian</value>
+            <value>Guianese</value>
+            <value>Guinean</value>
+            <value>Guyanese</value>
+            <value>Haitian</value>
+            <value>Herzegovinian</value>
+            <value>Honduran</value>
+            <value>HongKongChinese</value>
+            <value>Hungarian</value>
+            <value>Icelandic</value>
+            <value>Indian</value>
+            <value>Indonesian</value>
+            <value>Iranian</value>
+            <value>Iraqi</value>
+            <value>Irish</value>
+            <value>Irish</value>
+            <value>Israeli</value>
+            <value>Italian</value>
+            <value>Ivorian</value>
+            <value>Jamaican</value>
+            <value>Japanese</value>
+            <value>Jordanian</value>
+            <value>Kazakh</value>
+            <value>Kenyan</value>
+            <value>Kiribatian</value>
+            <value>Kuwaiti</value>
+            <value>Kyrgyz</value>
+            <value>Laotian</value>
+            <value>Latvian</value>
+            <value>Lebanese</value>
+            <value>Liberian</value>
+            <value>Libyan</value>
+            <value>Lithuanian</value>
+            <value>Luxembourgish</value>
+            <value>Macedonian</value>
+            <value>Malagasy</value>
+            <value>Malawian</value>
+            <value>Malaysian</value>
+            <value>Maldivian</value>
+            <value>Malian</value>
+            <value>Maltese</value>
+            <value>Mauritanian</value>
+            <value>Mauritian</value>
+            <value>Mexican</value>
+            <value>Moldovan</value>
+            <value>Mongolian</value>
+            <value>Montenegrin</value>
+            <value>Moroccan</value>
+            <value>Mozambican</value>
+            <value>Namibian</value>
+            <value>Nepalese</value>
+            <value>NewZealander</value>
+            <value>Nicaraguan</value>
+            <value>Nigerian</value>
+            <value>NorthKorean</value>
+            <value>Norwegian</value>
+            <value>Omani</value>
+            <value>Pakistani</value>
+            <value>Panamanian</value>
+            <value>PapuaNewGuinean</value>
+            <value>Paraguayan</value>
+            <value>Peruvian</value>
+            <value>Philippine</value>
+            <value>Polish</value>
+            <value>Portuguese</value>
+            <value>PuertoRican</value>
+            <value>Qatari</value>
+            <value>Romanian</value>
+            <value>Russian</value>
+            <value>Rwandan</value>
+            <value>SaintKittsAndNevis</value>
+            <value>SaintLucian</value>
+            <value>Samoan</value>
+            <value>SaoTomean</value>
+            <value>SaudiArabian</value>
+            <value>Senegalese</value>
+            <value>Serb</value>
+            <value>Seychellois</value>
+            <value>SierraLeonean</value>
+            <value>Singaporean</value>
+            <value>Slovakian</value>
+            <value>Slovenian</value>
+            <value>SolomonIslander</value>
+            <value>Somali</value>
+            <value>SouthAfrican</value>
+            <value>SouthKorean</value>
+            <value>Spanish</value>
+            <value>SriLankan</value>
+            <value>Sudanese</value>
+            <value>Surinamese</value>
+            <value>Swazi</value>
+            <value>Swedish</value>
+            <value>Swiss</value>
+            <value>Syrian</value>
+            <value>Taiwanese</value>
+            <value>Tajik</value>
+            <value>Tanzanian</value>
+            <value>Thai</value>
+            <value>Togolese</value>
+            <value>Tongan</value>
+            <value>TrinidadAndTobagan</value>
+            <value>Tunisian</value>
+            <value>Turkish</value>
+            <value>Turkmen</value>
+            <value>Ugandan</value>
+            <value>Ukrainian</value>
+            <value>Uruguayan</value>
+            <value>USVirginIslanders</value>
+            <value>Uzbek</value>
+            <value>Vanuatuan</value>
+            <value>Venezuelan</value>
+            <value>Vietnamese</value>
+            <value>Zambian</value>
+            <value>Zimbabwean</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <define name="DayOfWeekEnum">
+        <choice>
+            <value>MONDAY</value>
+            <value>TUESDAY</value>
+            <value>WEDNESDAY</value>
+            <value>THURSDAY</value>
+            <value>FRIDAY</value>
+            <value>SATURDAY</value>
+            <value>SUNDAY</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <define name="AccountTypeType">
+        <choice>
+            <value>STANDARD_TRADER</value>
+            <value>MARKET_MAKER</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <define name="ProductType">
+        <choice>
+            <value>CFD_DEMO</value>
+            <value>CFD_LIVE</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <define name="SubscriptionType">
+        <choice>
+            <value>instrument</value>
+            <value>account</value>
+            <value>tickHistoryResponse</value>
+            <value>historicMarketData</value>
+            <value>order</value>
+            <value>position</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <define name="CountryCodeEnum">
+        <choice>
+            <value>AR</value>
+            <value>AU</value>
+            <value>AT</value>
+            <value>BH</value>
+            <value>BB</value>
+            <value>BE</value>
+            <value>BM</value>
+            <value>BR</value>
+            <value>BN</value>
+            <value>BG</value>
+            <value>CA</value>
+            <value>CL</value>
+            <value>CN</value>
+            <value>CO</value>
+            <value>CR</value>
+            <value>CY</value>
+            <value>CZ</value>
+            <value>DK</value>
+            <value>DM</value>
+            <value>EG</value>
+            <value>EE</value>
+            <value>FI</value>
+            <value>FR</value>
+            <value>GE</value>
+            <value>DE</value>
+            <value>GR</value>
+            <value>GG</value>
+            <value>HK</value>
+            <value>HU</value>
+            <value>IS</value>
+            <value>IN</value>
+            <value>IE</value>
+            <value>IM</value>
+            <value>IL</value>
+            <value>IT</value>
+            <value>JP</value>
+            <value>JE</value>
+            <value>JO</value>
+            <value>KW</value>
+            <value>LV</value>
+            <value>LT</value>
+            <value>LU</value>
+            <value>MO</value>
+            <value>MK</value>
+            <value>MY</value>
+            <value>MV</value>
+            <value>MT</value>
+            <value>MU</value>
+            <value>MX</value>
+            <value>MD</value>
+            <value>NL</value>
+            <value>NZ</value>
+            <value>NO</value>
+            <value>OM</value>
+            <value>PE</value>
+            <value>PL</value>
+            <value>PT</value>
+            <value>QA</value>
+            <value>RO</value>
+            <value>RU</value>
+            <value>VC</value>
+            <value>WS</value>
+            <value>SA</value>
+            <value>SC</value>
+            <value>SG</value>
+            <value>SK</value>
+            <value>SI</value>
+            <value>ZA</value>
+            <value>KR</value>
+            <value>ES</value>
+            <value>SE</value>
+            <value>CH</value>
+            <value>TW</value>
+            <value>TN</value>
+            <value>AE</value>
+            <value>GB</value>
+            <value>UY</value>
+            <value>VU</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <!--Enumeration of transfer types.-->
+    <define name="TransferTypeEnum">
+        <choice>
+            <!--Credit the tradefair wallet.-->
+            <value>CREDIT</value>
+            <!--Debit the tradefair wallet.-->
+            <value>DEBIT</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <define name="CountryNameEnum">
+        <choice>
+            <value>Argentina</value>
+            <value>Australia</value>
+            <value>Austria</value>
+            <value>Bahrain</value>
+            <value>Barbados</value>
+            <value>Belgium</value>
+            <value>Bermuda</value>
+            <value>Brazil</value>
+            <value>Brunei</value>
+            <value>Bulgaria</value>
+            <value>Canada</value>
+            <value>Chile</value>
+            <value>China</value>
+            <value>Colombia</value>
+            <value>Costa Rica</value>
+            <value>Cyprus</value>
+            <value>Czech Republic</value>
+            <value>Denmark</value>
+            <value>Dominica</value>
+            <value>Egypt</value>
+            <value>Estonia</value>
+            <value>Finland</value>
+            <value>France</value>
+            <value>Georgia</value>
+            <value>Germany</value>
+            <value>Greece</value>
+            <value>Guernsey</value>
+            <value>Hong Kong</value>
+            <value>Hungary</value>
+            <value>Iceland</value>
+            <value>India</value>
+            <value>Ireland, Republic of (EIRE)</value>
+            <value>Isle of Man</value>
+            <value>Israel</value>
+            <value>Italy</value>
+            <value>Japan</value>
+            <value>Jersey</value>
+            <value>Jordan</value>
+            <value>Kuwait</value>
+            <value>Latvia</value>
+            <value>Lithuania</value>
+            <value>Luxembourg</value>
+            <value>Macau</value>
+            <value>Macedonia</value>
+            <value>Malaysia</value>
+            <value>Maldives</value>
+            <value>Malta</value>
+            <value>Mauritius</value>
+            <value>Mexico</value>
+            <value>Moldova</value>
+            <value>Netherlands</value>
+            <value>New Zealand</value>
+            <value>Norway</value>
+            <value>Oman</value>
+            <value>Peru</value>
+            <value>Poland</value>
+            <value>Portugal</value>
+            <value>Qatar</value>
+            <value>Romania</value>
+            <value>Russia</value>
+            <value>Saint Vincent and the Grenadines</value>
+            <value>Samoa</value>
+            <value>Saudi Arabia</value>
+            <value>Seychelles</value>
+            <value>Singapore</value>
+            <value>Slovakia</value>
+            <value>Slovenia</value>
+            <value>South Africa</value>
+            <value>South Korea</value>
+            <value>Spain</value>
+            <value>Sweden</value>
+            <value>Switzerland</value>
+            <value>Taiwan</value>
+            <value>Tunisia</value>
+            <value>United Arab Emirates</value>
+            <value>United Kingdom</value>
+            <value>Uruguay</value>
+            <value>Vanuatu</value>
+        </choice>
+    </define>
+
+    <!-- Currently duplicated in admin-enumerations.rng -->
+    <!--Enumeration of login failure codes.-->
+    <define name="LoginFailureEnum">
+        <choice>
+            <!--The account was closed and therefore the user could not log in.-->
+            <value>ACCOUNT_CLOSED</value>
+            <!--The account is locked or the user has messages waiting for them on the web site.-->
+            <value>ACCOUNT_LOCKED</value>
+            <!--The account is suspended.-->
+            <value>ACCOUNT_SUSPENDED</value>
+            <!--The user name or password were not valid.-->
+            <value>BAD_CREDENTIALS</value>
+            <!--A temporary system error prevented the log in being processed. The log in can be retried later.-->
+            <value>TEMPORARY_SYSTEM_ERROR</value>
+            <!-- The service is not currently available for use. -->
+            <value>SERVICE_UNAVAILABLE</value>
+            <!-- The users IP address resolved to a prohibited location -->
+            <value>LOCATION_PROHIBITED</value>
+            <!-- The password is temporary, and needs to be changed before user can log in -->
+            <value>PASSWORD_CHANGE_REQUIRED</value>
+            <!-- The temporary password has expired, and can no longer be used -->
+            <value>PASSWORD_EXPIRED</value>
+            <!-- The specified protocol version did not match the current supported version -->
+            <value>PROTOCOL_VERSION_INVALID</value>
+        </choice>
+    </define>
+
+    <!-- from old common/enumerations.rng -->
+    <!--Definition of the domain of instrument statuses.-->
+    <define name="InstrumentStatusEnum">
+        <choice>
+            <!--The instrument has been newly created.-->
+            <value>New</value>
+            <!--The instrument is accepting orders.-->
+            <value>Opened</value>
+            <!--The instrument is temporarily not accepting orders.-->
+            <value>Suspended</value>
+            <!--The is closed and waiting to be opened.-->
+            <value>Closed</value>
+            <!--The trades upon the instrument have been settled.-->
+            <value>Settled</value>
+            <!--The instrument is no longer trading.-->
+            <value>Withdrawn</value>
+        </choice>
+    </define>
+
+    <define name="FundsTransferRejectedStatusEnum">
+        <choice>
+            <value>DECLINED</value>
+            <value>TEMPORARY_FAILURE</value>
+            <value>CARD_DETAILS_INVALID</value>
+            <value>PROTOCOL_ERROR</value>
+            <value>SERVICE_UNAVAILABLE</value>
+            <value>DATABASE_FAILED</value>
+            <value>TOO_MANY_CARDS</value>
+            <value>PASSWORD_INVALID</value>
+            <value>UNAUTHORISED</value>
+            <value>THREE_D_SECURE_REQUIRED</value>
+            <value>FRAUD_CHECK_FAILED</value>
+            <value>FRAUD_CHECK_REJECTED</value>
+            <value>FRAUD_CHECK_PENDING</value>
+            <value>PAYMENT_ERROR</value>
+            <value>DOUBLE_AUTHORISATION_INVALID</value>
+        </choice>
+    </define>
+
+    <define name="PaymentCardRemoveFailedReasonEnum">
+        <choice>
+            <value>UNKNOWN_CARD</value>
+        </choice>
+    </define>
+
+    <define name="FundingDisallowedReasonEnum">
+        <choice>
+            <value>KYC</value>
+            <value>CLOSING_ONLY</value>
+            <value>OTHER</value>
+        </choice>
+    </define>
+
+    <define name="FraudCheckRecommendationType">
+        <choice>
+            <value>NOT_CHECKED</value>
+            <value>RELEASE</value>
+            <value>HOLD</value>
+            <value>REJECT</value>
+        </choice>
+    </define>
+
+    <define name="RegistrationLegalEntityType">
+        <choice>
+            <value>UK</value>
+            <value>GERMANY</value>
+            <value>SPAIN</value>
+            <value>NETHERLANDS</value>
+        </choice>
+    </define>
+
+    <define name="TickHistoryContentTypeEnum">
+        <choice>
+            <value>MARKET_DEPTH</value>
+        </choice>
+    </define>
+
+    <define name="MarketDataOrderBookOptionEnum">
+        <choice>
+            <value>BID</value>
+            <value>ASK</value>
+        </choice>
+    </define>
+
+    <define name="MarketDataAggregateOptionEnum">
+        <choice>
+            <value>BID</value>
+            <value>ASK</value>
+        </choice>
+    </define>
+
+    <define name="MarketDataOrderBookFormatEnum">
+        <choice>
+            <value>CSV</value>
+        </choice>
+    </define>
+
+    <define name="MarketDataExecutionFormatEnum">
+        <choice>
+            <value>RAW</value>
+        </choice>
+    </define>
+
+    <define name="MarketDataAggregateFormatEnum">
+        <choice>
+            <value>CSV</value>
+        </choice>
+    </define>
+
+    <define name="MarketDataAggregateResolutionEnum">
+        <choice>
+            <value>MINUTE</value>
+            <value>DAY</value>
+        </choice>
+    </define>
+
+
+</grammar>

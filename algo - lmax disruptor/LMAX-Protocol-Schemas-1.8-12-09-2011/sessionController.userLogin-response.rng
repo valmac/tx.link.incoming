@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <include href="tfx-response.rng">
+        <define name="ResponseBody">
+            <choice>
+                <group>
+                    <ref name="UserDetailsType"/>
+                    <ref name="AvailableAccountsType"/>
+                </group>
+                <group>
+                    <element name="failureType">
+                        <ref name="LoginFailureEnum"/>
+                    </element>
+                    <optional>
+                        <element name="minProtocolVersion">
+                            <ref name="StringType"/>
+                        </element>
+                        <element name="maxProtocolVersion">
+                            <ref name="StringType"/>
+                        </element>
+                    </optional>
+                </group>
+            </choice>
+        </define>
+    </include>
+</grammar>

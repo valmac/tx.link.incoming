@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <start>
+        <ref name="PositionEvent"/>
+    </start>
+
+    <define name="PositionEvent">
+        <choice>
+            <element name="positions">
+                <ref name="PositionPageType"/>
+            </element>
+            <element name="position">
+                <ref name="PositionType" />
+            </element>
+        </choice>
+
+    </define>
+
+    <define name="PositionPageType">
+        <element name="page">
+            <zeroOrMore>
+                <element name="position">
+                    <ref name="PositionType"/>
+                </element>
+            </zeroOrMore>
+        </element>
+        <element name="hasMoreResults">
+            <ref name="BooleanType"/>
+        </element>
+        <element name="correlationId">
+            <ref name="NonEmptyStringType"/>
+        </element>
+    </define>
+
+    <!--A statement of an account's position on an identified instrument
+         ...for accountController.getOpenPositions(offset) and for push position events.-->
+    <define name="PositionType">
+        <interleave>
+            <!--The unique identifier of the account the position relates to.-->
+            <element name="accountId">
+                <ref name="AccountIdType"/>
+            </element>
+            <!--The unique identifier of the instrument the position relates to.-->
+            <element name="instrumentId">
+                <ref name="InstrumentIdType"/>
+            </element>
+            <!-- Cumulative Cost = Long Cost - Short Cost -->
+            <element name="cumulativeCost">
+                <ref name="PriceType"/>
+            </element>
+            <!-- Open Cost = Cumulative Cost - Realised Profit -->
+            <element name="openCost">
+                <ref name="PriceType"/>
+            </element>
+            <!-- Open Quantity = Long Quantity - Short Quantity -->
+            <element name="openQuantity">
+                <ref name="QuantityType"/>
+            </element>
+            <!-- The short unfilled cost -->
+            <element name="shortUnfilledCost">
+                <ref name="PriceType"/>
+            </element>
+            <!-- The long unfilled cost -->
+            <element name="longUnfilledCost">
+                <ref name="PriceType"/>
+            </element>
+            <!--The current total valuation on this instrument (matched and unmatched).-->
+            <element name="valuation">
+                <ref name="PriceType"/>
+            </element>
+        </interleave>
+    </define>
+</grammar>
+

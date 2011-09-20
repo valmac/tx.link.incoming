@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <start>
+        <element name="tickHistoryResponse">
+            <ref name="TickHistoryResponseType"/>
+        </element>
+    </start>
+    
+    <define name="TickHistoryResponseType">
+        <element name="instructionId">
+            <ref name="SuppliedInstructionIdType"/>
+        </element>
+        
+        <choice>
+            <oneOrMore>
+                <element name="tickHistoryFile">
+                    <ref name="TickHistoryFileType"/>
+                </element>
+            </oneOrMore>
+
+            <element name="noMatchingData">
+                <empty />
+            </element>
+            <!-- warning about no results goes here -->
+        </choice>
+    </define>
+</grammar>

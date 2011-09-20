@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+
+    <start>
+        <element name="accountSuspended">
+            <ref name="AccountSuspendedType"/>
+        </element>
+    </start>
+    <!--An event signalling that an account has been suspened.-->
+    <define name="AccountSuspendedType">
+        <!--The unique identifier of the account that was suspended-->
+        <element name="accountId">
+            <ref name="AccountIdType"/>
+        </element>
+    </define>
+
+
+</grammar>

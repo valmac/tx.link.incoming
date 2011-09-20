@@ -1,0 +1,714 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="primitives.rng"/>
+    <include href="public-enumerations.rng"/>
+
+    <define name="PlaceOrderPayload">
+        <interleave>
+            <element name="quantity">
+                <ref name="QuantityType"/>
+            </element>
+            <optional>
+                <element name="stopLossOffset">
+                    <ref name="StopOffsetType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="stopProfitOffset">
+                    <ref name="StopOffsetType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="price">
+                    <ref name="PriceType"/>
+                </element>
+            </optional>
+            <ref name="TimeInForceType"/>
+        </interleave>
+    </define>
+
+    <define name="PlaceStopPayload">
+        <interleave>
+            <element name="instrumentId">
+                <ref name="InstrumentIdType"/>
+            </element>
+            <element name="stopCondition">
+                <element name="price">
+                    <ref name="PriceType"/>
+                </element>
+            </element>
+            <element name="quantity">
+                <ref name="QuantityType"/>
+            </element>
+            <optional>
+                <element name="stopLossOffset">
+                    <ref name="StopOffsetType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="stopProfitOffset">
+                    <ref name="StopOffsetType"/>
+                </element>
+            </optional>
+            <ref name="TimeInForceType"/>
+        </interleave>
+    </define>
+
+    <define name="TimeInForceType">
+        <element name="timeInForce">
+            <ref name="TimeInForceEnum"/>
+        </element>
+    </define>
+
+    <define name="AvailableAccountsType">
+        <element name="availableAccounts">
+            <zeroOrMore>
+                <element name="account">
+                    <element name="accountId">
+                        <ref name="AccountIdType"/>
+                    </element>
+                    <element name="accountName">
+                        <ref name="StringType"/>
+                    </element>
+                </element>
+            </zeroOrMore>
+        </element>
+    </define>
+
+    <define name="UserDetailsType">
+        <!-- logged in user's username. -->
+        <element name="username">
+            <ref name="UsernameType"/>
+        </element>
+        <!-- user's currency -->
+        <element name="currency">
+            <ref name="CurrencyType"/>
+        </element>
+        <!-- logged in user's account id. -->
+        <element name="accountId">
+            <ref name="AccountIdType"/>
+        </element>
+        <element name="accountType">
+            <ref name="AccountTypeType"/>
+        </element>
+        <element name="productType">
+            <ref name="ProductType"/>
+        </element>
+        <!-- logged in user's registration legal entity. -->
+        <element name="registrationLegalEntity">
+            <ref name="RegistrationLegalEntityResponseType"/>
+        </element>
+        <!-- logged in user's locale. -->
+        <element name="displayLocale">
+            <ref name="LocaleType"/>
+        </element>
+        <element name="fundingDisallowed">
+            <ref name="BooleanType"/>
+        </element>
+    </define>
+
+    <define name="RegistrationLegalEntityResponseType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[A-Z ]+</param>
+        </data>
+    </define>
+
+    <define name="Subscription">
+        <element name="subscription">
+            <choice>
+                <!-- The unique identifier of the instrument whose events are required. -->
+                <element name="instrument">
+                    <ref name="InstrumentIdType"/>
+                </element>
+                <!-- The unique identifier of the instrument whose price and status events are required. -->
+                <element name="ob2">
+                    <ref name="InstrumentIdType"/>
+                </element>
+                <!-- The unique identifier of the instrument whose status events are required. -->
+                <element name="orderBookStatus">
+                    <ref name="InstrumentIdType"/>
+                </element>
+                <!-- The from and to currencies. -->
+                <element name="exchangeRate">
+                    <ref name="ExchangeRateReferenceType"/>
+                </element>
+                <!-- A type for a generic subscription (not id specific) -->
+                <element name="type">
+                    <ref name="SubscriptionType"/>
+                </element>
+            </choice>
+        </element>
+        <optional>
+            <element name="longPollKey">
+                <ref name="LongPollKeyType"/>
+            </element>
+        </optional>
+    </define>
+
+    <define name="LongPollKeyType">
+        <ref name="StringType1to20"/>
+    </define>
+
+    <!--Definition of a password. A password can be any valid string.-->
+    <define name="PasswordType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[-0-9a-zA-Z!@#$%\^&#x00A3;&amp;*()_+|~=\\`{}\[\]:";'&lt;&gt;?,./]{8,20}</param>
+        </data>
+    </define>
+
+    <define name="LoginAttemptPasswordType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+
+    <define name="UsernameType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[0-9a-zA-Z\-_]{1,20}</param>
+        </data>
+    </define>
+
+    <define name="CurrencyType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[A-Z]{3}</param>
+        </data>
+    </define>
+
+    <define name="LocaleType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[a-z]{2}(_[A-Z]{2})?</param>
+        </data>
+    </define>
+
+    <define name="CountryType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[a-zA-Z]{2}</param>
+        </data>
+    </define>
+
+    <define name="QuantityType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="totalDigits">19</param>
+            <param name="fractionDigits">2</param>
+        </data>
+    </define>
+
+    <define name="StopOffsetType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minExclusive">0</param>
+            <param name="fractionDigits">5</param>
+        </data>
+    </define>
+
+    <define name="ExchangeRateReferenceType">
+        <interleave>
+            <element name="from">
+                <ref name="CurrencyType"/>
+            </element>
+            <element name="to">
+                <ref name="CurrencyType"/>
+            </element>
+        </interleave>
+    </define>
+
+    <define name="AccountIdType">
+        <ref name="PositiveNonZeroLongType"/>
+    </define>
+
+    <define name="PriceType">
+        <ref name="DecimalType"/>
+    </define>
+
+    <define name="OrderBookIdType">
+        <ref name="PositiveNonZeroLongType"/>
+    </define>
+
+    <!--Definition of an instrument identifier.-->
+    <define name="InstrumentIdType">
+        <ref name="PositiveNonZeroLongType"/>
+    </define>
+
+    <!--A representation of a price and quantity.-->
+    <define name="PricePointType">
+        <!--The price portion.-->
+        <element name="price">
+            <ref name="PriceType"/>
+        </element>
+        <!--The quantity portion.-->
+        <element name="quantity">
+            <ref name="QuantityType"/>
+        </element>
+    </define>
+
+    <define name="ExecutionIdType">
+        <ref name="PositiveNonZeroLongType"/>
+    </define>
+
+    <define name="OrderIdType">
+        <ref name="StringType1to16"/>
+    </define>
+
+    <define name="AccountStateType">
+        <interleave>
+            <!--The unique identifier of the account.-->
+            <element name="accountId">
+                <ref name="AccountIdType"/>
+            </element>
+            <!--The amount of money credited to the account.-->
+            <element name="balance">
+                <ref name="PriceType"/>
+            </element>
+            <!--The amount of money available for trading.-->
+            <element name="availableFunds">
+                <ref name="PriceType"/>
+            </element>
+            <!--The amount of money available for withdraw.-->
+            <element name="availableToWithdraw">
+                <ref name="PriceType"/>
+            </element>
+            <element name="unrealisedProfitAndLoss">
+                <ref name="PriceType"/>
+            </element>
+            <element name="margin">
+                <ref name="PriceType"/>
+            </element>
+            <optional>
+                <element name="onMarginCallExpiryTimestamp">
+                    <ref name="DateTimeType"/>
+                </element>
+            </optional>
+            <element name="wallets">
+                <zeroOrMore>
+                    <element name="wallet">
+                        <element name="currency">
+                            <ref name="CurrencyType"/>
+                        </element>
+                        <element name="balance">
+                            <ref name="PriceType"/>
+                        </element>
+                    </element>
+                </zeroOrMore>
+            </element>
+            <!-- The position of this state in the life span of the account. -->
+            <element name="active">
+                <ref name="BooleanType"/>
+            </element>
+        </interleave>
+    </define>
+
+    <define name="SuppliedInstructionIdType">
+        <ref name="PositiveNonZeroLongType"/>
+    </define>
+
+    <define name="InstructionIdType">
+        <ref name="LongType"/>
+    </define>
+
+    <define name="MarketClosePriceType">
+        <element name="price">
+            <choice>
+                <ref name="PriceType"/>
+                <empty/>
+            </choice>
+        </element>
+        <element name="timestamp">
+            <choice>
+                <ref name="DateTimeType"/>
+                <empty/>
+            </choice>
+        </element>
+    </define>
+
+    <!--Definition of a percentage type.-->
+    <define name="PercentageType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.00</param>
+            <param name="maxInclusive">100.00</param>
+            <param name="fractionDigits">2</param>
+        </data>
+    </define>
+
+    <!-- Definition of a unit cost type -->
+    <define name="UnitPriceType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.01</param>
+            <param name="fractionDigits">2</param>
+        </data>
+    </define>
+
+    <define name="CorrelationIdType">
+        <data type="long" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0</param>
+        </data>
+    </define>
+
+    <define name="CardDateType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">(01|02|03|04|05|06|07|08|09|10|11|12)/\d\d</param>
+        </data>
+    </define>
+
+    <define name="ShortNumberType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[0-9]{1,19}</param>
+        </data>
+    </define>
+
+    <define name="TickHistoryFileType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+
+    <define name="MarketDataUrlType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">1</param>
+        </data>
+    </define>
+
+    <define name="PaymentCardType">
+        <element name="id">
+            <ref name="PaymentCardIdType"/>
+        </element>
+        <element name="accountId">
+            <ref name="AccountIdType"/>
+        </element>
+        <element name="shortNumber">
+            <ref name="ShortNumberType"/>
+        </element>
+        <element name="expiryDate">
+            <ref name="CardDateType"/>
+        </element>
+        <element name="scheme">
+            <ref name="MandatoryGeneralTextEntryType"/>
+        </element>
+        <element name="timestamp">
+            <ref name="DateTimeType"/>
+        </element>
+        <element name="deposits">
+            <ref name="DecimalType"/>
+        </element>
+        <element name="withdrawals">
+            <ref name="DecimalType"/>
+        </element>
+    </define>
+
+    <define name="PaymentCardIdType">
+        <ref name="PositiveNonZeroLongType"/>
+    </define>
+
+    <!--An event signalling an update to an account's bank closed loop details.-->
+    <define name="BankClosedLoopType">
+        <element name="accountId">
+            <ref name="AccountIdType"/>
+        </element>
+        <element name="deposits">
+            <ref name="DecimalType"/>
+        </element>
+        <element name="withdrawals">
+            <ref name="DecimalType"/>
+        </element>
+    </define>
+    <!--Definition of a set of instruments.-->
+    <define name="InstrumentListType">
+        <!--An instrument in the set of instruments.-->
+        <zeroOrMore>
+            <element name="instrument">
+                <ref name="InstrumentType"/>
+            </element>
+        </zeroOrMore>
+    </define>
+
+    <!--Definition of an instrument.-->
+    <define name="InstrumentType">
+        <!--The unique identifier of the instrument.-->
+        <element name="id">
+            <ref name="InstrumentIdType"/>
+        </element>
+        <!--The name of the instrument.-->
+        <element name="name">
+            <ref name="NonEmptyStringType"/>
+        </element>
+        <!--The start time of the instrument.-->
+        <element name="startTime">
+            <ref name="DateTimeType"/>
+        </element>
+        <interleave>
+            <!--The end time of the instrument.-->
+            <optional>
+                <element name="endTime">
+                    <ref name="DateTimeType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="tradingHours">
+                    <ref name="TradingHoursType"/>
+                </element>
+            </optional>
+            <!--The margin value of the instrument.-->
+            <element name="margin">
+                <ref name="PercentageType"/>
+            </element>
+            <element name="currency">
+                <ref name="CurrencyType"/>
+            </element>
+            <!-- The unit cost of the instrument -->
+            <element name="unitPrice">
+                <ref name="UnitPriceType"/>
+            </element>
+            <element name="minimumOrderQuantity">
+                <ref name="MinimumOrderQuantityType"/>
+            </element>
+            <element name="orderQuantityIncrement">
+                <ref name="OrderQuantityIncrementType"/>
+            </element>
+            <element name="minimumPrice">
+                <ref name="PositivePriceType"/>
+            </element>
+            <optional>
+                <element name="maximumPrice">
+                    <ref name="PositivePriceType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="trustedSpread">
+                    <ref name="PositivePriceType"/>
+                </element>
+            </optional>
+            <element name="priceIncrement">
+                <ref name="PriceIncrementType"/>
+            </element>
+            <element name="stopBuffer">
+                <ref name="StopBufferType"/>
+            </element>
+            <element name="assetClass">
+                <ref name="AssetClassType"/>
+            </element>
+            <element name="underlyingIsin">
+                <ref name="UnderlyingIsinType"/>
+            </element>
+            <element name="symbol">
+                <ref name="InstrumentSymbolType"/>
+            </element>
+            <element name="maximumPositionThreshold">
+                <ref name="QuantityType"/>
+            </element>
+            <optional>
+                <element name="aggressiveCommissionRate">
+                    <ref name="CommissionRateAsBasisPointsType"/>
+                </element>
+                <element name="passiveCommissionRate">
+                    <ref name="CommissionRateAsBasisPointsType"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="aggressiveCommissionPerContract">
+                    <ref name="PositivePriceType"/>
+                </element>
+                <element name="passiveCommissionPerContract">
+                    <ref name="PositivePriceType"/>
+                </element>
+            </optional>
+            <element name="minimumCommission">
+                <ref name="PriceType"/>
+            </element>
+            <element name="fundingRatePercentage">
+                <ref name="PositivePercentageType2DP"/>
+            </element>
+            <element name="fundingPremiumPercentage">
+                <ref name="PositiveOrNegativePercentageType"/>
+            </element>
+            <element name="fundingReductionPercentage">
+                <ref name="PositiveOrNegativePercentageType"/>
+            </element>
+            <element name="fundingBaseRate">
+                <ref name="StringType"/>
+            </element>
+            <element name="dailyInterestRateBasis">
+                <ref name="PositiveIntegerType"/>
+            </element>
+            <element name="contractUnitOfMeasure">
+                <ref name="StringType"/>
+            </element>
+            <element name="contractSize">
+                <ref name="UnitPriceType"/>
+            </element>
+            <optional>
+                <optional>
+                    <element name="basisOfSettlement">
+                        <ref name="StringType"/>
+                    </element>
+                </optional>
+                <element name="retailVolatilityBandPercentage">
+                    <ref name="PositivePercentageType2DP"/>
+                </element>
+            </optional>
+            <optional>
+                <element name="tradingDays">
+                    <zeroOrMore>
+                        <element name="tradingDay">
+                            <ref name="DayOfWeekEnum"/>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+
+    <define name="CommissionRateAsBasisPointsType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.00</param>
+            <param name="maxInclusive">1000.00</param>
+            <param name="fractionDigits">2</param>
+        </data>
+    </define>
+
+    <define name="CommissionRateAsPercentageType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.0000</param>
+            <param name="maxInclusive">10.0000</param>
+            <param name="fractionDigits">4</param>
+        </data>
+    </define>
+
+    <define name="StopBufferType">
+        <ref name="PositiveIntType"/>
+    </define>
+    <define name="AssetClassType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{1,20}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="PriceIncrementType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.00001</param>
+            <param name="fractionDigits">5</param>
+        </data>
+    </define>
+    <!--  Definition of a positive percentage 0.00 -> 100.00 with precision scale of 2DP -->
+    <define name="PositivePercentageType2DP">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.0</param>
+            <param name="maxInclusive">100.0</param>
+            <param name="totalDigits">5</param>
+            <param name="fractionDigits">2</param>
+        </data>
+    </define>
+    <define name="TradingHoursType">
+        <element name="openingOffset">
+            <ref name="LongType"/>
+        </element>
+        <element name="closingOffset">
+            <ref name="LongType"/>
+        </element>
+        <element name="timezone">
+            <ref name="TimeZoneIdType"/>
+        </element>
+    </define>
+    <define name="InstrumentSymbolType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{1,20}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="PositivePriceType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0</param>
+            <param name="fractionDigits">5</param>
+        </data>
+    </define>
+    <define name="MinimumOrderQuantityType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0</param>
+            <param name="fractionDigits">2</param>
+        </data>
+    </define>
+    <define name="TimeZoneIdType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">1</param>
+            <param name="maxLength">32</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <!--  Definition of a positive or negative percentage -100.00 -> 100.00 with precision scale of 2DP -->
+    <define name="PositiveOrNegativePercentageType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">-100.0</param>
+            <param name="maxInclusive">100.0</param>
+            <param name="totalDigits">5</param>
+            <param name="fractionDigits">2</param>
+        </data>
+    </define>
+    <define name="UnderlyingIsinType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">0</param>
+            <param name="maxLength">256</param>
+        </data>
+    </define>
+    <define name="OrderQuantityIncrementType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.00001</param>
+            <param name="fractionDigits">5</param>
+        </data>
+    </define>
+
+    <define name="OrderBookMarketDataType">
+        <interleave>
+            <element name="options">
+                <oneOrMore>
+                    <element name="option">
+                        <ref name="MarketDataOrderBookOptionEnum"/>
+                    </element>
+                </oneOrMore>
+            </element>
+            <element name="format">
+                <ref name="MarketDataAggregateFormatEnum"/>
+            </element>
+            <element name="depth">
+                <ref name="MarketDataDepthType"/>
+            </element>
+        </interleave>
+    </define>
+
+    <define name="AggregateMarketDataType">
+        <interleave>
+            <element name="options">
+                <oneOrMore>
+                    <element name="option">
+                        <ref name="MarketDataAggregateOptionEnum"/>
+                    </element>
+                </oneOrMore>
+            </element>
+            <element name="resolution">
+                <ref name="MarketDataAggregateResolutionEnum"/>
+            </element>
+            <element name="format">
+                <ref name="MarketDataAggregateFormatEnum"/>
+            </element>
+            <element name="depth">
+                <ref name="MarketDataDepthType"/>
+            </element>
+        </interleave>
+    </define>
+
+    <define name="ExecutionMarketDataType">
+        <interleave>
+            <element name="format">
+                <ref name="MarketDataExecutionFormatEnum"/>
+            </element>
+        </interleave>
+    </define>
+
+    <define name="MarketDataDepthType">
+        <data type="positiveInteger" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">1</param>
+            <param name="maxInclusive">1</param>
+        </data>
+    </define>
+
+</grammar>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <start>
+        <element name="heartbeat">
+            <ref name="HeartBeatType"/>
+        </element>
+    </start>
+
+    <define name="HeartBeatType">
+        <element name="accountId">
+            <ref name="AccountIdType"/>
+        </element>
+        <element name="token">
+            <text/>
+        </element>
+    </define>
+</grammar>
+

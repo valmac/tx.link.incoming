@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <start>
+        <element name="historicMarketData">
+            <ref name="HistoricMarketDataType"/>
+        </element>
+    </start>
+
+    <define name="HistoricMarketDataType">
+        <element name="instructionId">
+            <ref name="SuppliedInstructionIdType"/>
+        </element>
+
+        <choice>
+            <element name="urls">
+                <oneOrMore>
+                    <element name="url">
+                        <ref name="MarketDataUrlType"/>
+                    </element>
+                </oneOrMore>
+            </element>
+            <element name="noMatchingData">
+                <empty/>
+            </element>
+        </choice>
+    </define>
+</grammar>

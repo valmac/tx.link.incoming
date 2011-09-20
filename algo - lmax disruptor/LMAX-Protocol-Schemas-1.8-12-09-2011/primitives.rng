@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <define name="NonEmptyStringType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">1</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+
+    <define name="MandatoryGeneralTextEntryType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{1,50}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="MandatoryGeneralTextEntryType2to25">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{2,25}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="MandatoryGeneralTextEntryType2to50">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{2,50}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="MandatoryGeneralTextEntryType2to100">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{2,100}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="MandatoryGeneralTextEntryType75">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{1,75}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="MandatoryGeneralTextEntryType100">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{1,100}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="MandatoryGeneralTextEntryType150">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <!--
+                   Accept any unicode letter, number, space, punctuation and mark. This will allow foreign names and names with punctuation such as O'Connor. This
+                   does not include less than or greater than and hence prevents script and HTML injection.
+               -->
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{1,150}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="OptionalGeneralTextEntryType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{0,50}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="OptionalGeneralTextEntryType25">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{0,25}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="OptionalGeneralTextEntryType50">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{0,50}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="OptionalGeneralTextEntryType75">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{0,75}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="OptionalGeneralTextEntryType100">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{0,100}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+    <define name="OptionalGeneralTextEntryType150">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="pattern">[\p{L}\p{N}\p{Zs}\p{P}\p{M}]{0,150}</param>
+            <param name="whiteSpace">collapse</param>
+        </data>
+    </define>
+
+    <define name="StringType">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+    <define name="StringType1Char">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">1</param>
+            <param name="maxLength">1</param>
+        </data>
+    </define>
+    <define name="StringType1to16">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">1</param>
+            <param name="maxLength">16</param>
+        </data>
+    </define>
+    <define name="StringType1to20">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+        </data>
+    </define>
+    <define name="StringType1to100">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">1</param>
+            <param name="maxLength">100</param>
+        </data>
+    </define>
+    <define name="StringType0to65535">
+        <data type="string" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minLength">0</param>
+            <param name="maxLength">65535</param>
+        </data>
+    </define>
+
+    <define name="DecimalType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+    <define name="PositiveDecimalType">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.0</param>
+        </data>
+    </define>
+    <define name="PositiveDecimalType2DP">
+        <data type="decimal" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0.00</param>
+            <param name="fractionDigits">2</param>
+        </data>
+    </define>
+
+    <define name="BooleanType">
+        <data type="boolean" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+
+    <define name="DateTimeType">
+        <data type="dateTime" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+    <define name="DateType">
+        <data type="date" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+
+    <define name="IntType">
+        <data type="int" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+    <define name="PositiveIntType">
+        <data type="int" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0</param>
+        </data>
+    </define>
+    <define name="PositiveNonZeroIntType">
+        <data type="int" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">1</param>
+        </data>
+    </define>
+    <!-- TODO: rationalise int and integer types -->
+    <define name="IntegerType">
+        <data type="integer" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+    <define name="PositiveIntegerType">
+        <data type="positiveInteger" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+    <define name="NonNegativeIntegerType">
+        <data type="nonNegativeInteger" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+    <define name="IntegerTypeMinusOneOrAbove">
+        <data type="integer" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">-1</param>
+        </data>
+    </define>
+
+    <define name="LongType">
+        <data type="long" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"/>
+    </define>
+    <define name="PositiveLongType">
+        <data type="long" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">0</param>
+        </data>
+    </define>
+    <define name="PositiveNonZeroLongType">
+        <data type="long" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+            <param name="minInclusive">1</param>
+        </data>
+    </define>
+</grammar>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <!-- The response when an order is placed. -->
+    <include href="published-datatypes.rng"/>
+    <include href="tfx-response.rng">
+        <define name="ResponseBody">
+            <optional>
+                <!-- The unique identifier of the instruction for the order placed. -->
+                <element name="instructionId">
+                    <ref name="InstructionIdType"/>
+                </element>
+            </optional>
+        </define>
+    </include>
+</grammar>

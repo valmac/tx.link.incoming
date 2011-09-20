@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "account_monitor", "account_monitor.vcproj", "{E0D0EA44-C892-482F-AC12-6698FF48D66F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "market_data", "market_data.vcproj", "{BCB21E63-A582-4689-886C-B82DC41523B8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "place_order", "place_order.vcproj", "{95840758-A5BE-4989-9F8D-354FAD51AC86}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "market_data_detailed", "market_data_detailed.vcproj", "{DB1A86B3-65A0-4216-B5CC-0BB4CF33B06C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0D0EA44-C892-482F-AC12-6698FF48D66F}.Release|Win32.ActiveCfg = Release|Win32
+		{E0D0EA44-C892-482F-AC12-6698FF48D66F}.Release|Win32.Build.0 = Release|Win32
+		{BCB21E63-A582-4689-886C-B82DC41523B8}.Release|Win32.ActiveCfg = Release|Win32
+		{BCB21E63-A582-4689-886C-B82DC41523B8}.Release|Win32.Build.0 = Release|Win32
+		{95840758-A5BE-4989-9F8D-354FAD51AC86}.Release|Win32.ActiveCfg = Release|Win32
+		{95840758-A5BE-4989-9F8D-354FAD51AC86}.Release|Win32.Build.0 = Release|Win32
+		{DB1A86B3-65A0-4216-B5CC-0BB4CF33B06C}.Release|Win32.ActiveCfg = Release|Win32
+		{DB1A86B3-65A0-4216-B5CC-0BB4CF33B06C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

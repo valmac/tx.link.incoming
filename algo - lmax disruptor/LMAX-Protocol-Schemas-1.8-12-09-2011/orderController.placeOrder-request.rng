@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <!-- A request to place a single order. -->
+    <include href="published-datatypes.rng"/>
+    <include href="tfx-request.rng">
+        <define name="RequestBody">
+            <element name="order">
+                <interleave>
+                    <optional>
+                        <element name="instructionId">
+                            <ref name="SuppliedInstructionIdType"/>
+                        </element>
+                    </optional>
+                    <element name="instrumentId">
+                        <ref name="InstrumentIdType"/>
+                    </element>
+                    <ref name="PlaceOrderPayload"/>
+                </interleave>
+            </element>
+        </define>
+    </include>
+</grammar>

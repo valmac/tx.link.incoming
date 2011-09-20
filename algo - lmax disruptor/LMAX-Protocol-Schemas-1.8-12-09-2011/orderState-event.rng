@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <start>
+        <choice>
+            <element name="orders">
+                <ref name="OrderStatePageType"/>
+            </element>
+            <element name="order">
+                <ref name="OrderStateType"/>
+            </element>
+        </choice>
+
+    </start>
+
+    <define name="OrderStatePageType">
+        <element name="page">
+            <zeroOrMore>
+                <element name="order">
+                    <ref name="OrderStateType"/>
+                </element>
+            </zeroOrMore>
+        </element>
+        <element name="hasMoreResults">
+            <ref name="BooleanType"/>
+        </element>
+        <element name="correlationId">
+            <ref name="NonEmptyStringType"/>
+        </element>
+    </define>
+
+    <define name="OrderStateType">
+        <interleave>
+            <element name="instructionId">
+                <ref name="InstructionIdType"/>
+            </element>
+            <optional>
+                <element name="originalInstructionId">
+                    <ref name="InstructionIdType"/>
+                </element>
+            </optional>
+            <element name="orderId">
+                <ref name="OrderIdType"/>
+            </element>
+            <!--The id of the account.-->
+            <element name="accountId">
+                <ref name="AccountIdType"/>
+            </element>
+            <!--The id of the instrument.-->
+            <element name="instrumentId">
+                <ref name="InstrumentIdType"/>
+            </element>
+            <choice>
+                <group>
+                    <element name="quantity">
+                        <ref name="QuantityType"/>
+                    </element>
+                </group>
+                <group>
+                    <element name="price">
+                        <ref name="PriceType"/>
+                    </element>
+                    <element name="quantity">
+                        <ref name="QuantityType"/>
+                    </element>
+                </group>
+            </choice>
+            <!--The portion of the order matched.-->
+            <element name="matchedQuantity">
+                <ref name="QuantityType"/>
+            </element>
+            <!--The portion of the order cancelled.-->
+            <element name="cancelledQuantity">
+                <ref name="QuantityType"/>
+            </element>
+            <optional>
+                <interleave>
+                    <element name="stopReferencePrice">
+                        <choice>
+                            <ref name="PriceType"/>
+                            <empty/>
+                        </choice>
+                    </element>
+                    <element name="stopLossOffset">
+                        <choice>
+                            <ref name="PriceType"/>
+                            <empty/>
+                        </choice>
+                    </element>
+                    <element name="stopProfitOffset">
+                        <choice>
+                            <ref name="PriceType"/>
+                            <empty/>
+                        </choice>
+                    </element>
+                </interleave>
+            </optional>
+            <element name="timestamp">
+                <ref name="DateTimeType"/>
+            </element>
+            <element name="orderType">
+                <ref name="OrderTypeEnum"/>
+            </element>
+            <element name="timeInForce">
+                <ref name="TimeInForceEnum"/>
+            </element>
+            <element name="openQuantity">
+                <ref name="QuantityType"/>
+            </element>
+            <optional>
+                <element name="openingOrderId">
+                    <ref name="StringType"/>
+                </element>
+            </optional>
+            <element name="openCost">
+                <ref name="PriceType"/>
+            </element>
+            <element name="cumulativeCost">
+                <ref name="PriceType"/>
+            </element>
+            <element name="commission">
+                <ref name="PriceType"/>
+            </element>
+            <optional>
+                <!--  Represents an execution report -->
+                <element name="executions">
+                    <!--The identifier of the latest match execution that contributed to the matched position on this instrument.
+         Only present if the account has any matches associated with this position.-->
+                    <element name="executionId">
+                        <ref name="ExecutionIdType"/>
+                    </element>
+                    <zeroOrMore>
+                        <choice>
+                            <!--  An execution at a price point -->
+                            <element name="execution">
+                                <ref name="ExecutionType"/>
+                            </element>
+                            <!--  A cancelled quantity at a price point -->
+                            <element name="orderCancelled">
+                                <ref name="OrderCancellationType"/>
+                            </element>
+                        </choice>
+                    </zeroOrMore>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+
+    <define name="ExecutionType">
+        <!--The price at which the execution occured.-->
+        <element name="price">
+            <ref name="PriceType"/>
+        </element>
+        <!--The quantity that was executed.-->
+        <element name="quantity">
+            <ref name="QuantityType"/>
+        </element>
+        <!--The profit that this execution realised for the overall position on the instrument.-->
+        <optional>
+            <element name="realisedProfit">
+                <ref name="PriceType"/>
+            </element>
+        </optional>
+    </define>
+
+    <define name="OrderCancellationType">
+        <!--The quantity that was cancelled.-->
+        <element name="quantity">
+            <ref name="QuantityType"/>
+        </element>
+    </define>
+</grammar>

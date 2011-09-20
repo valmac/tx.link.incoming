@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <start>
+
+        <!--
+        THIS EVENT IS DEPRECATED.
+
+        PLEASE USE orderBook2-event.rng
+        -->
+        <element name="orderBook">
+            <ref name="OrderBookType"/>
+        </element>
+    </start>
+
+    <!--The prices available on an instrument.-->
+    <define name="OrderBookType">
+        <interleave>
+            <!--The unique identifier for the instrument the prices relate to.-->
+            <element name="instrumentId">
+                <ref name="InstrumentIdType"/>
+            </element>
+            <!--The bid prices, in descending order of best to worst.-->
+            <element name="bids">
+                <zeroOrMore>
+                    <!--A price on the instrument.-->
+                    <element name="pricePoint">
+                        <ref name="PricePointType"/>
+                    </element>
+                </zeroOrMore>
+            </element>
+            <!--The offer prices, in descending order of best to worst.-->
+            <element name="offers">
+                <zeroOrMore>
+                    <!--A price on the instrument.-->
+                    <element name="pricePoint">
+                        <ref name="PricePointType"/>
+                    </element>
+                </zeroOrMore>
+            </element>
+            <element name="lastMarketClosePrice">
+                <ref name="MarketClosePriceType"/>
+            </element>
+            <element name="dailyHighestTradedPrice">
+                <choice>
+                    <ref name="PriceType"/>
+                    <empty/>
+                </choice>
+            </element>
+            <element name="dailyLowestTradedPrice">
+                <choice>
+                    <ref name="PriceType"/>
+                    <empty/>
+                </choice>
+            </element>
+            <element name="valuationBidPrice">
+                <choice>
+                    <ref name="PriceType"/>
+                    <empty/>
+                </choice>
+            </element>
+            <element name="valuationAskPrice">
+                <choice>
+                    <ref name="PriceType"/>
+                    <empty/>
+                </choice>
+            </element>
+            <element name="lastTradedPrice">
+                <choice>
+                    <ref name="PriceType"/>
+                    <empty/>
+                </choice>
+            </element>
+            <element name="exchangeTimestamp">
+                <choice>
+                    <ref name="PositiveLongType"/>
+                    <empty/>
+                </choice>
+            </element>
+        </interleave>
+    </define>
+</grammar>
+

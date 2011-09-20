@@ -1,0 +1,51 @@
+
+Changes since version 1.0.11.0
+================================================================================
+
+- add exchange COMEX
+
+Changes since version 1.0.10.0
+================================================================================
+
+- add exchange NLX for NYSE Liffe US contracts (YG, YI, ZG, ZI)
+
+Changes since version 1.0.5.0
+================================================================================
+
+- add Connection.ReplayTicks() for intraday historical trade ticks,
+  SetOption("intraday_tick", 1) before login to use it
+- add average fill price to position
+- add type to product (Future, Spot, Security)
+- add point value, currency to product info
+- fixed possible crash in order report events
+- fix update limit price on a prepared but not sent stop limit
+- market mode tick fixes
+- other minor fixes
+- update to boost 1.40
+
+Changes since version 1.0.4.0
+================================================================================
+
+- fix issue with misreporting canceled order quantities
+
+Changes since version 1.0.3.0
+================================================================================
+
+- Add option call set timeout, use: Connection.SetOption("timeout", <seconds>);
+- fix incorrect mode ticks on eurex and nybot
+- fix intermittent errors on auto reconnect
+
+Changes since version 1.0.2.0
+================================================================================
+
+- fixed possible deadlock on product lookup
+- fixed subscribe after relogin
+
+Changes since version 1.0.1.0
+================================================================================
+
+- fixed a deadlock on native exception throw
+- StopMarket orders now correctly use TriggerPrice instead of Price
+- added NO CANCEL to "PreOpen" Market Mode
+- Orders are now placed on IOrderArgs.Account instead of default account
+

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <include href="errors.rng"/>
+
+    <start>
+        <element name="instructionRejected">
+            <ref name="InstructionRejectedType"/>
+        </element>
+    </start>
+
+    <!--An event signalling that an order has been rejected.-->
+    <define name="InstructionRejectedType">
+        <interleave>
+            <element name="instructionId">
+                <ref name="InstructionIdType"/>
+            </element>
+            <element name="accountId">
+                <ref name="AccountIdType"/>
+            </element>
+            <optional>
+                <element name="instrumentId">
+                    <ref name="InstrumentIdType"/>
+                </element>
+            </optional>
+            <element name="reason">
+                <ref name="InstructionRejectionEnum"/>
+            </element>
+        </interleave>
+    </define>
+
+</grammar>
+

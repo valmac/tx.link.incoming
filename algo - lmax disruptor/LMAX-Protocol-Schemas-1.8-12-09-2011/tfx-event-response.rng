@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <!--<include href="accountFundingState-event.rng">-->
+        <!--<include href="position-event.rng">-->
+            <!--<start>-->
+                <!--<element name="events">-->
+                    <!--<element name="header">-->
+                        <!--<element name="seq">-->
+                            <!--<ref name="IntegerType"/>-->
+                        <!--</element>-->
+                    <!--</element>-->
+                    <!--<element name="body">-->
+                        <!--<oneOrMore>-->
+                            <!--<choice>-->
+                                <!--<ref name="AccountFundingStateEvent"/>-->
+                                <!--<ref name="PositionEvent"/>-->
+                            <!--</choice>-->
+                        <!--</oneOrMore>-->
+                    <!--</element>-->
+                <!--</element>-->
+            <!--</start>-->
+        <!--</include>-->
+    <!--</include>-->
+
+</grammar>

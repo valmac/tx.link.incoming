@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <include href="tfx-request.rng">
+        <define name="RequestBody">
+            <element name="instructionId">
+                <ref name="InstructionIdType"/>
+            </element>
+            <element name="orderBookId">
+                <ref name="OrderBookIdType"/>
+            </element>
+            <element name="from">
+                <ref name="LongType"/>
+            </element>
+            <element name="to">
+                <ref name="LongType"/>
+            </element>
+            <choice>
+                <element name="orderBook">
+                    <ref name="OrderBookMarketDataType"/>
+                </element>
+                <element name="aggregate">
+                    <ref name="AggregateMarketDataType"/>
+                </element>
+                <element name="execution">
+                    <ref name="ExecutionMarketDataType"/>
+                </element>
+            </choice>
+        </define>
+    </include>
+</grammar>

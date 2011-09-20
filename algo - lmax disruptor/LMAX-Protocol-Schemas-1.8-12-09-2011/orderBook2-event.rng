@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <start>
+        <!--
+           Format of the ob2 element value is:
+
+           InstrumentId ’|’ Timestamp ’|’ Bids ’|’ Asks ’|’ MarketClose ’|’ DailyHigh ’|’ DailyLow ’|’ ValuationBid ’|’ ValuationAsk ’|’ LastTraded
+
+               1. Bids is a string of up to 5 semi-colon separated quantity@price pairs ordered from best to worst e.g. 10@50;10@49;10@48
+               2. Asks is a string of up to 5 semi-colon separated quantity@price pairs ordered from best to worst e.g. 10@51;10@52;10@53
+               3. DailyHigh, DailyLow, ValuationBid, ValuationAsk, LastTraded are all Prices
+               4. Timestamp is formatted as a hexadecimal number
+               5. Numeric values do not contain trailing zeros
+
+                InstrumentId: Long
+                Timestamp: Hex String
+                Bids:  (( Quantity '@' Price ) ';' )* ( Quantity '@' Price )
+                Asks:  (( Quantity '@' Price ) ';' )* ( Quantity '@' Price )
+                MarketClose: Price ';' Timestamp
+                DailyHigh: Price
+                DailyLow: Price
+                ValuationBid: Price
+                ValuationAsk: Price
+                LastTraded: Price
+                Price: Double
+                Quantity: Double
+
+
+        For example:
+
+        4001|1309cde347b|100@1.41969;300@1.41968;10@1.41967;50@1.41966;300@1.41965|200@1.41975;100@1.41978;300@1.41979;10@1.41991;50@1.41992||||1.41969|1.41975|
+
+        -->
+        <element name="ob2">
+            <ref name="StringType"/>
+        </element>
+    </start>
+</grammar>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <start>
+        <!-- A request -->
+        <element name="req">
+            <!-- request id -->
+            <text/>
+            <!-- request body -->
+            <element name="body">
+                <ref name="RequestBody"/>
+            </element>
+        </element>
+    </start>
+
+    <!--Base definition of a request message body.-->
+    <define name="RequestBody">
+        <empty/>
+    </define>
+</grammar>

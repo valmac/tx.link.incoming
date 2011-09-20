@@ -1,0 +1,864 @@
+<html>
+<head>
+    <title>The LMAX .NET API Tutorial</title>
+</head>
+<body> 
+    <h1>
+        The LMAX .NET API</h1>
+    <h2>
+        Contents</h2>
+    <b>
+        <br />
+        <a href="Tutorial.html#1">1. Key Concepts</a>
+        <br />
+        <a href="Tutorial.html#2">2. Notes On Asynchronous Systems</a>
+        <br />
+        <a href="Tutorial.html#3">3. Lets Get Started! - Logging In</a>
+        <br />
+        <a href="Tutorial.html#4">4. Subscribing to Market Data</a>
+        <br />
+        <a href="Tutorial.html#5">5. Placing Orders</a>
+        <br />
+        <a href="Tutorial.html#6">6. Cancelling Orders</a>
+        <br />
+        <a href="Tutorial.html#7">7. Handling Rejects</a>
+        <br />
+        <a href="Tutorial.html#8">8. Handling Errors on Requests</a>
+        <br />
+        <a href="Tutorial.html#9">9. Handling Errors on the Event Stream</a>
+        <br />
+        <a href="Tutorial.html#10">10. Handling Session Disconnection</a>
+        <br />
+        <a href="Tutorial.html#11">11. Using and Amending Stops</a>
+        <br />
+        <a href="Tutorial.html#12">12. Subscribing to Other Events</a>
+        <br />
+        <a href="Tutorial.html#13">13. Requesting Account State</a> 
+	<br />
+        <a href="Tutorial.html#14">14. Retrieve Security Definitions</a>
+	<br />
+        <a href="Tutorial.html#15">15. Retrieve Historic Market Data</a> 		
+	</b>
+    <p />
+    <h3 id="1">
+        1. Key Concepts</h3>
+    <p />
+    <p>
+        The LMAX .NET API is a thin .NET layer over our existing XML over HTTPS (REST) protocol.
+        The goal of the API is to provide a simplified programming model for .NET-based
+        clients connecting to the LMAX Trader platform.</p>
+    <p>
+        The design of the API contains 5 key concepts: Requests, Callbacks, Events, EventListeners,
+        and the Session. Requests and Callbacks are used when making requests to LMAX Trader,
+        e.g. placing orders or subscribing to order book events. EventListeners are used
+        to propagate Events that are received asynchronously from LMAX Trader, e.g. market
+        data or execution reports. The final concept is the Session which is the core interface
+        used to send requests to LMAX Trader or register EventListeners.</p>
+    <h3 id="2">
+        2. Notes On Asynchronous Systems</h3>
+    <p>
+		The protocol used to communicate with LMAX Trader (and therefore the API that
+		sits on top of it) is fundamentally asynchronous. Data is returned from the API
+		through either a Callback as the result of a Request or as an Event passed to
+		an EventListener. For this reason, you may notice that almost all of the
+		methods in the API have void return values.
+	</p>
+	<p>
+		Anyone who has done UI programming, e.g. using Swing or GWT, will find the LMAX
+		API's asynchronous programming model very natural. Programmers who haven't done
+		so may find this programming model counter-intuitive at first, but with a little
+		practice it should become second nature. It may be necessary to become familiar
+		with some slightly more advanced .NET features such as anonymous delegates.
+	</p>
+    <h3 id="3">
+        3. Lets Get Started! - Logging In</h3>
+    <p>
+        To make the initial connection to LMAX Trader, first you need to construct an instance
+        of LmaxApi. LmaxApi only requires a single argument which is the HTTPS URI for LMAX
+        Trader. This would be "https://trade.lmaxtrader.com" for production or "https://testapi.lmaxtrader.com"
+        for the test system.  Don't forget to add both a project reference to the LmaxClientLibrary.dll, and also
+        the 'using' statements you need in each class file</p>
+    <pre>
+    	using Com.Lmax.Api;
+
+    	// ... lines omitted
+
+        public static void Main(string[] args)
+        {
+            string url = "https://testapi.lmaxtrader.com";
+            LmaxApi lmaxApi = new LmaxApi(url);
+        }
+    </pre>
+    <p>
+        Once the LmaxApi instance has been created, the next thing to do is construct a
+        LoginRequest. LoginRequest requires a username and password as part of the constructor.
+        There is an optional third parameter called ProductType which, if left out, defaults to
+        ProductType.CFD_LIVE for connecting to production, but may be set to ProductType.CFD_DEMO
+        to connect to the testapi system.</p>
+    <pre>
+        public static void Main(string[] args)
+        {
+            // ... lines omitted.
+            LoginRequest loginRequest = new LoginRequest("myusername", "mypassword", ProductType.CFD_DEMO);
+            lmaxApi.Login(loginRequest, LoginCallback, FailureCallback("log in"));
+        }
+    </pre>
+	<p>
+        The final step of the login process is to create a LoginCallback. The <code>OnLogin(ISession session)</code> 
+		Callback delegate should be considered the "entry point" of the client application. It is from within this
+		Callback where the application should setup listeners and create subscriptions to the information
+		that it is interested in. It is the point where the Session is provided to the application.
+		A reference to the session should be captured, and held onto for later use. A common pattern is to use 
+		a delegate from inside the main application instance.
+	</p>	
+    <pre>
+    class MyTradingBot
+    {
+        private ISession _session;
+
+        private void LoginCallback(ISession session)
+        {
+            Console.WriteLine("Logged in, account ID: " + session.AccountDetails.AccountId);
+            _session = session;
+
+            // Register EventListeners, subscribe to data and start the session.
+            // More detail on this later.
+        }
+
+        private static OnFailure FailureCallback(string failedFunction)
+        {
+            return failureResponse => Console.Error.WriteLine("Failed to " + failedFunction + " due to: " + failureResponse.Message);
+        }
+
+        public static void Main(string[] args)
+        {
+            MyTradingBot myTradingBot = new MyTradingBot();
+
+            LmaxApi lmaxApi = new LmaxApi("https://testapi.lmaxtrader.com");
+            lmaxApi.Login(new LoginRequest("myusername", "mypassword", ProductType.CFD_DEMO), myTradingBot.LoginCallback, FailureCallback("log in"));
+        }
+    }
+    </pre>
+    <p>
+        Success callbacks such as the LoginCallback above may accept different arguments
+        depending upon the request made. However, failure callbacks will always contain
+        a FailureResponse object. This is covered in more detail in the section on <a href="Tutorial.html#8">
+        Handling Errors on Requests</a>.
+    </p>
+    <h3 id="4">
+        4. Subscribing to Market Data</h3>
+    <p />
+    <p>
+        Now that the application has successfully logged in, it's time to do something useful - 
+        subscribing to some market data. The login call introduced the first two concepts of Requests and 
+		Callbacks. Subscribing to market data involves the remaining three concepts: Events, 
+		EventListeners and the Session. Within the <code>LoginCallback</code>
+        method, the application should first register an order book EventListener, then
+        use the session to send a request to subscribe to the market data for a specific
+        order book. Order book subscriptions are made on a per instrument id basis. The
+        API does not yet have a method for querying for instruments so the application will
+        need the ids for the instruments it would like to use ahead of time.
+    </p>
+    <p>
+        Whenever a price change is pushed out to the client, the delegate method that is
+        the listener for market data will be called, passing in an OrderBookEvent that will
+        contain the current market data for a specific order book. The most common pattern is to make 
+		the main trading application class implement the OrderBookEventListener interface.
+	</p>
+    <p />
+    <p>
+        Once all of the listeners and subscriptions are setup then the application needs
+        to start the session. The start call is very important as it starts the connection
+        to the asynchronous event stream. It should be noted that this call will block until
+        the session is deliberately stopped - typically when the application wants to shutdown.
+        The LMAX .NET API does not use multiple threads internally. However, it does not
+        prevent multi-threaded application being written using the API. The session can
+        be safely used across multiple threads (it will prevent start being called twice
+        on the same session).</p>
+    <pre>
+
+    class MyTradingBot
+    {
+        private const long GBP_USD_INSTRUMENT_ID = 4001;
+
+        public void MarketDataUpdate(OrderBookEvent orderBookEvent)
+        {
+            Console.WriteLine("Market data: {0}", orderBookEvent);
+        }
+
+        public void LoginCallback(ISession session)
+        {
+            session.MarketDataChanged += MarketDataUpdate;
+
+            session.Subscribe(new OrderBookSubscriptionRequest(GBP_USD_INSTRUMENT_ID),
+                    () => Console.WriteLine("Successful subscription"),
+                    failureResponse => Console.Error.WriteLine("Failed to subscribe: {0}", failureResponse));
+
+            session.Start();
+        }
+    }
+</pre>
+    <h3 id="5">
+        5. Placing Orders</h3>
+    <p>
+        The LMAX Trader platform supports a number of different order types and we are continually
+        adding more. This section will just cover the basics of Market and Limit orders.
+        Placing an order is very simple. It is just another case of constructing a request
+        and waiting for a Callback. However, obtaining information as to what happened as
+        a result of placing the order is not as simple. When an order is placed, the web
+        server only parses the request, does some basic validation before sending it asynchronously
+        to the broker. Obtaining the results of the order placement involves subscribing
+        to another type of data, in this case execution reports.</p>
+    <p>
+        The request objects for Market and Limit orders are called MarketOrderSpecification
+        and LimitOrderSpecification. To differentiate between buy orders and sell orders
+        the LMAX Trader uses signed quantities. To place a buy use a positive quantity to
+        place a sell use a negative one.</p>
+    <p>
+        When placing an order, an instructionId must be provided. This should be retained
+        so that it can be used to cancel or amend the order later.</p>
+    <pre>
+    class MyTradingBot
+    {
+        private readonly List&lt;long&gt; _newOrders = new List&lt;long&gt;();
+        private readonly List&lt;long&gt; _pendingOrders = new List&lt;long&gt;();
+        private readonly List&lt;Order.Order&gt; _placedOrders = new List&lt;Order.Order&gt;();
+
+        //Sample order specifications for market and limit buy-orders, with
+        //hard-coded instruction ids
+
+        private readonly MarketOrderSpecification _marketOrderSpecification =
+            new MarketOrderSpecification(1, 4001, +2m, TimeInForce.ImmediateOrCancel);
+
+        private readonly LimitOrderSpecification _limitOrderSpecification =
+            new LimitOrderSpecification(2, 4002, 1.62m, +2m, TimeInForce.GoodForDay);
+        private ISession _session;
+
+        public void MarketDataUpdate(OrderBookEvent orderBookEvent)
+        {
+            if (shouldTradeGivenCurrentMarketData(orderBookEvent))
+            {
+                PlaceMarketOrder(orderBookEvent.InstrumentId, generateNextInstructionId());
+
+                decimal sellPrice = calculateSellPrice(orderBookEvent);
+                PlaceSellLimitOrder(orderBookEvent.InstrumentId, sellPrice, generateNextInstructionId());
+            }
+        }
+
+        public void ExecutionEventListener(Execution execution)
+        {
+            if (_newOrders.Remove(execution.Order.InstructionId))
+            {
+                _placedOrders.Add(execution.Order);
+            }
+        }
+
+        public void PlaceMarketOrder(long instrumentId, long instructionId)
+        {
+            // Place a market order to buy - note that we can re-use an
+            // order specification to place multiple orders but the instructionId
+            // must be reset each time a new order is placed
+            _marketOrderSpecification.InstrumentId = instrumentId;
+
+            _marketOrderSpecification.InstructionId = instructionId;
+            _newOrders.Add(instructionId);
+
+            _session.PlaceMarketOrder(_marketOrderSpecification, PlaceOrderSuccess, OrderPlacementFailureCallback(instructionId, "place market order"));
+        }
+
+        public void PlaceSellLimitOrder(long instrumentId, decimal sellPrice, long instructionId)
+        {
+            // Place a limit order to sell.
+            _limitOrderSpecification.InstrumentId = instrumentId;
+            _limitOrderSpecification.Price = sellPrice;
+            _limitOrderSpecification.Quantity = -2.0m;// Negative to indicate sell
+
+            _limitOrderSpecification.InstructionId = instructionId;
+            _newOrders.Add(instructionId);
+
+            _session.PlaceLimitOrder(_limitOrderSpecification, PlaceOrderSuccess, OrderPlacementFailureCallback(instructionId, "place limit order"));
+        }
+
+        private void PlaceOrderSuccess(long placeOrderInstructionId)
+        {
+            // note - this will be the same instructionId as the one passed to the API,
+            // it confirms this success is related to that specific place order request
+
+            //move from "new" to "pending" to show the order was successfully placed
+            _newOrders.Remove(placeOrderInstructionId);
+            _pendingOrders.Add(placeOrderInstructionId);
+        }
+
+        private OnFailure OrderPlacementFailureCallback(long instructionId, string failedFunction)
+        {
+            return failureResponse =>
+                    {
+                        _newOrders.Remove(instructionId);
+                        Console.Error.WriteLine("Failed to " + failedFunction + " due to: " + failureResponse.Message);
+                    };
+        }
+
+        public void LoginCallback(ISession session)
+        {
+            // ... lines omitted.
+
+            session.OrderExecuted += ExecutionEventListener;
+
+            session.Subscribe(new ExecutionSubscriptionRequest(),
+                        () => Console.WriteLine("Successful subscription"),
+                        failureResponse => Console.Error.WriteLine("Failed to subscribe: {0}", failureResponse));
+
+        }
+    }
+</pre>
+    <h3 id="6">
+        6. Cancelling Orders</h3>
+    <p>
+        Cancelling orders is very similar to placing orders, and shares the same Callback
+        interface. A CancelOrderRequest requires the instrumentId and the instructionId
+        ("originalInstructionId") of the original order that is now being cancelled.
+    </p>
+    <p>
+        On a successful placement of CancelOrderRequest, the instructionId of the CancelOrderRequest
+        is returned.
+    </p>
+    <pre>
+    class MyTradingBot
+    {
+        private Session _session;
+        private readonly long _instrumentId; // .....
+        private readonly List&lt;long&gt; _pendingOrders = new List&lt;long&gt;();
+        private readonly List&lt;long&gt; _workingOrders = new List&lt;long&gt;();
+
+        public void CancelAllOrders()
+        {
+            CancelOrders(_pendingOrders);
+            CancelOrders(_workingOrders);
+        }
+
+        public void CancelOrders(List&lt;long&gt; instructionIds)
+        {
+            foreach (long originalInstructionId in instructionIds)
+            {
+                long cancelRequestInstructionId = generateNextInstructionId();
+                _session.CancelOrder(new CancelOrderRequest(_instrumentId, originalInstructionId, cancelRequestInstructionId),
+                        instructionId => Console.WriteLine("Cancel order instruction placed: {0:d}", instructionId),
+                        failureResponse => Console.WriteLine("Failed to cancel order: %s%n", failureResponse));
+            }
+        }
+    }
+</pre>
+    <h3 id="7">
+        7. Handling Rejects</h3>
+    <p>
+        Because the LMAX Trader platform is asynchronous it is not possible for all classes
+        of order failures to be handled in the Failure Callback. A Request may be syntactically
+        valid, but could be rejected at some point later by the Broker or the MTF. Possible
+        reasons for rejections could include: EXPOSURE_CHECK_FAILURE or INSUFFICIENT_LIQUIDITY
+        (full set available in instructionRejected-event.rng). These events are returned
+        in the same way that executions are returned, via the event stream. So to be notified
+        of rejection events it is necessary to register an InstructionRejected listener
+        with the session. There is no specific subscription for instruction rejects, using
+        ExecutionSubscriptionRequest will also subscribe to instruction rejected events.</p>
+    <pre>
+    class MyTradingBot
+    {
+        private void FailOnInstructionRejected(InstructionRejectedEvent instructionRejected)
+        {
+            Console.WriteLine("Rejection received: {0}", instructionRejected);
+        }
+
+        public void LoginCallback(ISession session)
+        {
+            // ... lines omitted.
+
+            session.InstructionRejected += FailOnInstructionRejected;
+            //should be subscribe to this once only, and it will fire the instruction reject and execution listeners
+            session.Subscribe(new ExecutionSubscriptionRequest(),
+                        () => Console.WriteLine("Successful subscription"),
+                        failureResponse => Console.Error.WriteLine("Failed to subscribe: {0}", failureResponse));
+
+        }
+    }
+</pre>
+    <h3 id="8">
+        8. Handling Errors on Requests</h3>
+    <p>
+        The failure Callback can be invoked in two different scenarios, and the FailureResponse
+        has a flag called <code>IsSystemFailure</code> to differentiate between them.</p>
+    <p>
+        The first is application failures. This is where the request has been successfully
+        received and responded to by the LMAX Trader, however the system has detected that
+        there is an error in the data, e.g. the price is negative or the quantity is zero.
+        For this scenario, <code>IsSystemFailure</code> will be false, as the failure is
+        not the result of the Request encountering a system issue.</p>
+    <p>
+        The flag will be set to true if some sort of system error was encountered while
+        processing the request. This could include IOExceptions as a result of a network
+        connectivity problem or a SAXParseException due to some corrupt data. If the FailureResponse
+        was the result of an exception, the exception can be obtained by calling <code>Exception</code>
+        on the FailureResponse. Not all system failures will be the result of an exception,
+        e.g. if the response to the HTTP result was not an "200 OK" then a system failure
+        will be generated. The actual response code will be in the <code>Message</code>
+        part of the FailureResponse.</p>
+    <pre>
+        public OnFailure FailureCallback(string failedFunction)
+        {
+            return failureResponse =>
+                       {
+
+                           if (!failureResponse.IsSystemFailure)
+                           {
+                               Console.Error.WriteLine("Data Error - Message: {0}, Description: {1}",
+                                                       failureResponse.Message,
+                                                       failureResponse.Description);
+                           }
+                           else
+                           {
+                               Exception e = failureResponse.Exception;
+                               if (null != e)
+                               {
+                                   Console.Error.WriteLine(e.StackTrace);
+                               }
+                               else
+                               {
+                                   Console.Error.WriteLine("System Error - Message: {0}, Description: {1}",
+                                                           failureResponse.Message,
+                                                           failureResponse.Description);
+                               }
+                           }
+                       };
+        }
+</pre>
+    <h3 id="9">
+        9. Handling Errors on the Event Stream</h3>
+    <p>
+        The other place that errors can occur, specifically system errors, is on the event
+        stream. By default these errors are hidden - if a failure occurs on the event stream
+        (e.g. the stream is disconnected) it will automatically retry the connection. However,
+        if an API client requires notification of an error that has occurred, it is possible
+        to add an EventListener that will be called back any time an exception occurs on
+        the event stream. The sole parameter passed to the listener registered with <code>EventStreamFailed</code>,
+        is the Exception that occurred. The API client can make a decision about how it
+        would like to proceed. If the API client would like to reconnect to the event stream,
+        then no action is necessary, though it may wish to log the exception. However, if
+        the client would like to shutdown, then the stop method on Session can be used to
+        shutdown the API client. The stop method should only be used when the client actually
+        wants to shutdown. It is possible to start and stop the session multiple times,
+        but it is not recommended practice.</p>
+    <pre>
+    class MyTradingBot
+    {
+        private ISession _session;
+
+        public void NotifyStreamFailure(Exception exception)
+        {
+            if (ShouldClientExit(exception))
+            {
+                _session.Stop();
+            }
+        }
+
+        public void LoginCallback(Session session)
+        {
+            _session = session;
+            session.EventStreamFailed += NotifyStreamFailure;
+            session.Start();  // This method will exit when session.stop is called.
+        }
+    }
+</pre>
+
+<h3 id="10">10. Handling Session Disconnection</h3> 
+ 
+<p>It is possible for the LMAX Exchange to log you out and disconnect your session.  This may
+    happen if there have not been any requests on the session for a period (usually around 15 minutes),
+    or if your account has been locked.  Timeouts can be avoided by making heartbeat requests
+    every 5 minutes or so.
+</p><p> 
+    If your session has been disconnected, reconnecting the session is not possible, so this does not
+    happen automatically as it does for stream failures.  A new session must be created by logging in again.
+    In order to be notified of your session being disconnected, you must set a EventStreamSessionDisconnected delegate.
+    An implementation might be to attempt to log in again, or exit the program.
+</p> 
+<pre> 
+    class MyTradingBot
+    {
+        private ISession _session;
+        private int _reconnectCount;
+
+        public void NotifySessionDisconnect()
+        {
+            if (++_reconnectCount &lt;= 3)
+            {
+                Console.WriteLine("Session disconnected - attempting to log in again (attempt " + _reconnectCount + ")");
+                _lmaxApi.login(...);
+            }
+            else
+            {
+                Console.WriteLine("Session disconnected - aborting after too many reconnect attempts");
+            }            
+        }
+
+        public void LoginCallback(Session session)
+        {
+            _session = session;
+            session.EventStreamSessionDisconnected += NotifySessionDisconnect;
+            session.Start();  // This method will exit when session.stop is called.
+        }
+    }
+</pre> 
+
+    <h3 id="11">
+        11. Using and Amending Stops</h3>
+    <p>
+        The LMAX Trader platform supports stop loss and stop profit offsets for both limit
+        and market orders. Stops can be specified either in the constructor for the relevant
+        Limit or Market order specification, or by using the properties StopLossPriceOffset
+        and StopProfitPriceOffset.</p>
+    <pre>
+    class MyTradingBot
+    {
+        private readonly List&lt;long&gt; _newOrders = new List&lt;long&gt;();
+        private readonly List&lt;long&gt; _pendingOrders = new List&lt;long&gt;();
+
+        private readonly MarketOrderSpecification _marketOrderSpecification =
+            new MarketOrderSpecification(0, 100, 2.0m, TimeInForce.ImmediateOrCancel, 0.1m, 0.2m);
+
+        private readonly LimitOrderSpecification _limitOrderSpecification =
+            new LimitOrderSpecification(1, 101, 1.0m, 0.0m, TimeInForce.GoodForDay);
+
+        private ISession _session;
+
+        public void PlaceMarketOrder(long instrumentId, long instructionId)
+        {
+            // Place a market order to buy, note that we can re-use an
+            // order specification to place multiple orders but the instructionId
+            // must be reset each time a new order is placed
+            _marketOrderSpecification.InstrumentId = instrumentId;
+
+            _marketOrderSpecification.InstructionId = instructionId;
+            _newOrders.Add(instructionId);
+
+            _session.PlaceMarketOrder(_marketOrderSpecification, PlaceOrderSuccess, PlaceOrderFailure(instructionId, "place market order"));
+        }
+
+        public void PlaceSellLimitOrder(long instrumentId, decimal sellPrice, long instructionId)
+        {
+            // Place a limit order to sell.
+            _limitOrderSpecification.InstrumentId = instrumentId;
+            _limitOrderSpecification.Price = sellPrice;
+            _limitOrderSpecification.Quantity = -2.0m;// Negative to indicate sell
+            _limitOrderSpecification.StopLossPriceOffset = 0.2m;
+
+            _limitOrderSpecification.InstructionId = instructionId;
+            _newOrders.Add(instructionId);
+
+            _session.PlaceLimitOrder(_limitOrderSpecification, PlaceOrderSuccess, PlaceOrderFailure(instructionId, "place sell limit order"));
+        }
+
+        private void PlaceOrderSuccess(long placeOrderInstructionId)
+        {
+            // note - this will be the same instructionId passed on the place order call,
+            // it confirms this success is related to that specific place order request
+
+            //move from "new" to "pending" to show the order was successfully placed
+            _newOrders.Remove(placeOrderInstructionId);
+            _pendingOrders.Add(placeOrderInstructionId);
+        }
+
+        private OnFailure PlaceOrderFailure(long instructionId, string failedFunction)
+        {
+            return failureResponse =>
+                    {
+                        _newOrders.Remove(instructionId);
+                        Console.Error.WriteLine("Failed to " + failedFunction + " due to: " + failureResponse.Message);
+                    };
+        }
+    }
+</pre>
+    <p>
+        Stops can also be amended after the order was placed, using the AmendStopLossProfitRequest.
+        An important point to remember is that a null will remove a previously specified
+        stop. So, if you only want to remove one of the stops (e.g. stop loss) you should
+        remember to respecify the other one if required (e.g. stop profit).</p>
+    <pre>
+    class MyTradingBot
+    {
+        private readonly List&lt;long&gt; _amendInstructions = new List&lt;long&gt;();
+
+        private ISession _session;
+
+        public void AmendStops(long instrumentId, long originalInstructionId, long instructionId,
+                           decimal stopLossOffset, decimal stopProfitOffset)
+        {
+            _session.AmendStops(new AmendStopLossProfitRequest(instrumentId, originalInstructionId, instructionId,
+                                                     stopLossOffset, stopProfitOffset), AmendSuccess, AmendFailure);
+        }
+
+        public void RemoveStopLoss(long instrumentId, long originalInstructionId, long instructionId, decimal oldStopProfitOffset)
+        {
+            // Use the oldStopProfitOffset to retain the stop profit for the order.
+            _session.AmendStops(new AmendStopLossProfitRequest(instrumentId, originalInstructionId, instructionId,
+                                                     null, oldStopProfitOffset), AmendSuccess, AmendFailure);
+        }
+
+        private void AmendSuccess(long amendRequestInstructionId)
+        {
+            _amendInstructions.Add(amendRequestInstructionId);
+        }
+
+        private void AmendFailure(FailureResponse failureResponse)
+        {
+            Console.WriteLine("Failed to amend stop: {0}", failureResponse);
+        }
+    }
+</pre>
+    <p>
+        Amending a stop may fail - for example, if the stop has already fired.</p>
+		
+	<h3 id="12">12. Subscribing to Other Events</h3>
+
+	<p>
+		As well as being able to <a href="Tutorial.html#4">subscribe to market data</a>, the
+		API allows you to subscribe to other types of event. These are all described further
+		on the Session interface. In each case, you need to add an event listener, then
+		subscribe to the event.</p>
+	<dl>
+		<dt>Account State:</dt>
+		<dd>
+			These allows you to keep track of your current balance, funds available to trade,
+			etc. Whenever an account state change is pushed out to the client, the delegate 
+			registered as the AccountStateUpdated listener will be called, passing in an 
+			AccountStateEvent that will contain the latest details for your account.
+		</dd>
+		<dt>Execution:</dt>
+		<dd>
+			These describe executions on your orders, i.e. fills.
+		</dd>
+		<dt>Order Book Status:</dt>
+		<dd>
+			These describe order book status changes like the start of day Open event, end of
+			day Close event, and other statii like Suspended.
+		</dd>
+		<dt>Order Events:</dt>
+		<dd>
+			These describe changes to your orders, e.g. if you add a stop loss to an order.
+		</dd>
+		<dt>Position Events:</dt>
+		<dd>
+			These describe overall position changes, which happen on fills, cancels, etc.
+		</dd>
+		<dt>Order Book Events:</dt>
+		<dd>
+			These describe market price changes (this is a high volume event stream).
+		</dd>
+	</dl>
+
+	<p>For example, subscribing to AccountState events:</p>
+    <pre>
+    class MyTradingBot
+    {
+        public void OnAccountStateEvent(AccountStateEvent accountStateEvent)
+        {
+            Console.WriteLine("Account state: {0}", accountStateEvent);
+        }
+        public void LoginCallback(ISession session)
+        {
+            session.AccountStateUpdated += OnAccountStateEvent;
+            session.Subscribe(new AccountSubscriptionRequest(),
+                    () => Console.WriteLine("Successful subscription"),
+                    failureResponse => Console.Error.WriteLine("Failed to subscribe: {0}", failureResponse));
+
+            session.Start();
+        }
+    }
+	</pre>
+    <p>
+        NB for simplicity the above example does not include a market data subscription,
+        but it is perfectly permissible for a client to subscribe for both types of events
+        at once</p>
+    <h3 id="13">
+        13. Requesting Account State</h3>
+    <p>
+        As well as subscribing to account state changes as they happen, the API allows you to request the current account state.
+		This will result in an AccountStateEvent being issued immediately. To receive the event you need to have subscribed to
+		AccountStateEvents as described above.
+	</p>
+    <p />
+    <pre>
+    class MyTradingBotAccountState
+    {
+        private ISession _session;
+
+        public void OnAccountStateEvent(AccountStateEvent accountStateEvent)
+        {
+            Console.WriteLine("Account state: {0}", accountStateEvent);
+        }
+
+        public void LoginCallback(ISession session)
+        {
+            _session = session;
+            _session.AccountStateUpdated += OnAccountStateEvent;
+
+            session.Subscribe(new AccountSubscriptionRequest(), SubscriptionCallback,
+                failureResponse => Console.Error.WriteLine("Failed to subscribe: {0}", failureResponse));
+
+            _session.Start();
+        }
+
+        private void SubscriptionCallback()
+        {
+            _session.RequestAccountState(new AccountStateRequest(),
+                () => Console.WriteLine("AccountStateRequest sent"),
+                failureResponse => Console.Error.WriteLine("AccountStateRequest failed"));
+        }
+    }
+    </pre>
+	<h3 id="14">14. Retrieve Security Definitions</h3>
+
+	<p> The API allows you to retrieve security definitions. To do this create a <code>SearchRequest</code> and provide an implementation of
+		<code>OnSearchResponse</code>.
+	<p> There are 2 main forms of the query string:</p>
+	<ul>
+		<li>To find a specific instrument the "id: (instrumentId)" form can be used.</li>
+		<li>To do a general search, use a term such as "CURRENCY", which will find all of the currency instruments.
+			A search term like "UK" will find all of the instruments that have "UK" in the name.
+		</li>
+	</ul>
+	<p>On a successful call the results will be returned in a <code>List&lt;Instrument&gt;</code> containing the first 25 results,
+		ordered alphabetically by name. If there are more results, the parameter <code>hasMoreResults</code> will be set to <code>true</code>. To retrieve
+		the next 25 instruments do another search, passing the id from the last instrument as the <code>offsetInstrumentId</code> of this new search.
+	</p>
+	<p>For example:
+	</p>
+	<pre>
+    class MyTradingBotAccountState
+    {
+        private ISession _session;
+
+        public void LoginCallback(ISession session)
+        {
+            string query = ""; // see above for how to do a more specific search
+            long offsetInstrumentId = 0; // see above for more details on this offset parameter
+			
+            _session = session;            
+
+            session.SearchInstruments(new SearchRequest(query, offsetInstrumentId), SearchCallback,
+                failureResponse => Console.Error.WriteLine("Failed to subscribe: {0}", failureResponse));
+
+            _session.Start();
+        }
+
+        private void SearchCallback(List&lt;Instrument&gt; instruments, bool hasMoreResults)
+        {
+            Console.WriteLine("Instruments Retrieved: {0}", instruments);
+            if(hasMoreResults)
+            {
+                Console.WriteLine("To continue retrieving all instruments please start next search from: {0}", instruments.get(instruments.size() - 1));
+            }
+        }
+    }
+	</pre>	
+
+<h3 id="15">15. Retrieving Historic Market Data</h3>
+    <p>In addition to subscribing to real-time market data, the API provides a mechanism for retrieving historic market data.  
+Two types of historic market data are supported:</p>
+    <ul>
+      <li><code>TopOfBookHistoricMarketDataRequest</code> - Best bid & ask tick data.</li>
+      <li><code>AggregateHistoricMarketDataRequest</code> - Aggregated price & volume data by day or minute.</li>
+    </ul>
+
+    <p>The data is delivered as a gzip-compressed CSV file.</p>
+
+    <p>The following steps are required to receive historic market data:</p>
+    <ol>
+        <li>Implement and register a historic market data delegate
+        <li>Subscribe to historic market data events
+        <li>Make historic market data requests
+        <li>Retrieve URLs within an authenticated session
+    </ol>
+
+    <p>
+      The code snipets below are extracted from the class <code>HistoricMarketDataRequester</code> in the API samples.
+    </p>
+
+    <h4 id="15.1">15.1. Implement and register a historic market data delegate</h4>
+<p>To receive historic market data, you must first implement a delegate matching the signature of <code>LmaxApi.OnHistoricMarketDataEvent</code> and 
+register the delegate with the session:</p>
+
+<pre>
+// Implement the delegate
+private void OnHistoricMarketData(long instructionId, List<Uri> uris)
+{
+    // do something with the URIs... see section 15.4 for a sample implementation
+}
+
+// Register the delegate
+_session.HistoricMarketDataReceived += OnHistoricMarketData;
+</pre>
+
+    <h4 id="15.2">15.2. Subscribe to historic market data events</h4>
+
+Use the standard <code>_session.Subscribe()</code> mechanism to subscribe to historic market data requests:
+
+<pre>
+_session.Subscribe(new HistoricMarketDataSubscriptionRequest(),
+                    () => Console.WriteLine("Successful subscription"),
+                    failureResponse => Console.Error.WriteLine("Failed to subscribe: {0}", failureResponse));
+</pre>
+
+As with other subscriptions, you can <code>Subscribe</code> before you call <code>_session.Start()</code>.
+
+    <h4 id="15.3">15.3. Make historic market data requests</h4>
+
+<p>To request historic market data for a specific instrument and date range, create an instance of <code>TopOfBookHistoricMarketDataRequest</code> or 
+<code>AggregateHistoricMarketDataRequest</code> and call the <code>requestHistoricMarketData</code> method on the session:</p>
+
+<pre>
+_session.RequestHistoricMarketData(new AggregateHistoricMarketDataRequest(instructionId, instrumentId,
+                                                                            DateTime.Parse("2011-05-11"),
+                                                                            DateTime.Parse("2011-06-13"),
+                                                                            Resolution.Day, Format.Csv,
+                                                                            Option.Bid),
+                                    () => Console.WriteLine("Successful request"),
+                                    failureResponse => Console.Error.WriteLine("Failed request: {0}", failureResponse));
+</pre>
+
+    <h4 id="15.4">15.4. Retrieve URLs within an authenticated session</h4>
+    <p>
+When the data is ready, the delegate you registered in step 15.1 will receive an asynchronous message with a list of URLs.  
+The asynchronous message also includes the instructionId you included with the request.  
+    </p>
+
+    <p>
+The URLs must be retrieved using an authenticated connection.  You can use the session's <code>OpenUri()</code> method to
+open each URL.  The files at the URLs are compressed with gzip.  The code snippet below shows how to 
+retrieve the URL and print out the uncompressed data:
+    </p>
+
+    <pre>
+private void OnHistoricMarketData(long instructionId, List<Uri> uris)
+{
+    foreach (var uri in uris)
+    {
+        _session.OpenUri(uri, OnUriResponse, FailureCallback("open uri"));
+    }
+}
+
+private static void OnUriResponse(Uri uri, BinaryReader reader)
+{
+    using (var stream = new GZipStream(reader.BaseStream, CompressionMode.Decompress))
+    {
+        const int size = 1024;
+        var buffer = new byte[size];
+        var numBytes = stream.Read(buffer, 0, size);
+        while (numBytes > 0)
+        {
+            Console.Write(Encoding.UTF8.GetString(buffer, 0, numBytes));
+            numBytes = stream.Read(buffer, 0, size);
+        }
+    }
+}
+    </pre>
+</body>
+</html>

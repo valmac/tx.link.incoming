@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    
+    <start>
+        <element name="orderBookStatus">
+            <ref name="OrderBookStatusType"/>
+        </element>
+    </start>
+
+
+    <define name="OrderBookStatusType">
+        <interleave>
+            <element name="id">
+                <ref name="InstrumentIdType"/>
+            </element>
+            <element name="status">
+                <ref name="InstrumentStatusEnum"/>
+            </element>
+            <optional>
+                <element name="phoneTradingAvailable">
+                    <empty/>
+                </element>
+            </optional>
+        </interleave>
+    </define>
+</grammar>
+

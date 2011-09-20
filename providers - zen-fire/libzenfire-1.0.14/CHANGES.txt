@@ -1,0 +1,189 @@
+
+Changes since version 1.0.11
+================================================================================
+
+- add exchange COMEX
+
+Changes since version 1.0.10
+================================================================================
+
+- add exchange NLX for NYSE Liffe US contracts (YG, YI, ZG, ZI)
+
+Changes since version 1.0.9
+================================================================================
+
+- fix update limit price on a prepared but not sent stop limit
+
+Changes since version 1.0.7
+================================================================================
+
+- fix alert up not firing unless intraday tick connection is used
+
+Changes since version 1.0.6
+================================================================================
+
+- added type to product (FUTURE, SPOT, SECURITY)
+- remove sstream from create
+- fix issue with product specs not being populated
+- disable intraday tick connection by default
+
+Changes since version 1.0.5
+================================================================================
+
+- add client->replay_ticks() for intraday historical trade ticks
+- market mode tick fixes
+- fixed possible crash in order report events
+- other minor fixes
+- version check library vs header on create
+- update to boost 1.40
+
+Changes since version 1.0.4
+================================================================================
+
+- block for point_value on lookup_product()
+
+Changes since version 1.0.3
+================================================================================
+
+- fix point_value initilization, add has_point_value
+
+Changes since version 1.0.2
+================================================================================
+
+- add define ZENFIRE_NO_AUTOLINK to disable auto linking
+- move open/close PL to position_t, remove product_pl
+- add average position fill price
+- add point value to product info
+- add FXCM_R and ICE exchanges
+
+Changes since version 1.0.1
+================================================================================
+
+- fix issue with misreporting canceled order quantities
+
+Changes since version 1.0.0
+================================================================================
+
+- fix incorrect mode ticks on eurex and nybot
+- fix intermittent errors on auto reconnect
+
+Changes since version 0.20.0
+================================================================================
+
+- added generic quantity and price fields to order reports, these are used on
+  both fill and cancel reports
+- added option "term_replay" to terminate order/position replays with event
+  type [report|position]::END_OF_REPLAY
+
+Changes since version 0.18.2
+================================================================================
+
+- fixed a possible deadlock in product lookup
+- logout will send alert down event 
+- fixed issues with attempting login with invalid user/pass
+- fixed product subscribe after relogin
+
+Changes since version 0.18.1
+================================================================================
+
+- fixed internal race condition
+
+Changes since version 0.18.0
+================================================================================
+
+- fixed order update failures being reported as rejects
+
+Changes since version 0.17.0
+================================================================================
+
+- fixed a bug causing lookup_product() to hang on some products
+- fixed a couple trivial bugs
+
+Changes since version 0.16.0
+================================================================================
+
+- add mode_t and tick callback for market mode
+- remove case sensitivity from product
+- remove get_dom(), add subscribe::SNAPSHOT flag to get current market depth
+- by default subscribe_account() replays any open orders, use SNAPSHOT to get all orders
+- remove list_pl(), replace with request_pl()
+- remove list orders functions, replace with request_orders()
+- add order::report::replay_t for replaying requested orders
+
+Changes since version 0.15.1
+================================================================================
+
+- changed account_subscribe default to ALL
+- changed arg::order::qty from unsigned to int
+- renamed report types NOTMODIFIED to UPDATE_FAIL and NOTCANCELED to CANCEL_FAIL
+- add report events for UPDATE_FAIL CANCEL_FAIL
+- add message() to report, to add human readble report detail where needed
+- fixed chance of login error after login failed
+
+Changes since version 0.15.0
+================================================================================
+
+- renamed order->open() to order->qty_opened()
+- renamed order->filled() to order->qty_filled()
+- renamed order->canceled() to order->qty_canceled()
+- order update functions can now be called without argument to get current update value
+- fix order->status() on orders not initiated from current connection
+- fix issue causing list_* snapshot functions to sometimes erroneously come back empty
+- disabled list_pl() so it doesn't return anything - account_subscribe() now triggers any product_pl_t callbacks currently open on account
+
+Changes since version 0.13.0
+================================================================================
+
+- account_subscribe() now fires account::profitloss_t callback if data is available
+- fix login()/logout() bug
+- add exchanges KCBT and MGEX
+- fix order_t::filled(), order_t::canceled()
+- fix order->reason() when canceled
+- total volume is moved to tick::size
+- rename windows library to libzenfire.lib to match linux version
+
+Changes since version 0.12.0
+================================================================================
+
+- separate subscription flags further, added VOLUME and EXTREME
+- rename list_orders() to list_open_orders(), add list_orders()
+- various bug fixes
+
+Changes since version 0.11.0
+================================================================================
+
+- add support for Live environment
+- order_t: added action(), duration(), message(), context(), tag(), zentag()
+- client_t: added list_exchanges()
+- client_t: fix list_pl(), list_orders()
+- tick: add daily trade volume, tick::volume_t
+- arg::order: renamed usertag to zentag
+
+
+Changes since version 0.10.0
+================================================================================
+
+- product_t: exchange is now an enum, it can be converted to and from a string
+  with the functions exchange::to_string() and exchange::from_string()
+- client_t: renamed systems to environments
+- client_t: renamed symbol_t to product_t
+- client_t: renamed zenfire open and close functions to login and logout
+- client_t: renamed systems to environments
+- profitloss_t: combined buy_margin and sell_margin to just margin
+
+
+Changes since version 0.9.0
+================================================================================
+
+- added order placement example
+- moved order action and duration types from namespace zenfire::arg::order to
+  namespace zenfire::order
+- removed default duration from all arg::order types
+- made client and order objects noncopyable
+- fixed client::create in windows so absolute paths can be used for cert path
+- minor bug fixes
+
+
+================================================================================
+================================================================================
+

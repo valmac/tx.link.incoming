@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="tslight">
+</Property><Property Name="Solution File" Value="F:\.repo\tx.link.incoming\providers - transaq\tslight\tslight.sln">
+</Property><Property Name="Date" Value="20 сентября 2011 г.">
+</Property><Property Name="Time" Value="8:45:20">
+</Property></Properties><Event ErrorLevel="0" Project="tslight" Source="tslight.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="tslight" Source="tslight.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="tslight" Source="tslight.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

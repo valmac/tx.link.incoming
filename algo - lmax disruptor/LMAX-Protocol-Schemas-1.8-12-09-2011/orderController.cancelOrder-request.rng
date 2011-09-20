@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <!-- A request to cancel all orders on an instrument. -->
+    <include href="published-datatypes.rng"/>
+    <include href="tfx-request.rng">
+        <define name="RequestBody">
+            <interleave>
+                <element name="instrumentId">
+                    <ref name="InstrumentIdType"/>
+                </element>
+                <optional>
+                    <element name="instructionId">
+                        <ref name="SuppliedInstructionIdType"/>
+                    </element>
+                </optional>
+                <element name="originalInstructionId">
+                    <ref name="InstructionIdType"/>
+                </element>
+            </interleave>
+        </define>
+    </include>
+</grammar>

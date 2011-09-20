@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <start>
+        <element name="instrument">
+            <interleave>
+                <element name="id">
+                    <ref name="InstrumentIdType"/>
+                </element>
+                <element name="name">
+                    <ref name="NonEmptyStringType"/>
+                </element>
+                <element name="startTime">
+                    <ref name="DateTimeType"/>
+                </element>
+                <optional>
+                    <element name="endTime">
+                        <ref name="DateTimeType"/>
+                    </element>
+                </optional>
+                <element name="margin">
+                    <ref name="PercentageType"/>
+                </element>
+                <element name="unitPrice">
+                    <ref name="UnitPriceType"/>
+                </element>
+            </interleave>
+        </element>
+    </start>
+</grammar>
+

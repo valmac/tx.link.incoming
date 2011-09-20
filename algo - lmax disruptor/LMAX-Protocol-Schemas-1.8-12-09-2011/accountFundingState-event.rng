@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <include href="published-datatypes.rng"/>
+    <start>
+        <ref name="AccountFundingStateEvent"/>
+    </start>
+
+    <define name="AccountFundingStateEvent">
+        <element name="accountFundingState">
+            <element name="accountId">
+                <ref name="AccountIdType"/>
+            </element>
+            <optional>
+                <element name="status">
+                    <ref name="FundingDisallowedReasonEnum"/>
+                </element>
+            </optional>
+        </element>
+    </define>
+</grammar>

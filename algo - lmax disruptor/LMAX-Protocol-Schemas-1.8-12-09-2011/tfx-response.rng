@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="../published-api/errors.rng"/>
+
+    <start>
+        <!-- A response -->
+        <element name="res">
+            <choice>
+                <group>
+                    <element name="header">
+                        <element name="status">
+                            <!--The request was successful.-->
+                            <value>OK</value>
+                        </element>
+                    </element>
+                    <element name="body">
+                        <ref name="ResponseBody"/>
+                    </element>
+                </group>
+                <group>
+                    <element name="header">
+                        <element name="status">
+                            <choice>
+                                <!--The request was unsuccessful.-->
+                                <value>WARN</value>
+                                <!--There was a system problem that caused an error.-->
+                                <value>ERROR</value>
+                            </choice>
+                        </element>
+                        <!--Optional list of warnings encountered during processing of the request.-->
+                        <optional>
+                            <element name="warnings">
+                                <ref name="WarningsType"/>
+                            </element>
+                        </optional>
+                    </element>
+                    <element name="body">
+                        <optional>
+                            <ref name="ResponseBody"/>
+                        </optional>
+                    </element>
+                    <optional>
+                        <!-- Authorization status -->
+                        <element name="auth">
+                            <ref name="AuthorisationEnum"/>
+                        </element>
+                    </optional>
+                </group>
+            </choice>
+        </element>
+    </start>
+
+    <!--Base definition of a request message body.-->
+    <define name="ResponseBody">
+        <empty/>
+    </define>
+
+    <!--Definition of a warning messages that can be provided in a response that has the status WARN.-->
+    <define name="WarningsType">
+        <zeroOrMore>
+            <!--There may be many individual warnings associated with a response.-->
+            <element name="warning">
+                <!--Identifies the field name in the request that this warning is associated with if applicable.-->
+                <element name="fieldName">
+                    <choice>
+                        <text/>
+                        <empty/>
+                    </choice>
+                </element>
+                <!--The warning message.-->
+                <element name="message">
+                    <choice>
+                        <!--Either a plain text English warning message...-->
+                        <text/>
+
+                        <!--or a 'warning code' from one of the following enumerations: -->
+                        <ref name="WarningEnum"/>
+                        <ref name="InstructionRejectionEnum"/>
+                    </choice>
+                </element>
+            </element>
+        </zeroOrMore>
+    </define>
+
+    <!--Enumeration of authorisation failure reasons.-->
+    <define name="AuthorisationEnum">
+        <choice>
+            <!--The user was unauthorised to perform that operation.-->
+            <value>UNAUTHORISED</value>
+            <!--The user was not authenticated. This maybe because they have not successfully logged in or because their session has expired.-->
+            <value>UNAUTHENTICATED</value>
+            <!--The user's session has expired, or they have been logged off for security reasons.-->
+            <value>SESSION_EXPIRED</value>
+        </choice>
+    </define>
+</grammar>

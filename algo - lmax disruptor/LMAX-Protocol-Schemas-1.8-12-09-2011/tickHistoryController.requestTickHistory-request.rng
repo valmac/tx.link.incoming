@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <include href="published-datatypes.rng"/>
+    <include href="tfx-request.rng">
+        <define name="RequestBody">
+            <element name="instructionId">
+                <ref name="SuppliedInstructionIdType"/>
+            </element>
+            <element name="instrumentId">
+                <ref name="InstrumentIdType"/>
+            </element>
+            <element name="contentType">
+                <ref name="TickHistoryContentTypeEnum"/>
+            </element>
+            <element name="startDate">
+                <ref name="DateType"/>
+            </element>
+            <element name="endDate">
+                <ref name="DateType"/>
+            </element>
+        </define>
+    </include>
+</grammar>
